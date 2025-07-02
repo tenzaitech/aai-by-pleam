@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backup-byGod Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .capability-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .capability-item.ready {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+
+        .capability-item.warning {
+            border-left-color: #ffc107;
+            background: #fff3cd;
+        }
+
+        .capability-item.error {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .capability-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .capability-info h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        .capability-info p {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin: 0;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-ready {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-warning {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .status-error {
+            background: #dc3545;
+            color: white;
+        }
+
+        .log-container {
+            height: 400px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .log-entry {
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #ddd;
+        }
+
+        .log-entry.info {
+            background: #d1ecf1;
+            border-left-color: #17a2b8;
+        }
+
+        .log-entry.success {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .log-entry.warning {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+
+        .log-entry.error {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+
+        .log-timestamp {
+            color: #6c757d;
+            font-size: 0.8rem;
+        }
+
+        .log-message {
+            margin-left: 10px;
+        }
+
+        .status-card {
+            grid-column: 1 / -1;
+        }
+
+        .status-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .status-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+
+        .status-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .status-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .recommendations {
+            margin-top: 20px;
+        }
+
+        .recommendation-item {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+        }
+
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 1000;
+        }
+
+        .connected {
+            background: #28a745;
+            color: white;
+        }
+
+        .disconnected {
+            background: #dc3545;
+            color: white;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #6c757d;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="connection-status" id="connectionStatus">
+        <span id="connectionText">กำลังเชื่อมต่อ...</span>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Backup-byGod Dashboard</h1>
+            <p>Real-time System Monitoring & Control Center</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- System Capabilities Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">System Capabilities</div>
+                </div>
+                <div id="capabilitiesContainer" class="capabilities-grid">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>กำลังโหลดข้อมูล...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Log Monitor -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Live Log Monitor</div>
+                </div>
+                <div id="logContainer" class="log-container">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>กำลังเชื่อมต่อ...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Status Report -->
+            <div class="card status-card">
+                <div class="card-header">
+                    <div class="card-icon">📈</div>
+                    <div class="card-title">Project Status Report</div>
+                </div>
+                <div id="statusContainer">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>กำลังโหลดสถานะ...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Socket.IO connection
+        const socket = io();
+        let isConnected = false;
+
+        // Connection status handling
+        socket.on('connect', function() {
+            isConnected = true;
+            updateConnectionStatus('เชื่อมต่อแล้ว', 'connected');
+            console.log('Connected to server');
+        });
+
+        socket.on('disconnect', function() {
+            isConnected = false;
+            updateConnectionStatus('ขาดการเชื่อมต่อ', 'disconnected');
+            console.log('Disconnected from server');
+        });
+
+        function updateConnectionStatus(text, className) {
+            const statusElement = document.getElementById('connectionStatus');
+            const textElement = document.getElementById('connectionText');
+            
+            statusElement.className = `connection-status ${className}`;
+            textElement.textContent = text;
+        }
+
+        // Handle real-time log updates
+        socket.on('new_log', function(logEntry) {
+            addLogEntry(logEntry);
+        });
+
+        // Handle status updates
+        socket.on('status_update', function(data) {
+            updateCapabilities(data.capabilities);
+            updateProjectStatus(data.project_status);
+        });
+
+        // Handle initial connection
+        socket.on('connected', function(data) {
+            console.log('Dashboard connected:', data.message);
+            // Load initial data
+            loadInitialData();
+        });
+
+        function loadInitialData() {
+            fetch('/api/status')
+                .then(response => response.json())
+                .then(data => {
+                    updateCapabilities(data.capabilities);
+                    updateProjectStatus(data.project_status);
+                    updateLogs(data.logs);
+                })
+                .catch(error => {
+                    console.error('Error loading initial data:', error);
+                });
+        }
+
+        function updateCapabilities(capabilities) {
+            const container = document.getElementById('capabilitiesContainer');
+            
+            if (!capabilities || Object.keys(capabilities).length === 0) {
+                container.innerHTML = '<div class="loading"><p>ไม่พบข้อมูลความสามารถ</p></div>';
+                return;
+            }
+
+            let html = '';
+            for (const [key, capability] of Object.entries(capabilities)) {
+                const statusClass = capability.status;
+                const statusText = capability.status === 'ready' ? 'พร้อม' : 
+                                 capability.status === 'warning' ? 'เตือน' : 
+                                 capability.status === 'error' ? 'ผิดพลาด' : 'ไม่ทราบ';
+                
+                html += `
+                    <div class="capability-item ${statusClass}">
+                        <div class="capability-icon">${capability.icon}</div>
+                        <div class="capability-info">
+                            <h4>${capability.name}</h4>
+                            <p>${capability.description}</p>
+                        </div>
+                        <span class="status-badge status-${statusClass}">${statusText}</span>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+
+        function updateProjectStatus(status) {
+            const container = document.getElementById('statusContainer');
+            
+            if (!status) {
+                container.innerHTML = '<div class="loading"><p>ไม่พบข้อมูลสถานะ</p></div>';
+                return;
+            }
+
+            const html = `
+                <div class="status-overview">
+                    <div class="status-item">
+                        <div class="status-value">${status.readiness_percent}%</div>
+                        <div class="status-label">ความพร้อมของระบบ</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-value">${status.ready_components}/${status.total_components}</div>
+                        <div class="status-label">คอมโพเนนต์พร้อม</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-value">${Math.round(status.system_resources.cpu_percent)}%</div>
+                        <div class="status-label">การใช้ CPU</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-value">${Math.round(status.system_resources.memory_percent)}%</div>
+                        <div class="status-label">การใช้ RAM</div>
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <h4>สถานะระบบ</h4>
+                    <p style="font-size: 1.1rem; margin: 10px 0;">${status.status_message}</p>
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${status.readiness_percent}%"></div>
+                    </div>
+                </div>
+                
+                <div class="recommendations">
+                    <h4>ข้อเสนอแนะ</h4>
+                    ${status.recommendations.map(rec => `
+                        <div class="recommendation-item">${rec}</div>
+                    `).join('')}
+                </div>
+                
+                <div style="margin-top: 20px; font-size: 0.9rem; color: #6c757d;">
+                    อัปเดตล่าสุด: ${new Date(status.last_update).toLocaleString('th-TH')}
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function updateLogs(logs) {
+            const container = document.getElementById('logContainer');
+            
+            if (!logs || logs.length === 0) {
+                container.innerHTML = '<div class="loading"><p>ไม่มีข้อมูล log</p></div>';
+                return;
+            }
+
+            let html = '';
+            logs.forEach(log => {
+                html += createLogEntry(log);
+            });
+            
+            container.innerHTML = html;
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function addLogEntry(logEntry) {
+            const container = document.getElementById('logContainer');
+            
+            // Remove loading message if present
+            if (container.querySelector('.loading')) {
+                container.innerHTML = '';
+            }
+            
+            const logElement = document.createElement('div');
+            logElement.innerHTML = createLogEntry(logEntry);
+            container.appendChild(logElement.firstElementChild);
+            
+            // Auto-scroll to bottom
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function createLogEntry(logEntry) {
+            const timestamp = new Date(logEntry.timestamp).toLocaleTimeString('th-TH');
+            return `
+                <div class="log-entry ${logEntry.level}">
+                    <span class="log-timestamp">[${timestamp}]</span>
+                    <span class="log-message">${logEntry.message}</span>
+                </div>
+            `;
+        }
+
+        // Auto-reconnect on page focus
+        window.addEventListener('focus', function() {
+            if (!isConnected) {
+                socket.connect();
+            }
+        });
+
+        // Handle page unload
+        window.addEventListener('beforeunload', function() {
+            socket.disconnect();
+        });
+    </script>
+</body>
+</html> 
