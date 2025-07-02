@@ -1,0 +1,16 @@
+{
+  "supabase_url": "YOUR_SUPABASE_URL",
+  "supabase_key": "YOUR_SUPABASE_ANON_KEY",
+  "supabase_service_key": "YOUR_SUPABASE_SERVICE_KEY",
+  "database_tables": {
+    "backup_logs": "backup_logs",
+    "system_status": "system_status",
+    "environment_cards": "environment_cards"
+  },
+  "features": {
+    "real_time": true,
+    "analytics": true,
+    "backup_history": true,
+    "system_monitoring": true
+  }
+}

@@ -28,41 +28,41 @@ system_status = {
     'project_status': {},
     'last_update': datetime.now().isoformat()
 }
+# เพิ่ม state cache สำหรับ capabilities
+capability_state_cache = {}
 
 class DashboardLogger:
-    """Custom logger for dashboard"""
-    
+    """Custom logger for dashboard (เฉพาะ log สำคัญ)"""
     def __init__(self):
         self.logs = []
         self.max_logs = 100
-    
+        self.important_keywords = [
+            'เริ่มต้น', 'หยุด', 'สำรอง', 'กู้คืน', 'error', 'ผิดพลาด', 'เตือน', 'warning', 'ข้อเสนอแนะ', 'recommend', 'สำเร็จ', 'เสร็จสมบูรณ์', 'critical', 'fail', 'success', 'backup', 'restore', 'status', 'พร้อมใช้งาน', 'disconnected', 'connected'
+        ]
     def add_log(self, level, message, timestamp=None):
-        """Add log entry"""
+        """Add log entry (เฉพาะ log สำคัญ)"""
         if timestamp is None:
             timestamp = datetime.now().isoformat()
-        
+        # กรอง log เฉพาะที่สำคัญ
+        if not any(k in message.lower() for k in self.important_keywords) and level not in ['error', 'warning', 'success']:
+            return
         log_entry = {
             'timestamp': timestamp,
             'level': level,
             'message': message
         }
-        
         self.logs.append(log_entry)
-        
-        # Keep only recent logs
         if len(self.logs) > self.max_logs:
             self.logs.pop(0)
-        
-        # Emit to all connected clients
         socketio.emit('new_log', log_entry)
-        
         print(f"[{level.upper()}] {message}")
 
 # Global logger instance
 dashboard_logger = DashboardLogger()
 
 def get_system_capabilities():
-    """Get system capabilities status"""
+    """Get system capabilities status (log เฉพาะเมื่อสถานะเปลี่ยน)"""
+    global capability_state_cache
     capabilities = {
         'chrome_automation': {
             'name': 'Chrome Automation',
@@ -92,71 +92,86 @@ def get_system_capabilities():
             'description': 'ควบคุมการสำรองข้อมูลอัตโนมัติ',
             'status': 'unknown',
             'icon': '💾'
+        },
+        'supabase_integration': {
+            'name': 'Supabase Database',
+            'description': 'Cloud Database และ Real-time Features',
+            'status': 'unknown',
+            'icon': '☁️'
+        },
+        'environment_cards': {
+            'name': 'Environment Cards',
+            'description': 'แสดงข้อมูล Environment ของโปรแกรมต่างๆ',
+            'status': 'unknown',
+            'icon': '📋'
         }
-        # GPU Processing removed for future development
-        # 'gpu_processing': {
-        #     'name': 'GPU Processing',
-        #     'description': 'การประมวลผลด้วย GPU (Future Feature)',
-        #     'status': 'disabled',
-        #     'icon': '🎮'
-        # }
     }
-    
+    # Helper สำหรับ log เฉพาะเมื่อเปลี่ยนแปลง
+    def log_if_changed(key, status, msg_ready, msg_error):
+        prev = capability_state_cache.get(key)
+        if prev != status:
+            if status == 'ready':
+                dashboard_logger.add_log('info', msg_ready)
+            elif status == 'error':
+                dashboard_logger.add_log('error', msg_error)
+            capability_state_cache[key] = status
     # Test each capability
     try:
         from core.chrome_controller import AIChromeController
         capabilities['chrome_automation']['status'] = 'ready'
-        dashboard_logger.add_log('info', 'Chrome Controller พร้อมใช้งาน')
+        log_if_changed('chrome_automation', 'ready', 'Chrome Controller พร้อมใช้งาน', 'Chrome Controller error')
     except Exception as e:
         capabilities['chrome_automation']['status'] = 'error'
-        dashboard_logger.add_log('error', f'Chrome Controller error: {str(e)}')
-    
+        log_if_changed('chrome_automation', 'error', '', f'Chrome Controller error: {str(e)}')
     try:
         from core.ai_integration import MultimodalAIIntegration
         capabilities['ai_integration']['status'] = 'ready'
-        dashboard_logger.add_log('info', 'AI Integration พร้อมใช้งาน')
+        log_if_changed('ai_integration', 'ready', 'AI Integration พร้อมใช้งาน', 'AI Integration error')
     except Exception as e:
         capabilities['ai_integration']['status'] = 'error'
-        dashboard_logger.add_log('error', f'AI Integration error: {str(e)}')
-    
+        log_if_changed('ai_integration', 'error', '', f'AI Integration error: {str(e)}')
     try:
         from core.thai_processor import FullThaiProcessor
         capabilities['thai_processor']['status'] = 'ready'
-        dashboard_logger.add_log('info', 'Thai Processor พร้อมใช้งาน')
+        log_if_changed('thai_processor', 'ready', 'Thai Processor พร้อมใช้งาน', 'Thai Processor error')
     except Exception as e:
         capabilities['thai_processor']['status'] = 'error'
-        dashboard_logger.add_log('error', f'Thai Processor error: {str(e)}')
-    
+        log_if_changed('thai_processor', 'error', '', f'Thai Processor error: {str(e)}')
     try:
         from core.visual_recognition import VisualRecognition
         capabilities['visual_recognition']['status'] = 'ready'
-        dashboard_logger.add_log('info', 'Visual Recognition พร้อมใช้งาน')
+        log_if_changed('visual_recognition', 'ready', 'Visual Recognition พร้อมใช้งาน', 'Visual Recognition error')
     except Exception as e:
         capabilities['visual_recognition']['status'] = 'error'
-        dashboard_logger.add_log('error', f'Visual Recognition error: {str(e)}')
-    
+        log_if_changed('visual_recognition', 'error', '', f'Visual Recognition error: {str(e)}')
     try:
         from core.backup_controller import BackupController
         capabilities['backup_controller']['status'] = 'ready'
-        dashboard_logger.add_log('info', 'Backup Controller พร้อมใช้งาน')
+        log_if_changed('backup_controller', 'ready', 'Backup Controller พร้อมใช้งาน', 'Backup Controller error')
     except Exception as e:
         capabilities['backup_controller']['status'] = 'error'
-        dashboard_logger.add_log('error', f'Backup Controller error: {str(e)}')
-    
-    # GPU Processing disabled for future development
-    # try:
-    #     import tensorflow as tf
-    #     gpu_devices = tf.config.list_physical_devices('GPU')
-    #     if gpu_devices:
-    #         capabilities['gpu_processing']['status'] = 'ready'
-    #         dashboard_logger.add_log('success', f'GPU พร้อมใช้งาน: {len(gpu_devices)} devices')
-    #     else:
-    #         capabilities['gpu_processing']['status'] = 'warning'
-    #         dashboard_logger.add_log('warning', 'GPU ไม่พร้อมใช้งาน - ใช้ CPU แทน')
-    # except Exception as e:
-    #     capabilities['gpu_processing']['status'] = 'error'
-    #     dashboard_logger.add_log('error', f'GPU error: {str(e)}')
-    
+        log_if_changed('backup_controller', 'error', '', f'Backup Controller error: {str(e)}')
+    # Test Supabase Integration
+    try:
+        from core.supabase_integration import supabase_integration
+        if supabase_integration.connect():
+            capabilities['supabase_integration']['status'] = 'ready'
+            log_if_changed('supabase_integration', 'ready', 'Supabase Database เชื่อมต่อสำเร็จ', 'Supabase Database error')
+        else:
+            capabilities['supabase_integration']['status'] = 'warning'
+            log_if_changed('supabase_integration', 'warning', '', 'Supabase Database ไม่ได้ตั้งค่า credentials')
+    except Exception as e:
+        capabilities['supabase_integration']['status'] = 'error'
+        log_if_changed('supabase_integration', 'error', '', f'Supabase Database error: {str(e)}')
+    # Test Environment Cards
+    try:
+        from core.environment_cards import env_cards
+        env_cards.generate_all_cards()
+        capabilities['environment_cards']['status'] = 'ready'
+        log_if_changed('environment_cards', 'ready', 'Environment Cards พร้อมใช้งาน', 'Environment Cards error')
+    except Exception as e:
+        capabilities['environment_cards']['status'] = 'error'
+        log_if_changed('environment_cards', 'error', '', f'Environment Cards error: {str(e)}')
     return capabilities
 
 def get_project_status():
