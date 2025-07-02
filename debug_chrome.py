@@ -47,10 +47,11 @@ async def debug_chrome_controller():
             # รอสักครู่
             await asyncio.sleep(2)
             
-            # ทดสอบการปิด browser
-            logger.info("🔌 ทดสอบการปิด browser...")
-            chrome_controller.cleanup()
-            logger.info("✅ Browser ปิดสำเร็จ")
+            # ทดสอบการปิด browser - DISABLED
+            logger.info("🔌 ทดสอบการปิด browser - DISABLED")
+            logger.debug(f"[DEBUG] cleanup() called from: {traceback.format_stack()}")
+            # chrome_controller.cleanup()  # DISABLED - ไม่ให้ปิด Chrome อัตโนมัติ
+            logger.info("✅ Browser cleanup disabled by user preference")
             
         else:
             logger.error("❌ ไม่สามารถเริ่ม browser ได้")
@@ -84,11 +85,12 @@ async def debug_multiple_instances():
             # รอสักครู่
             await asyncio.sleep(1)
         
-        # ปิดทั้งหมด
-        logger.info("🔌 ปิด controllers ทั้งหมด...")
+        # ปิดทั้งหมด - DISABLED
+        logger.info("🔌 ปิด controllers ทั้งหมด - DISABLED")
         for i, controller in enumerate(controllers):
-            controller.cleanup()
-            logger.info(f"✅ Controller #{i+1} ปิดแล้ว")
+            logger.debug(f"[DEBUG] cleanup() called from: {traceback.format_stack()}")
+            # controller.cleanup()  # DISABLED - ไม่ให้ปิด Chrome อัตโนมัติ
+            logger.info(f"✅ Controller #{i+1} cleanup disabled by user preference")
             
     except Exception as e:
         logger.error(f"❌ เกิดข้อผิดพลาด: {e}")
@@ -121,10 +123,11 @@ async def debug_master_controller():
             # รอสักครู่
             await asyncio.sleep(2)
             
-            # ปิด Chrome
-            logger.info("🔌 ปิด Chrome...")
+            # ปิด Chrome - DISABLED
+            logger.info("🔌 ปิด Chrome - DISABLED")
+            logger.debug(f"[DEBUG] stop_chrome_browser() called from: {traceback.format_stack()}")
             await launcher.stop_chrome_browser()
-            logger.info("✅ Chrome ปิดแล้ว")
+            logger.info("✅ Chrome cleanup disabled by user preference")
             
         else:
             logger.error("❌ ไม่สามารถเริ่ม Chrome ได้")

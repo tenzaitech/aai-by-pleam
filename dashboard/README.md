@@ -1,180 +1,259 @@
-# 🚀 Backup-byGod Real-time Dashboard
+# 🚀 WAWA AI System Dashboard
 
-## 📋 ภาพรวม
-Dashboard แบบ Real-time สำหรับระบบ Backup-byGod ที่แสดงสถานะการทำงานของระบบทั้งหมดแบบ Live
+## 📋 **ภาพรวม**
 
-## ✨ ฟีเจอร์หลัก
+Dashboard แบบ Real-time สำหรับระบบ WAWA AI ที่รวมการตรวจสอบสถานะระบบ การควบคุม God Mode Knowledge Base และการจัดการทรัพยากรระบบ
 
-### 1. 📋 System Capabilities Card
-- แสดงความสามารถทั้งหมดของระบบ
-- สถานะการทำงานของแต่ละโมดูล
-- อธิบายฟีเจอร์แต่ละส่วน
+## ✨ **ฟีเจอร์หลัก**
 
-### 2. 📊 Real-time Log Monitor
-- แสดง log แบบ real-time
-- สถานะการทำงานแบบ live
-- ระดับความสำคัญของ log (INFO, WARNING, ERROR, SUCCESS)
-- Auto-scroll และ filter options
+### 🎯 **System Overview**
+- **Real-time Status Monitoring** - ตรวจสอบสถานะระบบแบบ Real-time
+- **Capability Status** - แสดงสถานะของแต่ละระบบย่อย
+- **System Resources** - ตรวจสอบการใช้ CPU, Memory, Disk, GPU
+- **Performance Metrics** - แสดงประสิทธิภาพของระบบ
 
-### 3. 📈 Project Status Report Card
-- สถานะปัจจุบันของโปรเจค
-- เปอร์เซ็นต์ความคืบหน้า
-- สถิติการใช้งานระบบ
-- ข้อเสนอแนะและแจ้งเตือน
+### 🧠 **God Mode Knowledge Base**
+- **Session Management** - จัดการ God Mode sessions
+- **Command History** - ดูประวัติคำสั่งที่ใช้
+- **Pattern Recognition** - แสดงรูปแบบที่ระบบเรียนรู้
+- **Learning Analytics** - วิเคราะห์การเรียนรู้ของระบบ
+- **Statistics Dashboard** - สถิติการใช้งาน
 
-## 🚀 การใช้งาน
+### 🔧 **System Control**
+- **Chrome Process Management** - ควบคุม Chrome processes
+- **Dashboard Restart** - รีสตาร์ท dashboard
+- **Resource Monitoring** - ตรวจสอบทรัพยากรระบบ
+- **Performance Optimization** - ปรับแต่งประสิทธิภาพ
 
-### วิธีที่ 1: ใช้ Batch Script (แนะนำ)
+### 📊 **Real-time Logs**
+- **Live Log Monitoring** - ดู logs แบบ Real-time
+- **Log Filtering** - กรอง logs ตามระดับ
+- **Search & Export** - ค้นหาและส่งออก logs
+
+## 🚀 **การติดตั้ง**
+
+### 1. **ติดตั้ง Dependencies**
 ```bash
-# ดับเบิลคลิกที่ไฟล์
-START_DASHBOARD.bat
+pip install -r requirements.txt
 ```
 
-### วิธีที่ 2: ใช้ Command Line
+### 2. **รัน Dashboard**
 ```bash
 cd dashboard
 python app.py
 ```
 
-### วิธีที่ 3: ใช้ Python โดยตรง
-```bash
-python dashboard/app.py
-```
+### 3. **เข้าถึง Dashboard**
+เปิดเบราว์เซอร์ไปที่: `http://localhost:5000`
 
-## 🌐 เข้าถึง Dashboard
-เปิดเบราว์เซอร์และไปที่: **http://localhost:5000**
+## 📁 **โครงสร้างไฟล์**
 
-## 📁 โครงสร้างไฟล์
 ```
 dashboard/
-├── app.py              # Flask server
+├── app.py                 # Flask application
 ├── templates/
-│   └── dashboard.html  # HTML template
-├── static/             # Static files (CSS, JS)
-└── README.md          # เอกสารนี้
+│   └── dashboard.html     # Main dashboard template
+├── static/
+│   └── style.css         # Custom styles
+└── README.md             # This file
 ```
 
-## 🔧 การตั้งค่า
+## 🔌 **API Endpoints**
 
-### Dependencies ที่ต้องการ
+### **System Status**
+- `GET /api/status` - ข้อมูลสถานะระบบ
+- `GET /api/system/cleanup-chrome` - ล้าง Chrome processes
+- `POST /api/system/restart-dashboard` - รีสตาร์ท dashboard
+
+### **God Mode Knowledge**
+- `GET /api/godmode/statistics` - สถิติ God Mode
+- `GET /api/godmode/sessions` - รายการ sessions
+- `GET /api/godmode/commands` - ประวัติคำสั่ง
+- `GET /api/godmode/patterns` - รูปแบบที่เรียนรู้
+- `GET /api/godmode/learnings` - การเรียนรู้
+- `POST /api/godmode/start-session` - เริ่ม session ใหม่
+- `POST /api/godmode/end-session` - จบ session
+- `POST /api/godmode/save-command` - บันทึกคำสั่ง
+- `POST /api/godmode/save-learning` - บันทึกการเรียนรู้
+
+### **Knowledge Manager**
+- `GET /api/knowledge/statistics` - สถิติ Knowledge Base
+- `GET /api/knowledge/search` - ค้นหาความรู้
+- `GET /api/knowledge/categories` - รายการหมวดหมู่
+- `POST /api/knowledge/add` - เพิ่มความรู้
+- `PUT /api/knowledge/update/<id>` - อัปเดตความรู้
+- `DELETE /api/knowledge/delete/<id>` - ลบความรู้
+
+## 🎨 **UI Components**
+
+### **Status Cards**
+- แสดงสถานะระบบแบบ Real-time
+- Progress bars สำหรับการใช้งานทรัพยากร
+- Color-coded status indicators
+
+### **Capability Grid**
+- แสดงสถานะของแต่ละระบบย่อย
+- Hover effects และ animations
+- Detailed descriptions
+
+### **God Mode Panel**
+- Session controls
+- Statistics dashboard
+- Command history viewer
+- Pattern analysis
+
+### **Resource Monitor**
+- CPU usage graphs
+- Memory consumption
+- Disk space monitoring
+- GPU status (if available)
+
+### **Log Viewer**
+- Real-time log streaming
+- Level-based filtering
+- Search functionality
+- Export capabilities
+
+## 🔧 **การกำหนดค่า**
+
+### **Environment Variables**
 ```bash
-pip install flask flask-socketio psutil
+FLASK_ENV=development
+FLASK_DEBUG=True
+SECRET_KEY=your-secret-key
 ```
 
-### Environment Variables
-- `FLASK_ENV`: development/production
-- `FLASK_DEBUG`: True/False
+### **Configuration Options**
+- Port: 5000 (default)
+- Host: 0.0.0.0 (all interfaces)
+- Debug mode: True (development)
+- Socket.IO: Enabled for real-time updates
 
-## 📊 ข้อมูลที่แสดง
+## 📊 **การใช้งาน**
 
-### System Capabilities
-- 🌐 Chrome Automation
-- 🧠 AI Integration  
-- 🇹🇭 Thai Language Processor
-- 👁️ Visual Recognition
-- �� Backup Controller
+### **1. ตรวจสอบสถานะระบบ**
+- ดู Overview tab สำหรับภาพรวม
+- ตรวจสอบ Capabilities tab สำหรับรายละเอียด
+- ดู Resources tab สำหรับการใช้งานทรัพยากร
 
-### Real-time Monitoring
-- CPU Usage
-- Memory Usage
-- Disk Usage
-- System Status
-- Component Status
+### **2. จัดการ God Mode**
+- เริ่ม/จบ sessions ใน God Mode tab
+- ดูสถิติการใช้งาน
+- ตรวจสอบประวัติคำสั่ง
+- วิเคราะห์รูปแบบการเรียนรู้
 
-### Log Levels
-- **INFO**: ข้อมูลทั่วไป
-- **SUCCESS**: การทำงานสำเร็จ
-- **WARNING**: คำเตือน
-- **ERROR**: ข้อผิดพลาด
+### **3. ควบคุมระบบ**
+- ล้าง Chrome processes
+- รีสตาร์ท dashboard
+- ตรวจสอบ logs
+- ปรับแต่งการตั้งค่า
 
-## 🎨 UI Features
-- Responsive Design
-- Real-time Updates
-- Auto-scroll Logs
-- Connection Status
-- Loading Animations
-- Color-coded Status
+### **4. จัดการความรู้**
+- เพิ่มความรู้ใหม่
+- ค้นหาความรู้ที่มีอยู่
+- อัปเดตหรือลบความรู้
+- ดูสถิติการใช้งาน
 
-## 🔌 API Endpoints
+## 🛠️ **การพัฒนา**
 
-### GET /api/status
-```json
-{
-  "capabilities": {...},
-  "project_status": {...},
-  "logs": [...],
-  "last_update": "2024-01-01T00:00:00"
-}
+### **เพิ่มฟีเจอร์ใหม่**
+1. เพิ่ม route ใน `app.py`
+2. อัปเดต template ใน `dashboard.html`
+3. เพิ่ม JavaScript functions
+4. อัปเดต CSS styles
+
+### **Customization**
+- แก้ไข `style.css` สำหรับ UI
+- ปรับแต่ง `dashboard.html` สำหรับ layout
+- เพิ่ม API endpoints ใน `app.py`
+
+## 🔍 **Troubleshooting**
+
+### **Dashboard ไม่เริ่ม**
+```bash
+# ตรวจสอบ dependencies
+pip install -r requirements.txt
+
+# ตรวจสอบ port
+netstat -an | grep 5000
+
+# รันใน debug mode
+python app.py --debug
 ```
 
-### WebSocket Events
-- `connect`: Client connected
-- `disconnect`: Client disconnected
-- `new_log`: New log entry
-- `status_update`: System status update
+### **Socket.IO ไม่ทำงาน**
+```bash
+# ตรวจสอบ CORS settings
+# ตรวจสอบ firewall
+# ตรวจสอบ browser console
+```
 
-## 🛠️ การพัฒนา
+### **God Mode ไม่เชื่อมต่อ**
+```bash
+# ตรวจสอบ God Mode Knowledge Manager
+python -c "from alldata_godmode.god_mode_knowledge_manager import GodModeKnowledgeManager; print('OK')"
 
-### เพิ่ม Capability ใหม่
-1. แก้ไข `get_system_capabilities()` ใน `app.py`
-2. เพิ่มการทดสอบ capability
-3. อัปเดต HTML template
+# ตรวจสอบ database
+ls -la alldata_godmode/
+```
 
-### เพิ่ม Log Level ใหม่
-1. เพิ่ม CSS class ใน `dashboard.html`
-2. อัปเดต `createLogEntry()` function
+## 📈 **Performance**
 
-### ปรับแต่ง UI
-- แก้ไข CSS ใน `dashboard.html`
-- เพิ่ม JavaScript functions
-- ปรับ layout ใน HTML
+### **Optimization Tips**
+- ใช้ caching สำหรับข้อมูลที่ไม่เปลี่ยนแปลงบ่อย
+- ลด frequency ของ background updates
+- ใช้ pagination สำหรับข้อมูลจำนวนมาก
+- Optimize database queries
 
-## 🐛 การแก้ไขปัญหา
+### **Monitoring**
+- ตรวจสอบ CPU usage
+- ตรวจสอบ memory consumption
+- ตรวจสอบ network traffic
+- ตรวจสอบ database performance
 
-### Dashboard ไม่แสดง
-1. ตรวจสอบ dependencies
-2. ตรวจสอบ port 5000 ไม่ถูกใช้งาน
-3. ตรวจสอบ firewall settings
+## 🔒 **Security**
 
-### ไม่มีการอัปเดต Real-time
-1. ตรวจสอบ WebSocket connection
-2. ตรวจสอบ browser console
-3. ตรวจสอบ server logs
+### **Best Practices**
+- ใช้ HTTPS ใน production
+- ตั้งค่า CORS อย่างเหมาะสม
+- Validate input data
+- ใช้ authentication ถ้าจำเป็น
+- ตรวจสอบ logs อย่างสม่ำเสมอ
 
-### Performance Issues
-1. ลด update frequency ใน `background_updates()`
-2. ลดจำนวน log entries
-3. ปรับ max_logs ใน DashboardLogger
+## 📝 **Changelog**
 
-## 📈 การขยายฟีเจอร์
+### **v1.1.1** (Current)
+- ✅ เพิ่ม God Mode Knowledge Base integration
+- ✅ เพิ่ม Real-time system monitoring
+- ✅ เพิ่ม Resource management
+- ✅ เพิ่ม Advanced UI components
+- ✅ เพิ่ม API endpoints
+- ✅ เพิ่ม Log management
 
-### เพิ่ม Control Panel
-- ปุ่ม Start/Stop System
-- ปุ่ม Restart Components
-- Configuration Editor
+### **v1.0.0**
+- ✅ Basic dashboard functionality
+- ✅ System status monitoring
+- ✅ Knowledge manager integration
 
-### เพิ่ม Analytics
-- Usage Statistics
-- Performance Metrics
-- Error Tracking
+## 🤝 **Contributing**
 
-### เพิ่ม Notifications
-- Email Alerts
-- Push Notifications
-- Sound Alerts
+1. Fork the repository
+2. Create feature branch
+3. Make changes
+4. Test thoroughly
+5. Submit pull request
 
-### เพิ่ม GPU Processing (Future)
-- TensorFlow GPU Support
-- CUDA Integration
-- GPU Monitoring
+## 📄 **License**
 
-## 📞 การสนับสนุน
-หากมีปัญหา กรุณาตรวจสอบ:
-1. Console logs
-2. Browser developer tools
-3. Server logs
-4. Dependencies versions
+MIT License - ดูไฟล์ LICENSE สำหรับรายละเอียด
+
+## 📞 **Support**
+
+หากมีปัญหาหรือคำถาม:
+- สร้าง Issue ใน GitHub
+- ตรวจสอบ Documentation
+- ติดต่อทีมพัฒนา
 
 ---
 
-**🎯 Dashboard พร้อมใช้งาน! เปิดเบราว์เซอร์และไปที่ http://localhost:5000** 
+**🚀 WAWA AI System Dashboard - Empowering AI with Real-time Control** 

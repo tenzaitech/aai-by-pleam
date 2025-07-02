@@ -3,621 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Backup-byGod Dashboard</title>
+    <title>🎯 WAWA AI System Dashboard</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    
+    <!-- Socket.IO -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 30px;
         }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
+        .status-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            border-radius: 15px;
+            padding: 20px;
             margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-
-        .card {
+        .capability-card {
             background: white;
             border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
-
-        .card:hover {
+        .capability-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
+        .status-ready { border-left: 5px solid #28a745; }
+        .status-error { border-left: 5px solid #dc3545; }
+        .status-warning { border-left: 5px solid #ffc107; }
+        .status-unknown { border-left: 5px solid #6c757d; }
+        
+        .resource-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #2c3e50;
+        
+        .progress-custom {
+            height: 25px;
+            border-radius: 15px;
+            background: #e9ecef;
         }
-
-        .card-icon {
-            font-size: 2rem;
-            margin-right: 15px;
+        
+        .progress-custom .progress-bar {
+            border-radius: 15px;
+            font-weight: bold;
         }
-
-        .capabilities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .capability-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-radius: 10px;
-            background: #f8f9fa;
-            border-left: 4px solid #ddd;
-            transition: all 0.3s ease;
-        }
-
-        .capability-item.ready {
-            border-left-color: #28a745;
-            background: #d4edda;
-        }
-
-        .capability-item.warning {
-            border-left-color: #ffc107;
-            background: #fff3cd;
-        }
-
-        .capability-item.error {
-            border-left-color: #dc3545;
-            background: #f8d7da;
-        }
-
-        .capability-icon {
-            font-size: 1.5rem;
-            margin-right: 15px;
-        }
-
-        .capability-info h4 {
-            font-size: 1rem;
-            margin-bottom: 5px;
-            color: #2c3e50;
-        }
-
-        .capability-info p {
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin: 0;
-        }
-
-        .status-badge {
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .status-ready {
-            background: #28a745;
-            color: white;
-        }
-
-        .status-warning {
-            background: #ffc107;
-            color: #212529;
-        }
-
-        .status-error {
-            background: #dc3545;
-            color: white;
-        }
-
+        
         .log-container {
-            height: 400px;
+            max-height: 400px;
             overflow-y: auto;
             background: #f8f9fa;
             border-radius: 10px;
             padding: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
         }
-
+        
         .log-entry {
-            margin-bottom: 8px;
-            padding: 8px;
-            border-radius: 5px;
-            border-left: 3px solid #ddd;
+            padding: 5px 0;
+            border-bottom: 1px solid #dee2e6;
         }
-
-        .log-entry.info {
-            background: #d1ecf1;
-            border-left-color: #17a2b8;
-        }
-
-        .log-entry.success {
-            background: #d4edda;
-            border-left-color: #28a745;
-        }
-
-        .log-entry.warning {
-            background: #fff3cd;
-            border-left-color: #ffc107;
-        }
-
-        .log-entry.error {
-            background: #f8d7da;
-            border-left-color: #dc3545;
-        }
-
-        .log-timestamp {
-            color: #6c757d;
-            font-size: 0.8rem;
-        }
-
-        .log-message {
-            margin-left: 10px;
-        }
-
-        .status-card {
-            grid-column: 1 / -1;
-        }
-
-        .status-overview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .status-item {
-            text-align: center;
-            padding: 20px;
-            border-radius: 10px;
-            background: #f8f9fa;
-        }
-
-        .status-value {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .status-label {
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: #e9ecef;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 15px 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #28a745, #20c997);
-            transition: width 0.5s ease;
-            border-radius: 10px;
-        }
-
-        .recommendations {
-            margin-top: 20px;
-        }
-
-        .recommendation-item {
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 8px;
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-        }
-
-        .connection-status {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 15px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            z-index: 1000;
-        }
-
-        .connected {
-            background: #28a745;
-            color: white;
-        }
-
-        .disconnected {
-            background: #dc3545;
-            color: white;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 50px;
-            color: #6c757d;
-        }
-
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Knowledge Manager Styles */
-        .knowledge-controls {
-            padding: 20px 0;
-        }
-
-        .knowledge-tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .tab-button {
-            padding: 10px 20px;
+        
+        .log-error { color: #dc3545; }
+        .log-warning { color: #ffc107; }
+        .log-success { color: #28a745; }
+        .log-info { color: #17a2b8; }
+        
+        .nav-tabs .nav-link {
+            border-radius: 10px 10px 0 0;
             border: none;
-            background: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
+            color: #6c757d;
         }
-
-        .tab-button.active {
-            border-bottom-color: #667eea;
-            color: #667eea;
-            font-weight: 600;
-        }
-
-        .tab-button:hover {
-            background: #f8f9fa;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-
-        .form-group textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-
-        .btn-primary {
+        
+        .nav-tabs .nav-link.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
         }
-
-        .btn-primary:hover {
+        
+        .btn-godmode {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border: none;
+            color: white;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: bold;
+        }
+        
+        .btn-godmode:hover {
+            background: linear-gradient(135deg, #ee5a24 0%, #ff6b6b 100%);
+            color: white;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
-
-        .search-controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+        
+        .godmode-data {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
         }
-
-        .search-controls input {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .search-controls select {
-            min-width: 150px;
-        }
-
-        .search-results {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .knowledge-item {
+        
+        .session-item {
+            background: white;
+            border-radius: 10px;
             padding: 15px;
             margin-bottom: 10px;
-            border-radius: 8px;
-            background: #f8f9fa;
             border-left: 4px solid #667eea;
         }
-
-        .knowledge-item h4 {
-            margin: 0 0 8px 0;
-            color: #2c3e50;
-        }
-
-        .knowledge-item p {
-            margin: 0 0 8px 0;
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-
-        .knowledge-item .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-
-        .tag {
-            background: #e3f2fd;
-            color: #1976d2;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-        }
-
-        .knowledge-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 20px;
+        
+        .command-item {
+            background: white;
             border-radius: 8px;
-            background: #f8f9fa;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-
-        .category-stats {
-            margin-top: 20px;
-        }
-
-        .category-item {
-            display: flex;
-            justify-content: space-between;
             padding: 10px;
-            margin: 5px 0;
-            background: #f8f9fa;
-            border-radius: 5px;
+            margin-bottom: 8px;
+            border-left: 3px solid #28a745;
         }
-
-        @media (max-width: 768px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .container {
-                padding: 10px;
-            }
-
-            .search-controls {
-                flex-direction: column;
-            }
-
-            .knowledge-tabs {
-                flex-wrap: wrap;
-            }
+        
+        .pattern-item {
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-left: 3px solid #ffc107;
+        }
+        
+        .learning-item {
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-left: 3px solid #17a2b8;
         }
     </style>
 </head>
 <body>
-    <div class="connection-status" id="connectionStatus">
-        <span id="connectionText">กำลังเชื่อมต่อ...</span>
-    </div>
-
-    <div class="container">
-        <div class="header">
-            <h1>🚀 Backup-byGod Dashboard</h1>
-            <p>Real-time System Monitoring & Control Center</p>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-robot"></i> WAWA AI System
+            </a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text">
+                    <i class="fas fa-clock"></i> <span id="current-time"></span>
+                </span>
+            </div>
         </div>
+    </nav>
 
-        <div class="dashboard-grid">
-            <!-- System Capabilities Card -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">📋</div>
-                    <div class="card-title">System Capabilities</div>
-                </div>
-                <div id="capabilitiesContainer" class="capabilities-grid">
-                    <div class="loading">
-                        <div class="spinner"></div>
-                        <p>กำลังโหลดข้อมูล...</p>
+    <div class="container-fluid mt-4">
+        <!-- System Status Overview -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-chart-line"></i> System Status Overview</h5>
                     </div>
-                </div>
-            </div>
-
-            <!-- Real-time Log Monitor -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">📊</div>
-                    <div class="card-title">Live Log Monitor</div>
-                </div>
-                <div id="logContainer" class="log-container">
-                    <div class="loading">
-                        <div class="spinner"></div>
-                        <p>กำลังเชื่อมต่อ...</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project Status Report -->
-            <div class="card status-card">
-                <div class="card-header">
-                    <div class="card-icon">📈</div>
-                    <div class="card-title">Project Status Report</div>
-                </div>
-                <div id="statusContainer">
-                    <div class="loading">
-                        <div class="spinner"></div>
-                        <p>กำลังโหลดสถานะ...</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Knowledge Manager Card -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">🧠</div>
-                    <div class="card-title">Knowledge Manager</div>
-                </div>
-                <div id="knowledgeContainer">
-                    <div class="knowledge-controls">
-                        <div class="knowledge-tabs">
-                            <button class="tab-button active" onclick="switchTab('add')">➕ เพิ่มความรู้</button>
-                            <button class="tab-button" onclick="switchTab('search')">🔍 ค้นหา</button>
-                            <button class="tab-button" onclick="switchTab('stats')">📊 สถิติ</button>
+                    <div class="card-body">
+                    <div class="row">
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h2 id="status-percent">--</h2>
+                            <p id="status-message">กำลังตรวจสอบ...</p>
+                                    <div class="progress">
+                                        <div id="status-progress" class="progress-bar" style="width: 0%"></div>
+                                    </div>
                         </div>
-                        
-                        <!-- Add Knowledge Tab -->
-                        <div id="addTab" class="tab-content active">
-                            <div class="form-group">
-                                <label>ประเภท:</label>
-                                <select id="categorySelect">
-                                    <option value="n8n">🔧 n8n</option>
-                                    <option value="zapier">⚡ Zapier</option>
-                                    <option value="make">🔄 Make</option>
-                                    <option value="general">📚 General</option>
-                                    <option value="chrome">🌐 Chrome</option>
-                                    <option value="ai">🧠 AI</option>
-                                </select>
                             </div>
-                            
-                            <div class="form-group">
-                                <label>เพิ่มจาก URL:</label>
-                                <input type="url" id="urlInput" placeholder="https://example.com" />
-                                <input type="text" id="titleInput" placeholder="ชื่อเรื่อง (ไม่บังคับ)" />
-                                <textarea id="descriptionInput" placeholder="คำอธิบาย (ไม่บังคับ)"></textarea>
-                                <button onclick="addKnowledgeFromUrl()" class="btn-primary">➕ เพิ่มจาก URL</button>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 id="ready-count">0</h4>
+                                    <small>Ready Systems</small>
+                                </div>
                             </div>
-                            
-                            <div class="form-group">
-                                <label>เพิ่มจากข้อความ:</label>
-                                <input type="text" id="textTitleInput" placeholder="ชื่อเรื่อง" required />
-                                <textarea id="textContentInput" placeholder="เนื้อหา" required></textarea>
-                                <textarea id="textDescriptionInput" placeholder="คำอธิบาย (ไม่บังคับ)"></textarea>
-                                <button onclick="addKnowledgeFromText()" class="btn-primary">📝 เพิ่มจากข้อความ</button>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 id="error-count">0</h4>
+                                    <small>Errors</small>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <!-- Search Tab -->
-                        <div id="searchTab" class="tab-content">
-                            <div class="search-controls">
-                                <input type="text" id="searchInput" placeholder="ค้นหาความรู้..." />
-                                <select id="searchCategory">
-                                    <option value="">ทุกหมวดหมู่</option>
-                                    <option value="n8n">🔧 n8n</option>
-                                    <option value="zapier">⚡ Zapier</option>
-                                    <option value="make">🔄 Make</option>
-                                    <option value="general">📚 General</option>
-                                    <option value="chrome">🌐 Chrome</option>
-                                    <option value="ai">🧠 AI</option>
-                                </select>
-                                <button onclick="searchKnowledge()" class="btn-primary">🔍 ค้นหา</button>
-                            </div>
-                            <div id="searchResults" class="search-results"></div>
-                        </div>
-                        
-                        <!-- Stats Tab -->
-                        <div id="statsTab" class="tab-content">
-                            <div id="knowledgeStats" class="knowledge-stats">
-                                <div class="loading">
-                                    <div class="spinner"></div>
-                                    <p>กำลังโหลดสถิติ...</p>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <small>Last Update</small><br>
+                                    <span id="last-update">--</span>
                                 </div>
                             </div>
                         </div>
@@ -625,488 +215,245 @@
                 </div>
             </div>
         </div>
+
+        <!-- System Capabilities -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-cogs"></i> System Capabilities</h5>
+                    </div>
+                    <div class="card-body">
+                <div class="row" id="capabilities-container">
+                            <div class="col-md-3 mb-3">
+                                <div id="capability-chrome_automation" class="capability-card status-unknown">
+                                    <div class="status-indicator unknown"></div>
+                                    <h6>🌐 Chrome Automation</h6>
+                                    <p class="capability-description">ควบคุม Chrome ด้วย AI และ Selenium</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div id="capability-ai_integration" class="capability-card status-unknown">
+                                    <div class="status-indicator unknown"></div>
+                                    <h6>🧠 AI Integration</h6>
+                                    <p class="capability-description">การประมวลผล AI แบบ Multimodal</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div id="capability-thai_processor" class="capability-card status-unknown">
+                                    <div class="status-indicator unknown"></div>
+                                    <h6>🇹🇭 Thai Language Processor</h6>
+                                    <p class="capability-description">ประมวลผลภาษาไทยและ OCR</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div id="capability-visual_recognition" class="capability-card status-unknown">
+                                    <div class="status-indicator unknown"></div>
+                                    <h6>👁️ Visual Recognition</h6>
+                                    <p class="capability-description">การจดจำภาพและวิเคราะห์ภาพ</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div id="capability-backup_controller" class="capability-card status-unknown">
+                                    <div class="status-indicator unknown"></div>
+                                    <h6>💾 Backup Controller</h6>
+                                    <p class="capability-description">ควบคุมการสำรองข้อมูลอัตโนมัติ</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div id="capability-supabase_integration" class="capability-card status-unknown">
+                                    <div class="status-indicator unknown"></div>
+                                    <h6>☁️ Supabase Database</h6>
+                                    <p class="capability-description">Cloud Database และ Real-time Features</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div id="capability-environment_cards" class="capability-card status-unknown">
+                                    <div class="status-indicator unknown"></div>
+                                    <h6>📋 Environment Cards</h6>
+                                    <p class="capability-description">แสดงข้อมูล Environment ของโปรแกรมต่างๆ</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div id="capability-knowledge_manager" class="capability-card status-unknown">
+                                    <div class="status-indicator unknown"></div>
+                                    <h6>🧠 Knowledge Manager</h6>
+                                    <p class="capability-description">จัดการฐานความรู้สำหรับการเรียนรู้และควบคุมระบบ</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div id="capability-godmode_knowledge" class="capability-card status-unknown">
+                                    <div class="status-indicator unknown"></div>
+                                    <h6>🚀 God Mode Knowledge</h6>
+                                    <p class="capability-description">ฐานข้อมูลความรู้ถาวรสำหรับ God Mode</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div id="capability-gpu_processing" class="capability-card status-unknown">
+                                    <div class="status-indicator unknown"></div>
+                                    <h6>🎮 GPU Processing</h6>
+                                    <p class="capability-description">การประมวลผลด้วย GPU (RTX 4060)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div id="capability-smart_allocator" class="capability-card status-unknown">
+                                    <div class="status-indicator unknown"></div>
+                                    <h6>⚡ Smart Resource Allocator</h6>
+                                    <p class="capability-description">จัดสรรทรัพยากรอัจฉริยะ</p>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+        <!-- God Mode Section -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-crown"></i> God Mode Statistics</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="godmode-statistics">
+                <div class="row">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <h4>0</h4>
+                                        <small>Sessions</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <h4>0</h4>
+                                        <small>Commands</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <h4>0</h4>
+                                        <small>Patterns</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <h4>0%</h4>
+                                        <small>Success Rate</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-terminal"></i> Recent Commands</h5>
+                </div>
+                    <div class="card-body">
+                        <div id="godmode-commands">
+                            <p class="text-muted">No commands found</p>
+            </div>
+                    </div>
+                </div>
+                            </div>
+                        </div>
+
+        <!-- System Resources -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-microchip"></i> System Resources</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="system-resources">
+                            <p class="text-muted">Loading system resources...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-lightbulb"></i> Recommendations</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="recommendations-container">
+                            <p class="text-muted">No recommendations available</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Control Panel -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-gamepad"></i> Control Panel</h5>
+                    </div>
+                    <div class="card-body">
+                <div class="row">
+                            <div class="col-md-3">
+                                <button id="start-godmode" class="btn btn-success btn-lg w-100 mb-2">
+                                    <i class="fas fa-play"></i> Start God Mode
+                                </button>
+                            </div>
+                            <div class="col-md-3">
+                                <button id="end-godmode" class="btn btn-danger btn-lg w-100 mb-2">
+                                    <i class="fas fa-stop"></i> End God Mode
+                                </button>
+                        </div>
+                            <div class="col-md-3">
+                                <button id="cleanup-chrome" class="btn btn-warning btn-lg w-100 mb-2">
+                                    <i class="fas fa-broom"></i> Cleanup Chrome
+                                </button>
+                    </div>
+                            <div class="col-md-3">
+                                <button id="restart-dashboard" class="btn btn-info btn-lg w-100 mb-2">
+                                    <i class="fas fa-redo"></i> Restart Dashboard
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            </div>
+                        </div>
+
+        <!-- System Logs -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list-alt"></i> System Logs</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="logs-container" style="max-height: 300px; overflow-y: auto;">
+                            <p class="text-muted">Loading logs...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+    
     <script>
-        // Initialize Socket.IO connection
-        const socket = io();
-        let isConnected = false;
-
-        // Connection status handling
-        socket.on('connect', function() {
-            isConnected = true;
-            updateConnectionStatus('เชื่อมต่อแล้ว', 'connected');
-            console.log('Connected to server');
-        });
-
-        socket.on('disconnect', function() {
-            isConnected = false;
-            updateConnectionStatus('ขาดการเชื่อมต่อ', 'disconnected');
-            console.log('Disconnected from server');
-        });
-
-        function updateConnectionStatus(text, className) {
-            const statusElement = document.getElementById('connectionStatus');
-            const textElement = document.getElementById('connectionText');
-            
-            statusElement.className = `connection-status ${className}`;
-            textElement.textContent = text;
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('current-time').textContent = now.toLocaleString('th-TH');
         }
-
-        // Handle real-time log updates
-        socket.on('new_log', function(logEntry) {
-            addLogEntry(logEntry);
-        });
-
-        // Handle status updates
-        socket.on('status_update', function(data) {
-            updateCapabilities(data.capabilities);
-            updateProjectStatus(data.project_status);
-        });
-
-        // Handle initial connection
-        socket.on('connected', function(data) {
-            console.log('Dashboard connected:', data.message);
-            // Load initial data
-            loadInitialData();
-        });
-
-        function loadInitialData() {
-            fetch('/api/status')
-                .then(response => response.json())
-                .then(data => {
-                    updateCapabilities(data.capabilities);
-                    updateProjectStatus(data.project_status);
-                    updateLogs(data.logs);
-                })
-                .catch(error => {
-                    console.error('Error loading initial data:', error);
-                });
-        }
-
-        function updateCapabilities(capabilities) {
-            const container = document.getElementById('capabilitiesContainer');
-            
-            if (!capabilities || Object.keys(capabilities).length === 0) {
-                container.innerHTML = '<div class="loading"><p>ไม่พบข้อมูลความสามารถ</p></div>';
-                return;
-            }
-
-            let html = '';
-            for (const [key, capability] of Object.entries(capabilities)) {
-                const statusClass = capability.status;
-                const statusText = capability.status === 'ready' ? 'พร้อม' : 
-                                 capability.status === 'warning' ? 'เตือน' : 
-                                 capability.status === 'error' ? 'ผิดพลาด' : 'ไม่ทราบ';
-                
-                html += `
-                    <div class="capability-item ${statusClass}">
-                        <div class="capability-icon">${capability.icon}</div>
-                        <div class="capability-info">
-                            <h4>${capability.name}</h4>
-                            <p>${capability.description}</p>
-                        </div>
-                        <span class="status-badge status-${statusClass}">${statusText}</span>
-                    </div>
-                `;
-            }
-            
-            container.innerHTML = html;
-        }
-
-        function updateProjectStatus(status) {
-            const container = document.getElementById('statusContainer');
-            
-            if (!status) {
-                container.innerHTML = '<div class="loading"><p>ไม่พบข้อมูลสถานะ</p></div>';
-                return;
-            }
-
-            const html = `
-                <div class="status-overview">
-                    <div class="status-item">
-                        <div class="status-value">${status.readiness_percent}%</div>
-                        <div class="status-label">ความพร้อมของระบบ</div>
-                    </div>
-                    <div class="status-item">
-                        <div class="status-value">${status.ready_components}/${status.total_components}</div>
-                        <div class="status-label">คอมโพเนนต์พร้อม</div>
-                    </div>
-                    <div class="status-item">
-                        <div class="status-value">${Math.round(status.system_resources.cpu_percent)}%</div>
-                        <div class="status-label">การใช้ CPU</div>
-                    </div>
-                    <div class="status-item">
-                        <div class="status-value">${Math.round(status.system_resources.memory_percent)}%</div>
-                        <div class="status-label">การใช้ RAM</div>
-                    </div>
-                </div>
-                
-                <div style="margin: 20px 0;">
-                    <h4>สถานะระบบ</h4>
-                    <p style="font-size: 1.1rem; margin: 10px 0;">${status.status_message}</p>
-                    
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${status.readiness_percent}%"></div>
-                    </div>
-                </div>
-                
-                <div class="recommendations">
-                    <h4>ข้อเสนอแนะ</h4>
-                    ${status.recommendations.map(rec => `
-                        <div class="recommendation-item">${rec}</div>
-                    `).join('')}
-                </div>
-                
-                <div style="margin-top: 20px; font-size: 0.9rem; color: #6c757d;">
-                    อัปเดตล่าสุด: ${new Date(status.last_update).toLocaleString('th-TH')}
-                </div>
-            `;
-            
-            container.innerHTML = html;
-        }
-
-        function updateLogs(logs) {
-            const container = document.getElementById('logContainer');
-            
-            if (!logs || logs.length === 0) {
-                container.innerHTML = '<div class="loading"><p>ไม่มีข้อมูล log</p></div>';
-                return;
-            }
-
-            let html = '';
-            logs.forEach(log => {
-                html += createLogEntry(log);
-            });
-            
-            container.innerHTML = html;
-            container.scrollTop = container.scrollHeight;
-        }
-
-        function addLogEntry(logEntry) {
-            const container = document.getElementById('logContainer');
-            
-            // Remove loading message if present
-            if (container.querySelector('.loading')) {
-                container.innerHTML = '';
-            }
-            
-            const logElement = document.createElement('div');
-            logElement.innerHTML = createLogEntry(logEntry);
-            container.appendChild(logElement.firstElementChild);
-            
-            // Auto-scroll to bottom
-            container.scrollTop = container.scrollHeight;
-        }
-
-        function createLogEntry(logEntry) {
-            const timestamp = new Date(logEntry.timestamp).toLocaleTimeString('th-TH');
-            return `
-                <div class="log-entry ${logEntry.level}">
-                    <span class="log-timestamp">[${timestamp}]</span>
-                    <span class="log-message">${logEntry.message}</span>
-                </div>
-            `;
-        }
-
-        // Auto-reconnect on page focus
-        window.addEventListener('focus', function() {
-            if (!isConnected) {
-                socket.connect();
-            }
-        });
-
-        // Handle page unload
-        window.addEventListener('beforeunload', function() {
-            socket.disconnect();
-        });
-
-        // Knowledge Manager Functions
-        function switchTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabName + 'Tab').classList.add('active');
-            event.target.classList.add('active');
-            
-            // Load data for specific tabs
-            if (tabName === 'stats') {
-                loadKnowledgeStats();
-            }
-        }
-
-        function addKnowledgeFromUrl() {
-            const url = document.getElementById('urlInput').value;
-            const category = document.getElementById('categorySelect').value;
-            const title = document.getElementById('titleInput').value;
-            const description = document.getElementById('descriptionInput').value;
-            
-            if (!url) {
-                alert('กรุณาใส่ URL');
-                return;
-            }
-            
-            const data = {
-                type: 'url',
-                url: url,
-                category: category,
-                title: title || null,
-                description: description || null
-            };
-            
-            fetch('/api/knowledge/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    alert('เพิ่มความรู้สำเร็จ!');
-                    clearForm('url');
-                } else {
-                    alert('เกิดข้อผิดพลาด: ' + result.error);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('เกิดข้อผิดพลาดในการเชื่อมต่อ');
-            });
-        }
-
-        function addKnowledgeFromText() {
-            const title = document.getElementById('textTitleInput').value;
-            const content = document.getElementById('textContentInput').value;
-            const category = document.getElementById('categorySelect').value;
-            const description = document.getElementById('textDescriptionInput').value;
-            
-            if (!title || !content) {
-                alert('กรุณาใส่ชื่อเรื่องและเนื้อหา');
-                return;
-            }
-            
-            const data = {
-                type: 'text',
-                title: title,
-                content: content,
-                category: category,
-                description: description || null
-            };
-            
-            fetch('/api/knowledge/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    alert('เพิ่มความรู้สำเร็จ!');
-                    clearForm('text');
-                } else {
-                    alert('เกิดข้อผิดพลาด: ' + result.error);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('เกิดข้อผิดพลาดในการเชื่อมต่อ');
-            });
-        }
-
-        function searchKnowledge() {
-            const query = document.getElementById('searchInput').value;
-            const category = document.getElementById('searchCategory').value;
-            
-            if (!query) {
-                alert('กรุณาใส่คำค้นหา');
-                return;
-            }
-            
-            const url = `/api/knowledge/search?q=${encodeURIComponent(query)}&limit=10`;
-            if (category) {
-                url += `&category=${encodeURIComponent(category)}`;
-            }
-            
-            fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert('เกิดข้อผิดพลาด: ' + data.error);
-                    return;
-                }
-                displaySearchResults(data.results, data.query);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('เกิดข้อผิดพลาดในการค้นหา');
-            });
-        }
-
-        function displaySearchResults(results, query) {
-            const container = document.getElementById('searchResults');
-            
-            if (results.length === 0) {
-                container.innerHTML = '<p>ไม่พบผลลัพธ์สำหรับ: "' + query + '"</p>';
-                return;
-            }
-            
-            let html = `<h4>ผลลัพธ์สำหรับ: "${query}" (${results.length} รายการ)</h4>`;
-            
-            results.forEach(item => {
-                html += `
-                    <div class="knowledge-item">
-                        <h4>${item.title}</h4>
-                        <p>${item.description}</p>
-                        <p><strong>หมวดหมู่:</strong> ${item.category}</p>
-                        <p><strong>วันที่สร้าง:</strong> ${new Date(item.metadata.created).toLocaleDateString('th-TH')}</p>
-                        ${item.tags && item.tags.length > 0 ? `
-                            <div class="tags">
-                                ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                            </div>
-                        ` : ''}
-                        <div style="margin-top: 10px;">
-                            <button onclick="viewKnowledge('${item.id}')" class="btn-primary" style="margin-right: 10px;">👁️ ดูรายละเอียด</button>
-                            <button onclick="deleteKnowledge('${item.id}')" class="btn-primary" style="background: #dc3545;">🗑️ ลบ</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
-        }
-
-        function loadKnowledgeStats() {
-            fetch('/api/knowledge/statistics')
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    document.getElementById('knowledgeStats').innerHTML = '<p>เกิดข้อผิดพลาด: ' + data.error + '</p>';
-                    return;
-                }
-                displayKnowledgeStats(data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('knowledgeStats').innerHTML = '<p>เกิดข้อผิดพลาดในการโหลดสถิติ</p>';
-            });
-        }
-
-        function displayKnowledgeStats(stats) {
-            const container = document.getElementById('knowledgeStats');
-            
-            let html = `
-                <div class="stat-item">
-                    <div class="stat-value">${stats.total_items}</div>
-                    <div class="stat-label">ความรู้ทั้งหมด</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">${Object.keys(stats.categories).length}</div>
-                    <div class="stat-label">หมวดหมู่</div>
-                </div>
-            `;
-            
-            if (stats.last_updated) {
-                html += `
-                    <div class="stat-item">
-                        <div class="stat-value">📅</div>
-                        <div class="stat-label">อัปเดตล่าสุด</div>
-                    </div>
-                `;
-            }
-            
-            html += '<div class="category-stats">';
-            html += '<h4>สถิติตามหมวดหมู่</h4>';
-            
-            for (const [category, count] of Object.entries(stats.categories)) {
-                html += `
-                    <div class="category-item">
-                        <span>${category}</span>
-                        <span>${count} รายการ</span>
-                    </div>
-                `;
-            }
-            
-            html += '</div>';
-            
-            container.innerHTML = html;
-        }
-
-        function clearForm(type) {
-            if (type === 'url') {
-                document.getElementById('urlInput').value = '';
-                document.getElementById('titleInput').value = '';
-                document.getElementById('descriptionInput').value = '';
-            } else if (type === 'text') {
-                document.getElementById('textTitleInput').value = '';
-                document.getElementById('textContentInput').value = '';
-                document.getElementById('textDescriptionInput').value = '';
-            }
-        }
-
-        function viewKnowledge(knowledgeId) {
-            fetch(`/api/knowledge/${knowledgeId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert('เกิดข้อผิดพลาด: ' + data.error);
-                    return;
-                }
-                
-                const content = `
-                    <h3>${data.title}</h3>
-                    <p><strong>หมวดหมู่:</strong> ${data.category}</p>
-                    <p><strong>คำอธิบาย:</strong> ${data.description}</p>
-                    <p><strong>เนื้อหา:</strong></p>
-                    <div style="max-height: 300px; overflow-y: auto; background: #f8f9fa; padding: 15px; border-radius: 8px;">
-                        ${data.content.substring(0, 1000)}${data.content.length > 1000 ? '...' : ''}
-                    </div>
-                    <p><strong>วันที่สร้าง:</strong> ${new Date(data.metadata.created).toLocaleString('th-TH')}</p>
-                    ${data.url ? `<p><strong>URL:</strong> <a href="${data.url}" target="_blank">${data.url}</a></p>` : ''}
-                `;
-                
-                alert(content.replace(/<[^>]*>/g, '')); // Simple text display
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('เกิดข้อผิดพลาดในการดูรายละเอียด');
-            });
-        }
-
-        function deleteKnowledge(knowledgeId) {
-            if (!confirm('คุณแน่ใจหรือไม่ที่จะลบความรู้นี้?')) {
-                return;
-            }
-            
-            fetch(`/api/knowledge/delete/${knowledgeId}`, {
-                method: 'DELETE'
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    alert('ลบความรู้สำเร็จ!');
-                    // Refresh search results if on search tab
-                    if (document.getElementById('searchTab').classList.contains('active')) {
-                        searchKnowledge();
-                    }
-                } else {
-                    alert('เกิดข้อผิดพลาด: ' + result.error);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('เกิดข้อผิดพลาดในการลบ');
-            });
-        }
+        setInterval(updateTime, 1000);
+        updateTime();
     </script>
 </body>
 </html> 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        pre { background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .capability { margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .ready { background: #d4edda; border-color: #c3e6cb; }
+        .error { background: #f8d7da; border-color: #f5c6cb; }
+        .warning { background: #fff3cd; border-color: #ffeaa7; }
+        .unknown { background: #f8f9fa; border-color: #e9ecef; }
+    </style>
+</head>
+<body>
+    <h1>API Test - System Capabilities</h1>
+    <div id="result">Loading...</div>
+    
+    <script>
+        fetch('/api/status')
+            .then(response => response.json())
+            .then(data => {
+                console.log('API Response:', data);
+                
+                let html = '<h2>System Status</h2>';
+                html += `<p><strong>Status:</strong> ${data.status_percent}% - ${data.status_message}</p>`;
+                
+                html += '<h2>Capabilities</h2>';
+                if (data.capabilities) {
+                    Object.keys(data.capabilities).forEach(key => {
+                        const cap = data.capabilities[key];
+                        html += `
+                            <div class="capability ${cap.status}">
+                                <h3>${cap.icon} ${cap.name}</h3>
+                                <p><strong>Status:</strong> ${cap.status}</p>
+                                <p><strong>Description:</strong> ${cap.description}</p>
+                            </div>
+                        `;
+                    });
+                }
+                
+                html += '<h2>Raw JSON Data</h2>';
+                html += '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                
+                document.getElementById('result').innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = 'Error: ' + error.message;
+            });
+    </script>
+</body>
+</html> 

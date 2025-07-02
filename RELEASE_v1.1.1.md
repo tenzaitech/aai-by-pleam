@@ -118,7 +118,7 @@ python system_status_check.py
 ### **2. Auto-System Setup**
 ```bash
 # Clean Chrome
-taskkill /f /im chrome.exe
+# taskkill /f /im chrome.exe  # DISABLED BY USER PREFERENCE
 
 # Start Dashboard
 cd dashboard && python app.py &

@@ -10,10 +10,10 @@
 python system_status_check.py
 ```
 
-### 2. CLEANUP CHROME PROCESSES
+### 2. CLEANUP CHROME PROCESSES - DISABLED
 ```bash
-# ทำความสะอาด Chrome processes
-taskkill /f /im chrome.exe
+# ทำความสะอาด Chrome processes - DISABLED BY USER PREFERENCE
+# taskkill /f /im chrome.exe
 ```
 
 ### 3. START DASHBOARD
@@ -59,9 +59,9 @@ python smart_resource_allocator.py
 python system_status_check.py
 ```
 
-### Step 2: Clean Environment
+### Step 2: Clean Environment - DISABLED
 ```bash
-taskkill /f /im chrome.exe
+# taskkill /f /im chrome.exe  # DISABLED BY USER PREFERENCE
 ```
 
 ### Step 3: Start Services
@@ -103,7 +103,7 @@ python parallel_chrome_test.py
 ### IF SYSTEM SLOW
 ```bash
 # Clean memory
-taskkill /f /im chrome.exe
+# taskkill /f /im chrome.exe  # DISABLED BY USER PREFERENCE
 taskkill /f /im python.exe
 ```
 
@@ -141,8 +141,8 @@ python performance_optimizer.py --metrics
 # 1. System Status Check
 python system_status_check.py
 
-# 2. Clean Chrome
-taskkill /f /im chrome.exe
+# 2. Clean Chrome - DISABLED
+# taskkill /f /im chrome.exe  # DISABLED BY USER PREFERENCE
 
 # 3. Start Dashboard
 cd dashboard && python app.py &

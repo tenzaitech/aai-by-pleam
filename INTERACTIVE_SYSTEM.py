@@ -10,6 +10,8 @@ import os
 from pathlib import Path
 from typing import Dict, Any, Optional
 import time
+from alldata_godmode.god_mode_knowledge_manager import GodModeKnowledgeManager
+import traceback
 
 # Fix Windows console encoding
 if sys.platform == "win32":
@@ -23,6 +25,8 @@ class InteractiveSystem:
         self.running = False
         self.components = {}
         self.config = self.load_config()
+        self.godmode_km = GodModeKnowledgeManager()
+        self.godmode_session_id = None
         
     def load_config(self):
         """โหลดการตั้งค่า"""
@@ -423,10 +427,11 @@ class InteractiveSystem:
             return False
             
     async def stop_chrome_browser(self):
-        """ปิด Chrome browser"""
+        """ปิด Chrome browser - DISABLED"""
         if "chrome" in self.components:
-            self.chrome_controller.cleanup()
-            print("🔌 Chrome browser ปิดแล้ว")
+            print(f"[DEBUG] stop_chrome_browser() called from: {traceback.format_stack()}")
+            # self.chrome_controller.cleanup()  # DISABLED - ไม่ให้ปิด Chrome อัตโนมัติ
+            print("🔌 Chrome browser cleanup disabled by user preference")
             
     async def get_chrome_status(self):
         """ดูสถานะ Chrome browser"""
@@ -438,40 +443,45 @@ class InteractiveSystem:
         """รันระบบ interactive"""
         if not await self.initialize_system():
             return
-            
-        while True:
-            try:
-                self.show_menu()
-                choice = input("เลือกเมนู: ").strip()
-                
-                if choice == "0":
-                    print("🛑 ออกจากระบบ...")
+        # เริ่ม session godmode ทุกครั้งที่เข้าโหมด godauto/godmode
+        self.godmode_session_id = self.godmode_km.start_session()
+        try:
+            while True:
+                try:
+                    self.show_menu()
+                    choice = input("เลือกเมนู: ").strip()
+                    # บันทึก command ทุกครั้ง
+                    self.godmode_km.save_command(self.godmode_session_id, f"menu_choice:{choice}", "menu", True, "User selected menu")
+                    if choice == "0":
+                        print("🛑 ออกจากระบบ...")
+                        break
+                    elif choice == "1":
+                        await self.chrome_menu()
+                    elif choice == "2":
+                        await self.thai_menu()
+                    elif choice == "3":
+                        await self.ai_menu()
+                    elif choice == "4":
+                        await self.visual_menu()
+                    elif choice == "5":
+                        await self.backup_menu()
+                    elif choice == "6":
+                        self.system_status()
+                    elif choice == "7":
+                        print("🔧 System Settings (ยังไม่พร้อม)")
+                    elif choice == "8":
+                        await self.run_all_tests()
+                    else:
+                        print("❌ เลือกไม่ถูกต้อง")
+                except KeyboardInterrupt:
+                    print("\n🛑 ระบบถูกหยุดโดยผู้ใช้")
                     break
-                elif choice == "1":
-                    await self.chrome_menu()
-                elif choice == "2":
-                    await self.thai_menu()
-                elif choice == "3":
-                    await self.ai_menu()
-                elif choice == "4":
-                    await self.visual_menu()
-                elif choice == "5":
-                    await self.backup_menu()
-                elif choice == "6":
-                    self.system_status()
-                elif choice == "7":
-                    print("🔧 System Settings (ยังไม่พร้อม)")
-                elif choice == "8":
-                    await self.run_all_tests()
-                else:
-                    print("❌ เลือกไม่ถูกต้อง")
-                    
-            except KeyboardInterrupt:
-                print("\n🛑 ระบบถูกหยุดโดยผู้ใช้")
-                break
-            except Exception as e:
-                print(f"❌ เกิดข้อผิดพลาด: {e}")
-                
+                except Exception as e:
+                    print(f"❌ เกิดข้อผิดพลาด: {e}")
+                    self.godmode_km.save_command(self.godmode_session_id, f"error:{e}", "error", False, str(e))
+        finally:
+            # จบ session godmode
+            self.godmode_km.end_session(self.godmode_session_id)
         print("👋 ขอบคุณที่ใช้งาน!")
         
 async def main():

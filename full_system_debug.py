@@ -51,14 +51,15 @@ def scan_python_files_for_selenium(directory):
     return selenium_files
 
 def monitor_chrome_processes():
-    """ติดตาม Chrome processes แบบ real-time"""
+    """ติดตาม Chrome processes แบบ real-time - DISABLED"""
     while True:
         try:
-            result = subprocess.run(['tasklist', '/FI', 'IMAGENAME eq chrome.exe'], 
-                                  capture_output=True, text=True)
-            if 'chrome.exe' in result.stdout:
-                log_debug(f"🚨 CHROME DETECTED:\n{result.stdout}")
-            time.sleep(2)
+            # result = subprocess.run(['tasklist', '/FI', 'IMAGENAME eq chrome.exe'], 
+            #                       capture_output=True, text=True)
+            # if 'chrome.exe' in result.stdout:
+            #     log_debug(f"🚨 CHROME DETECTED:\n{result.stdout}")
+            log_debug("Chrome monitoring disabled by user preference")
+            time.sleep(10)  # ลดความถี่การตรวจสอบ
         except Exception as e:
             log_debug(f"Monitor error: {e}")
             time.sleep(5)
@@ -132,10 +133,11 @@ def check_running_processes():
                               capture_output=True, text=True)
         log_debug(f"Python processes:\n{result.stdout}")
         
-        # ตรวจสอบ Chrome processes
-        result = subprocess.run(['tasklist', '/FI', 'IMAGENAME eq chrome.exe'], 
-                              capture_output=True, text=True)
-        log_debug(f"Chrome processes:\n{result.stdout}")
+        # ตรวจสอบ Chrome processes - DISABLED
+        # result = subprocess.run(['tasklist', '/FI', 'IMAGENAME eq chrome.exe'], 
+        #                       capture_output=True, text=True)
+        # log_debug(f"Chrome processes:\n{result.stdout}")
+        log_debug("Chrome process checking disabled by user preference")
         
     except Exception as e:
         log_debug(f"Process check error: {e}")

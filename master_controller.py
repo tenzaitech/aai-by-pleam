@@ -12,6 +12,7 @@ import os
 import sys
 from pathlib import Path
 from typing import Dict, Any
+import traceback
 
 # Import components with error handling
 try:
@@ -154,11 +155,12 @@ class FullSystemLauncher:
             return False
             
     async def stop_chrome_browser(self):
-        """ปิด Chrome browser"""
+        """ปิด Chrome browser - DISABLED"""
         if hasattr(self, 'chrome_controller'):
             try:
-                self.chrome_controller.cleanup()
-                self.logger.info("🔌 Chrome browser ปิดแล้ว")
+                self.logger.debug(f"[DEBUG] stop_chrome_browser() called from: {traceback.format_stack()}")
+                # self.chrome_controller.cleanup()  # DISABLED - ไม่ให้ปิด Chrome อัตโนมัติ
+                self.logger.info("🔌 Chrome browser cleanup disabled by user preference")
             except Exception as e:
                 self.logger.error(f"❌ Chrome cleanup error: {e}")
         

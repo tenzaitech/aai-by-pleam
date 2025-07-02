@@ -17,14 +17,15 @@ def log_debug(message):
     print(f"[{timestamp}] 🔍 {message}")
 
 def monitor_chrome_processes():
-    """ติดตาม Chrome processes"""
+    """ติดตาม Chrome processes - DISABLED"""
     while True:
         try:
-            result = subprocess.run(['tasklist', '/FI', 'IMAGENAME eq chrome.exe'], 
-                                  capture_output=True, text=True)
-            if 'chrome.exe' in result.stdout:
-                log_debug(f"Chrome processes found:\n{result.stdout}")
-            time.sleep(5)
+            # result = subprocess.run(['tasklist', '/FI', 'IMAGENAME eq chrome.exe'], 
+            #                       capture_output=True, text=True)
+            # if 'chrome.exe' in result.stdout:
+            #     log_debug(f"Chrome processes found:\n{result.stdout}")
+            log_debug("Chrome monitoring disabled by user preference")
+            time.sleep(10)
         except Exception as e:
             log_debug(f"Monitor error: {e}")
             time.sleep(10)

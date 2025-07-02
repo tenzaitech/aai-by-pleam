@@ -17,6 +17,7 @@ import logging
 import threading
 import time
 import subprocess
+import traceback
 
 class AIChromeController:
     _instance = None
@@ -47,17 +48,18 @@ class AIChromeController:
                 self.openai_client.api_key = openai_api_key
             except Exception as e:
                 self.logger.warning(f"OpenAI init error: {e}")
-        atexit.register(self.cleanup)
+        # atexit.register(self.cleanup)  # DISABLED - ไม่ให้ปิด Chrome อัตโนมัติ
         self._initialized = True
         
-        # เริ่ม auto cleanup thread
-        self.start_auto_cleanup_thread()
+        # เริ่ม auto cleanup thread - DISABLED
+        # self.start_auto_cleanup_thread()
         
     def auto_cleanup_chrome_process(self):
-        """Kill all chrome.exe processes (Windows only)"""
+        """Kill all chrome.exe processes (Windows only) - DISABLED"""
         try:
-            subprocess.call(['taskkill', '/F', '/IM', 'chrome.exe'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            self.logger.info("[AUTO CLEANUP] Killed all chrome.exe processes.")
+            self.logger.info("[AUTO CLEANUP] Chrome cleanup disabled by user preference")
+            # subprocess.call(['taskkill', '/F', '/IM', 'chrome.exe'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            # self.logger.info("[AUTO CLEANUP] Killed all chrome.exe processes.")
         except Exception as e:
             self.logger.warning(f"[AUTO CLEANUP] Failed to kill chrome.exe: {e}")
 
@@ -74,8 +76,8 @@ class AIChromeController:
         
         self.logger.info("[BROWSER] start_ai_browser called.")
         
-        # Auto cleanup chrome.exe ก่อนเริ่ม
-        self.auto_cleanup_chrome_process()
+        # Auto cleanup chrome.exe ก่อนเริ่ม - DISABLED
+        # self.auto_cleanup_chrome_process()
         
         # ตรวจสอบว่า driver กำลังทำงานอยู่หรือไม่
         if self.driver:
@@ -104,25 +106,19 @@ class AIChromeController:
                 self.logger.info("🔍 DEBUG: Headless mode enabled")
                 options.add_argument("--headless")
             
-            # เพิ่ม options เพื่อป้องกันการเปิด Chrome ซ้ำ
+            # เพิ่ม options พื้นฐานที่จำเป็นเท่านั้น
             options.add_argument("--no-sandbox")
             options.add_argument("--disable-dev-shm-usage")
             options.add_argument("--disable-gpu")
             options.add_argument("--disable-extensions")
             options.add_argument("--disable-plugins")
-            options.add_argument("--disable-images")
-            options.add_argument("--disable-javascript")
             options.add_argument("--disable-web-security")
-            options.add_argument("--disable-features=VizDisplayCompositor")
             options.add_argument("--remote-debugging-port=0")
             options.add_argument("--disable-background-timer-throttling")
             options.add_argument("--disable-backgrounding-occluded-windows")
             options.add_argument("--disable-renderer-backgrounding")
             options.add_argument("--disable-features=TranslateUI")
             options.add_argument("--disable-ipc-flooding-protection")
-            # เพิ่ม options เพื่อป้องกันการเปิด Chrome ซ้ำ
-            options.add_argument("--single-process")
-            options.add_argument("--no-zygote")
             options.add_argument("--disable-background-networking")
             options.add_argument("--disable-default-apps")
             options.add_argument("--disable-sync")
@@ -138,7 +134,6 @@ class AIChromeController:
             options.add_argument("--disable-prompt-on-repost")
             options.add_argument("--disable-web-resources")
             options.add_argument("--disable-features=VizDisplayCompositor")
-            options.add_argument("--disable-features=TranslateUI")
             options.add_argument("--disable-features=BlinkGenPropertyTrees")
             options.add_argument("--disable-features=CalculateNativeWinOcclusion")
             options.add_argument("--disable-features=GlobalMediaControls")
@@ -157,6 +152,12 @@ class AIChromeController:
             options.add_argument("--disable-features=WebUIDarkModeV8")
             options.add_argument("--disable-features=WebUIDarkModeV9")
             options.add_argument("--disable-features=WebUIDarkModeV10")
+            
+            # ลบ options ที่อาจทำให้ Chrome crash
+            # options.add_argument("--single-process")  # ลบออก - อาจทำให้ crash
+            # options.add_argument("--no-zygote")  # ลบออก - อาจทำให้ crash
+            # options.add_argument("--disable-images")  # ลบออก - อาจทำให้ crash
+            # options.add_argument("--disable-javascript")  # ลบออก - อาจทำให้ crash
             
             # สร้าง Chrome driver
             self.logger.info("🔍 DEBUG: Creating Chrome driver...")
@@ -223,49 +224,54 @@ class AIChromeController:
         pass
         
     def cleanup(self):
-        """ปิด Chrome driver"""
+        """ปิด Chrome driver - DISABLED"""
         if hasattr(self, 'logger'):
-            self.logger.info("[BROWSER] cleanup called.")
-        if self.driver:
-            try:
-                # ตรวจสอบว่า driver ยังทำงานอยู่หรือไม่
-                try:
-                    self.driver.current_url
-                    self.driver.quit()
-                    if hasattr(self, 'logger'):
-                        self.logger.info("🔌 ปิด Chrome driver แล้ว")
-                except Exception:
-                    if hasattr(self, 'logger'):
-                        self.logger.info("🔌 Chrome driver ถูกปิดไปแล้ว")
-            except Exception as e:
-                if hasattr(self, 'logger'):
-                    self.logger.error(f"❌ ไม่สามารถปิด Chrome driver: {e}")
-            finally:
-                self.driver = None
+            self.logger.info("[BROWSER] cleanup called - DISABLED")
+            self.logger.debug(f"[DEBUG] cleanup() called from: {traceback.format_stack()}")
+        # DISABLED - ไม่ให้ปิด Chrome อัตโนมัติ
+        # if self.driver:
+        #     try:
+        #         # ตรวจสอบว่า driver ยังทำงานอยู่หรือไม่
+        #         try:
+        #             self.driver.current_url
+        #             self.driver.quit()
+        #             if hasattr(self, 'logger'):
+        #                 self.logger.info("🔌 ปิด Chrome driver แล้ว")
+        #         except Exception:
+        #             if hasattr(self, 'logger'):
+        #                 self.logger.info("🔌 Chrome driver ถูกปิดไปแล้ว")
+        #     except Exception as e:
+        #         if hasattr(self, 'logger'):
+        #             self.logger.error(f"❌ ไม่สามารถปิด Chrome driver: {e}")
+        #     finally:
+        #         self.driver = None
             
     def __del__(self):
-        """Destructor - ปิด driver เมื่อ object ถูกทำลาย"""
-        self.cleanup()
+        """Destructor - ปิด driver เมื่อ object ถูกทำลาย - DISABLED"""
+        if hasattr(self, 'logger'):
+            self.logger.debug(f"[DEBUG] __del__() called from: {traceback.format_stack()}")
+        # self.cleanup()  # DISABLED - ไม่ให้ปิด Chrome อัตโนมัติ
         
     def is_ready(self):
         """ตรวจสอบว่า Chrome Controller พร้อมใช้งานหรือไม่"""
         return self.driver is not None
 
     def start_auto_cleanup_thread(self):
-        """เริ่ม background thread สำหรับ auto cleanup chrome.exe"""
-        import threading
-        import time
-        
-        def cleanup_loop():
-            while True:
-                try:
-                    time.sleep(30)  # รอ 30 วินาที
-                    self.auto_cleanup_chrome_process()
-                except Exception as e:
-                    if hasattr(self, 'logger'):
-                        self.logger.warning(f"Auto cleanup error: {e}")
-                    time.sleep(60)  # รอ 1 นาทีถ้าเกิดข้อผิดพลาด
-        
-        cleanup_thread = threading.Thread(target=cleanup_loop, daemon=True)
-        cleanup_thread.start()
-        self.logger.info("[AUTO CLEANUP] Background cleanup thread started")
+        """เริ่ม background thread สำหรับ auto cleanup chrome.exe - DISABLED"""
+        # DISABLED - ไม่ให้ปิด Chrome อัตโนมัติ
+        # import threading
+        # import time
+        # 
+        # def cleanup_loop():
+        #     while True:
+        #         try:
+        #             time.sleep(30)  # รอ 30 วินาที
+        #             self.auto_cleanup_chrome_process()
+        #         except Exception as e:
+        #             if hasattr(self, 'logger'):
+        #                 self.logger.warning(f"Auto cleanup error: {e}")
+        #             time.sleep(60)  # รอ 1 นาทีถ้าเกิดข้อผิดพลาด
+        # 
+        # cleanup_thread = threading.Thread(target=cleanup_loop, daemon=True)
+        # cleanup_thread.start()
+        # self.logger.info("[AUTO CLEANUP] Background cleanup thread started")

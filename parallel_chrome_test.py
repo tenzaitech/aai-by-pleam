@@ -14,6 +14,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import traceback
 
 class ParallelChromeTest:
     def __init__(self):
@@ -29,8 +30,6 @@ class ParallelChromeTest:
         options.add_argument("--disable-gpu")
         options.add_argument("--disable-extensions")
         options.add_argument("--disable-plugins")
-        options.add_argument("--disable-images")
-        options.add_argument("--disable-javascript")
         options.add_argument("--disable-web-security")
         options.add_argument("--remote-debugging-port=0")
         options.add_argument("--disable-background-timer-throttling")
@@ -155,15 +154,17 @@ class ParallelChromeTest:
         except Exception as e:
             print(f"❌ Error: {e}")
         finally:
-            # ปิด browsers
-            print("🔒 ปิด Chrome windows...")
+            # ปิด browsers - DISABLED
+            print("🔒 ปิด Chrome windows - DISABLED")
             for driver in self.drivers:
                 try:
-                    driver.quit()
+                    print(f"[DEBUG] driver.quit() called from: {traceback.format_stack()}")
+                    # driver.quit()  # DISABLED - ไม่ให้ปิด Chrome อัตโนมัติ
+                    pass
                 except:
                     pass
             
-            print("🎯 Parallel Chrome Test เสร็จสิ้น!")
+            print("🎯 Parallel Chrome Test เสร็จสิ้น! (Chrome cleanup disabled)")
 
 async def main():
     """Main function"""
