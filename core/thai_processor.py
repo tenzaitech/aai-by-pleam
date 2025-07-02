@@ -39,6 +39,14 @@ class FullThaiProcessor:
             'ฟอร์ม': 'form'
         }
         
+    def normalize_thai_text(self, text):
+        """ทำให้ข้อความภาษาไทยเป็นมาตรฐาน"""
+        return normalize(text)
+        
+    def tokenize_thai(self, text):
+        """แยกคำภาษาไทย"""
+        return word_tokenize(text)
+        
     def process_natural_command(self, command):
         """ประมวลผลคำสั่งธรรมชาติ"""
         normalized = self.normalize_thai_text(command)

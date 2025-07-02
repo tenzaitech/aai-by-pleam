@@ -34,7 +34,7 @@ except ImportError:
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'backup-bygod-dashboard-2024'
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 
 # Import God Mode Knowledge Manager with error handling
 GODMODE_KM_AVAILABLE = False
@@ -108,7 +108,10 @@ class DashboardLogger:
         self.logs.append(log_entry)
         if len(self.logs) > self.max_logs:
             self.logs.pop(0)
-        socketio.emit('new_log', log_entry)
+        try:
+            socketio.emit('new_log', log_entry)
+        except:
+            pass
         print(f"[{level.upper()}] {message}")
 
 # Global logger instance
@@ -198,7 +201,7 @@ def get_system_capabilities():
             'name': 'God Mode Knowledge',
             'description': 'ฐานข้อมูลความรู้ถาวรสำหรับ God Mode',
             'status': 'unknown',
-            'icon': '🚀'
+            'icon': '⚡'
         },
         'gpu_processing': {
             'name': 'GPU Processing',
@@ -214,149 +217,205 @@ def get_system_capabilities():
         }
     }
     
-    # Helper สำหรับ log เฉพาะเมื่อเปลี่ยนแปลง
+    # Check each capability with error handling
     def log_if_changed(key, status, msg_ready, msg_error):
-        prev = capability_state_cache.get(key)
-        if prev != status:
+        """Log only if status changed"""
+        if key not in capability_state_cache or capability_state_cache[key] != status:
+            capability_state_cache[key] = status
             if status == 'ready':
-                dashboard_logger.add_log('info', msg_ready)
+                dashboard_logger.add_log('success', msg_ready)
             elif status == 'error':
                 dashboard_logger.add_log('error', msg_error)
-            capability_state_cache[key] = status
-    
-    # Test Chrome Controller - ใช้ instance ที่มีอยู่แล้วแทนการ import class
+        return status
+
+    # Chrome Automation
     try:
-        if 'chrome_controller' in globals() and chrome_controller:
-            capabilities['chrome_automation']['status'] = 'ready'
-            log_if_changed('chrome_automation', 'ready', 'Chrome Controller พร้อมใช้งาน', 'Chrome Controller error')
+        if chrome_controller and hasattr(chrome_controller, 'is_ready'):
+            if chrome_controller.is_ready():
+                capabilities['chrome_automation']['status'] = log_if_changed(
+                    'chrome_automation', 'ready', 
+                    'Chrome Controller พร้อมใช้งาน', 
+                    'Chrome Controller มีปัญหา'
+                )
+            else:
+                capabilities['chrome_automation']['status'] = log_if_changed(
+                    'chrome_automation', 'warning', 
+                    'Chrome Controller พร้อมใช้งาน', 
+                    'Chrome Controller กำลังเตรียมตัว'
+                )
         else:
-            capabilities['chrome_automation']['status'] = 'error'
-            log_if_changed('chrome_automation', 'error', '', 'Chrome Controller ไม่พร้อมใช้งาน')
-    except Exception as e:
-        capabilities['chrome_automation']['status'] = 'error'
-        log_if_changed('chrome_automation', 'error', '', f'Chrome Controller error: {str(e)}')
-    
-    # Test God Mode Knowledge Manager
-    try:
-        if GODMODE_KM_AVAILABLE and godmode_km:
-            capabilities['godmode_knowledge']['status'] = 'ready'
-            log_if_changed('godmode_knowledge', 'ready', 'God Mode Knowledge Manager พร้อมใช้งาน', 'God Mode Knowledge Manager error')
-        else:
-            capabilities['godmode_knowledge']['status'] = 'error'
-            log_if_changed('godmode_knowledge', 'error', '', 'God Mode Knowledge Manager ไม่พร้อมใช้งาน')
-    except Exception as e:
-        capabilities['godmode_knowledge']['status'] = 'error'
-        log_if_changed('godmode_knowledge', 'error', '', f'God Mode Knowledge Manager error: {str(e)}')
-    
-    # Test GPU Processing
-    try:
-        import torch
-        if torch.cuda.is_available():
-            capabilities['gpu_processing']['status'] = 'ready'
-            log_if_changed('gpu_processing', 'ready', 'GPU Processing พร้อมใช้งาน (CUDA)', 'GPU Processing error')
-        else:
-            capabilities['gpu_processing']['status'] = 'warning'
-            log_if_changed('gpu_processing', 'warning', 'GPU Processing ไม่พร้อม (ไม่มี CUDA)', '')
-    except Exception as e:
-        capabilities['gpu_processing']['status'] = 'error'
-        log_if_changed('gpu_processing', 'error', '', f'GPU Processing error: {str(e)}')
-    
-    # Test Smart Resource Allocator
-    try:
-        smart_allocator = safe_import_component('smart_allocator', 'smart_resource_allocator', 'SmartResourceAllocator')
-        if smart_allocator:
-            capabilities['smart_allocator']['status'] = 'ready'
-            log_if_changed('smart_allocator', 'ready', 'Smart Resource Allocator พร้อมใช้งาน', 'Smart Resource Allocator error')
-        else:
-            capabilities['smart_allocator']['status'] = 'error'
-            log_if_changed('smart_allocator', 'error', '', 'Smart Resource Allocator ไม่สามารถ import ได้')
-    except Exception as e:
-        capabilities['smart_allocator']['status'] = 'error'
-        log_if_changed('smart_allocator', 'error', '', f'Smart Resource Allocator error: {str(e)}')
-    
+            capabilities['chrome_automation']['status'] = log_if_changed(
+                'chrome_automation', 'error', 
+                'Chrome Controller พร้อมใช้งาน', 
+                'Chrome Controller ไม่พร้อมใช้งาน'
+            )
+    except:
+        capabilities['chrome_automation']['status'] = log_if_changed(
+            'chrome_automation', 'error', 
+            'Chrome Controller พร้อมใช้งาน', 
+            'Chrome Controller ไม่พร้อมใช้งาน'
+        )
+
+    # AI Integration
     try:
         ai_integration = safe_import_component('ai_integration', 'core.ai_integration', 'MultimodalAIIntegration')
         if ai_integration:
-            capabilities['ai_integration']['status'] = 'ready'
-            log_if_changed('ai_integration', 'ready', 'AI Integration พร้อมใช้งาน', 'AI Integration error')
+            capabilities['ai_integration']['status'] = log_if_changed(
+                'ai_integration', 'ready', 
+                'AI Integration พร้อมใช้งาน', 
+                'AI Integration มีปัญหา'
+            )
         else:
-            capabilities['ai_integration']['status'] = 'error'
-            log_if_changed('ai_integration', 'error', '', 'AI Integration ไม่สามารถ import ได้')
-    except Exception as e:
-        capabilities['ai_integration']['status'] = 'error'
-        log_if_changed('ai_integration', 'error', '', f'AI Integration error: {str(e)}')
-    
+            capabilities['ai_integration']['status'] = log_if_changed(
+                'ai_integration', 'error', 
+                'AI Integration พร้อมใช้งาน', 
+                'AI Integration ไม่พร้อมใช้งาน'
+            )
+    except:
+        capabilities['ai_integration']['status'] = log_if_changed(
+            'ai_integration', 'error', 
+            'AI Integration พร้อมใช้งาน', 
+            'AI Integration ไม่พร้อมใช้งาน'
+        )
+
+    # Thai Processor
     try:
         thai_processor = safe_import_component('thai_processor', 'core.thai_processor', 'FullThaiProcessor')
         if thai_processor:
-            capabilities['thai_processor']['status'] = 'ready'
-            log_if_changed('thai_processor', 'ready', 'Thai Processor พร้อมใช้งาน', 'Thai Processor error')
+            capabilities['thai_processor']['status'] = log_if_changed(
+                'thai_processor', 'ready', 
+                'Thai Processor พร้อมใช้งาน', 
+                'Thai Processor มีปัญหา'
+            )
         else:
-            capabilities['thai_processor']['status'] = 'error'
-            log_if_changed('thai_processor', 'error', '', 'Thai Processor ไม่สามารถ import ได้')
-    except Exception as e:
-        capabilities['thai_processor']['status'] = 'error'
-        log_if_changed('thai_processor', 'error', '', f'Thai Processor error: {str(e)}')
-    
+            capabilities['thai_processor']['status'] = log_if_changed(
+                'thai_processor', 'error', 
+                'Thai Processor พร้อมใช้งาน', 
+                'Thai Processor ไม่พร้อมใช้งาน'
+            )
+    except:
+        capabilities['thai_processor']['status'] = log_if_changed(
+            'thai_processor', 'error', 
+            'Thai Processor พร้อมใช้งาน', 
+            'Thai Processor ไม่พร้อมใช้งาน'
+        )
+
+    # Visual Recognition
     try:
         visual_recognition = safe_import_component('visual_recognition', 'core.visual_recognition', 'VisualRecognition')
         if visual_recognition:
-            capabilities['visual_recognition']['status'] = 'ready'
-            log_if_changed('visual_recognition', 'ready', 'Visual Recognition พร้อมใช้งาน', 'Visual Recognition error')
+            capabilities['visual_recognition']['status'] = log_if_changed(
+                'visual_recognition', 'ready', 
+                'Visual Recognition พร้อมใช้งาน', 
+                'Visual Recognition มีปัญหา'
+            )
         else:
-            capabilities['visual_recognition']['status'] = 'error'
-            log_if_changed('visual_recognition', 'error', '', 'Visual Recognition ไม่สามารถ import ได้')
-    except Exception as e:
-        capabilities['visual_recognition']['status'] = 'error'
-        log_if_changed('visual_recognition', 'error', '', f'Visual Recognition error: {str(e)}')
-    
+            capabilities['visual_recognition']['status'] = log_if_changed(
+                'visual_recognition', 'error', 
+                'Visual Recognition พร้อมใช้งาน', 
+                'Visual Recognition ไม่พร้อมใช้งาน'
+            )
+    except:
+        capabilities['visual_recognition']['status'] = log_if_changed(
+            'visual_recognition', 'error', 
+            'Visual Recognition พร้อมใช้งาน', 
+            'Visual Recognition ไม่พร้อมใช้งาน'
+        )
+
+    # Backup Controller
     try:
         backup_controller = safe_import_component('backup_controller', 'core.backup_controller', 'BackupController')
         if backup_controller:
-            capabilities['backup_controller']['status'] = 'ready'
-            log_if_changed('backup_controller', 'ready', 'Backup Controller พร้อมใช้งาน', 'Backup Controller error')
+            capabilities['backup_controller']['status'] = log_if_changed(
+                'backup_controller', 'ready', 
+                'Backup Controller พร้อมใช้งาน', 
+                'Backup Controller มีปัญหา'
+            )
         else:
-            capabilities['backup_controller']['status'] = 'error'
-            log_if_changed('backup_controller', 'error', '', 'Backup Controller ไม่สามารถ import ได้')
-    except Exception as e:
-        capabilities['backup_controller']['status'] = 'error'
-        log_if_changed('backup_controller', 'error', '', f'Backup Controller error: {str(e)}')
-    
+            capabilities['backup_controller']['status'] = log_if_changed(
+                'backup_controller', 'error', 
+                'Backup Controller พร้อมใช้งาน', 
+                'Backup Controller ไม่พร้อมใช้งาน'
+            )
+    except:
+        capabilities['backup_controller']['status'] = log_if_changed(
+            'backup_controller', 'error', 
+            'Backup Controller พร้อมใช้งาน', 
+            'Backup Controller ไม่พร้อมใช้งาน'
+        )
+
+    # Supabase Integration
     try:
         supabase_integration = safe_import_component('supabase_integration', 'core.supabase_integration', 'SupabaseIntegration')
         if supabase_integration:
-            capabilities['supabase_integration']['status'] = 'ready'
-            log_if_changed('supabase_integration', 'ready', 'Supabase Integration พร้อมใช้งาน', 'Supabase Integration error')
+            capabilities['supabase_integration']['status'] = log_if_changed(
+                'supabase_integration', 'ready', 
+                'Supabase Integration พร้อมใช้งาน', 
+                'Supabase Integration มีปัญหา'
+            )
         else:
-            capabilities['supabase_integration']['status'] = 'error'
-            log_if_changed('supabase_integration', 'error', '', 'Supabase Integration ไม่สามารถ import ได้')
-    except Exception as e:
-        capabilities['supabase_integration']['status'] = 'error'
-        log_if_changed('supabase_integration', 'error', '', f'Supabase Integration error: {str(e)}')
-    
+            capabilities['supabase_integration']['status'] = log_if_changed(
+                'supabase_integration', 'error', 
+                'Supabase Integration พร้อมใช้งาน', 
+                'Supabase Integration ไม่พร้อมใช้งาน'
+            )
+    except:
+        capabilities['supabase_integration']['status'] = log_if_changed(
+            'supabase_integration', 'error', 
+            'Supabase Integration พร้อมใช้งาน', 
+            'Supabase Integration ไม่พร้อมใช้งาน'
+        )
+
+    # Environment Cards
     try:
         environment_cards = safe_import_component('environment_cards', 'core.environment_cards', 'EnvironmentCards')
         if environment_cards:
-            capabilities['environment_cards']['status'] = 'ready'
-            log_if_changed('environment_cards', 'ready', 'Environment Cards พร้อมใช้งาน', 'Environment Cards error')
+            capabilities['environment_cards']['status'] = log_if_changed(
+                'environment_cards', 'ready', 
+                'Environment Cards พร้อมใช้งาน', 
+                'Environment Cards มีปัญหา'
+            )
         else:
-            capabilities['environment_cards']['status'] = 'error'
-            log_if_changed('environment_cards', 'error', '', 'Environment Cards ไม่สามารถ import ได้')
-    except Exception as e:
-        capabilities['environment_cards']['status'] = 'error'
-        log_if_changed('environment_cards', 'error', '', f'Environment Cards error: {str(e)}')
-    
-    try:
-        if KNOWLEDGE_MANAGER_AVAILABLE and knowledge_manager:
-            capabilities['knowledge_manager']['status'] = 'ready'
-            log_if_changed('knowledge_manager', 'ready', 'Knowledge Manager พร้อมใช้งาน', 'Knowledge Manager error')
-        else:
-            capabilities['knowledge_manager']['status'] = 'error'
-            log_if_changed('knowledge_manager', 'error', '', 'Knowledge Manager ไม่พร้อมใช้งาน')
-    except Exception as e:
-        capabilities['knowledge_manager']['status'] = 'error'
-        log_if_changed('knowledge_manager', 'error', '', f'Knowledge Manager error: {str(e)}')
-    
+            capabilities['environment_cards']['status'] = log_if_changed(
+                'environment_cards', 'error', 
+                'Environment Cards พร้อมใช้งาน', 
+                'Environment Cards ไม่พร้อมใช้งาน'
+            )
+    except:
+        capabilities['environment_cards']['status'] = log_if_changed(
+            'environment_cards', 'error', 
+            'Environment Cards พร้อมใช้งาน', 
+            'Environment Cards ไม่พร้อมใช้งาน'
+        )
+
+    # Knowledge Manager
+    if KNOWLEDGE_MANAGER_AVAILABLE:
+        capabilities['knowledge_manager']['status'] = log_if_changed(
+            'knowledge_manager', 'ready', 
+            'Knowledge Manager พร้อมใช้งาน', 
+            'Knowledge Manager มีปัญหา'
+        )
+    else:
+        capabilities['knowledge_manager']['status'] = log_if_changed(
+            'knowledge_manager', 'error', 
+            'Knowledge Manager พร้อมใช้งาน', 
+            'Knowledge Manager ไม่พร้อมใช้งาน'
+        )
+
+    # God Mode Knowledge
+    if GODMODE_KM_AVAILABLE:
+        capabilities['godmode_knowledge']['status'] = log_if_changed(
+            'godmode_knowledge', 'ready', 
+            'God Mode Knowledge พร้อมใช้งาน', 
+            'God Mode Knowledge มีปัญหา'
+        )
+    else:
+        capabilities['godmode_knowledge']['status'] = log_if_changed(
+            'godmode_knowledge', 'error', 
+            'God Mode Knowledge พร้อมใช้งาน', 
+            'God Mode Knowledge ไม่พร้อมใช้งาน'
+        )
+
     return capabilities
 
 def get_godmode_data():
@@ -670,8 +729,11 @@ def api_godmode_statistics():
         })
     
     try:
-        stats = godmode_km.get_statistics()
-        return jsonify(stats)
+        if godmode_km is not None:
+            stats = godmode_km.get_statistics()
+            return jsonify(stats)
+        else:
+            return jsonify({'error': 'God Mode Knowledge Manager not available'})
     except Exception as e:
         return jsonify({'error': str(e)})
 
@@ -697,9 +759,12 @@ def api_godmode_sessions():
         ])
     
     try:
-        limit = request.args.get('limit', 10, type=int)
-        sessions = godmode_km.get_session_history(limit=limit)
-        return jsonify(sessions)
+        if godmode_km is not None:
+            limit = request.args.get('limit', 10, type=int)
+            sessions = godmode_km.get_session_history(limit=limit)
+            return jsonify(sessions)
+        else:
+            return jsonify({'error': 'God Mode Knowledge Manager not available'})
     except Exception as e:
         return jsonify({'error': str(e)})
 
@@ -726,10 +791,16 @@ def api_godmode_commands():
         ])
     
     try:
-        limit = request.args.get('limit', 20, type=int)
-        session_id = request.args.get('session_id')
-        commands = godmode_km.get_command_history(session_id=session_id, limit=limit)
-        return jsonify(commands)
+        if godmode_km is not None:
+            limit = request.args.get('limit', 20, type=int)
+            session_id = request.args.get('session_id')
+            if session_id is not None:
+                commands = godmode_km.get_command_history(session_id=session_id, limit=limit)
+            else:
+                commands = godmode_km.get_command_history(limit=limit)
+            return jsonify(commands)
+        else:
+            return jsonify({'error': 'God Mode Knowledge Manager not available'})
     except Exception as e:
         return jsonify({'error': str(e)})
 
