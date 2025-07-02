@@ -1,4 +1,3 @@
-
 """
 AI-Powered Chrome Controller
 ควบคุม Chrome ด้วย AI
@@ -13,9 +12,31 @@ from PIL import Image
 import io
 
 class AIChromeController:
-    def __init__(self, openai_api_key):
+    _instance = None
+
+    def __init__(self):
+        """เริ่มต้น Chrome Controller"""
+        # ใช้ Singleton pattern
+        if hasattr(AIChromeController, '_instance'):
+            return AIChromeController._instance
+        
         self.driver = None
-        self.openai_client = openai.OpenAI(api_key=openai_api_key)
+        self._initialized = False
+        self._is_initializing = False
+        
+        # ตั้งค่า logger
+        self.setup_logger()
+        
+        # ตั้งค่า atexit
+        import atexit
+        atexit.register(self.cleanup)
+        self._initialized = True
+        
+        # เริ่ม auto cleanup thread
+        self.start_auto_cleanup_thread()
+        
+        # บันทึก instance
+        AIChromeController._instance = self
         
     async def start_ai_browser(self, headless=False):
         """เริ่มต้น AI browser"""

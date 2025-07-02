@@ -66,7 +66,7 @@ class SmartTemplate:
         }
     
     def get_chrome_base_template(self) -> str:
-        """Template ฐานสำหรับ Chrome Automation"""
+        """Template ฐานสำหรับ Chrome"""
         return '''
 """
 Chrome Automation Controller
@@ -86,11 +86,15 @@ class ChromeController:
         options = Options()
         if headless:
             options.add_argument("--headless")
-        self.driver = webdriver.Chrome(options=options)
+        # ใช้ Singleton pattern แทนการสร้างใหม่
+        from core.chrome_controller import AIChromeController
+        controller = AIChromeController()
+        self.driver = await controller.start_ai_browser(headless=headless)
         
     async def navigate_to(self, url):
         """ไปยัง URL"""
-        self.driver.get(url)
+        if self.driver:
+            self.driver.get(url)
         
     async def smart_click(self, element_description):
         """คลิกอัจฉริยะ"""
@@ -114,16 +118,21 @@ class SimpleChromeController:
         
     def start_browser(self):
         """เริ่มต้น browser"""
-        self.driver = webdriver.Chrome()
+        # ใช้ Singleton pattern แทนการสร้างใหม่
+        from core.chrome_controller import AIChromeController
+        controller = AIChromeController()
+        self.driver = controller.driver
         
     def go_to(self, url):
         """ไปยัง URL"""
-        self.driver.get(url)
+        if self.driver:
+            self.driver.get(url)
         
     def click_element(self, selector):
         """คลิก element"""
-        element = self.driver.find_element_by_css_selector(selector)
-        element.click()
+        if self.driver:
+            element = self.driver.find_element_by_css_selector(selector)
+            element.click()
 '''
     
     def get_chrome_advanced_template(self) -> str:
@@ -148,34 +157,36 @@ class AdvancedChromeController:
         
     async def start_browser(self, headless=False, timeout=30):
         """เริ่มต้น browser แบบขั้นสูง"""
-        options = Options()
-        if headless:
-            options.add_argument("--headless")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        
-        self.driver = webdriver.Chrome(options=options)
-        self.wait = WebDriverWait(self.driver, timeout)
+        # ใช้ Singleton pattern แทนการสร้างใหม่
+        from core.chrome_controller import AIChromeController
+        controller = AIChromeController()
+        self.driver = await controller.start_ai_browser(headless=headless)
+        if self.driver:
+            self.wait = WebDriverWait(self.driver, timeout)
         
     async def smart_navigate(self, url, wait_for_element=None):
         """นำทางแบบอัจฉริยะ"""
-        self.driver.get(url)
-        if wait_for_element:
-            self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, wait_for_element)))
+        if self.driver:
+            self.driver.get(url)
+            if wait_for_element and self.wait:
+                self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, wait_for_element)))
             
     async def smart_click(self, element_description, timeout=10):
         """คลิกอัจฉริยะ"""
-        # AI-powered element finding
-        element = self.find_element_by_description(element_description)
-        if element:
-            element.click()
-            return True
+        if self.driver:
+            # AI-powered element finding
+            element = self.find_element_by_description(element_description)
+            if element:
+                element.click()
+                return True
         return False
         
     def find_element_by_description(self, description):
         """หา element จากคำอธิบาย"""
-        # AI-powered element finding logic
-        pass
+        if self.driver:
+            # AI-powered element finding logic
+            pass
+        return None
 '''
     
     def get_chrome_ai_template(self) -> str:
@@ -201,32 +212,34 @@ class AIChromeController:
         
     async def start_ai_browser(self, headless=False):
         """เริ่มต้น AI browser"""
-        options = Options()
-        if headless:
-            options.add_argument("--headless")
-        self.driver = webdriver.Chrome(options=options)
+        # ใช้ Singleton pattern แทนการสร้างใหม่
+        from core.chrome_controller import AIChromeController as SingletonController
+        controller = SingletonController()
+        self.driver = await controller.start_ai_browser(headless=headless)
         
     async def ai_navigate(self, url, instruction):
         """นำทางด้วย AI"""
-        self.driver.get(url)
-        
-        # ใช้ AI วิเคราะห์หน้าเว็บ
-        screenshot = self.driver.get_screenshot_as_png()
-        analysis = await self.analyze_screenshot_with_ai(screenshot, instruction)
-        
-        return analysis
+        if self.driver:
+            self.driver.get(url)
+            
+            # ใช้ AI วิเคราะห์หน้าเว็บ
+            screenshot = self.driver.get_screenshot_as_png()
+            analysis = await self.analyze_screenshot_with_ai(screenshot, instruction)
+            
+            return analysis
         
     async def ai_click(self, natural_description):
         """คลิกด้วย AI"""
-        # ใช้ AI หา element จากคำอธิบายธรรมชาติ
-        screenshot = self.driver.get_screenshot_as_png()
-        element_info = await self.find_element_with_ai(screenshot, natural_description)
-        
-        if element_info:
-            # คลิกตามที่ AI บอก
-            x, y = element_info['coordinates']
-            self.driver.execute_script(f"document.elementFromPoint({x}, {y}).click()")
-            return True
+        if self.driver:
+            # ใช้ AI หา element จากคำอธิบายธรรมชาติ
+            screenshot = self.driver.get_screenshot_as_png()
+            element_info = await self.find_element_with_ai(screenshot, natural_description)
+            
+            if element_info:
+                # คลิกตามที่ AI บอก
+                x, y = element_info['coordinates']
+                self.driver.execute_script(f"document.elementFromPoint({x}, {y}).click()")
+                return True
         return False
         
     async def analyze_screenshot_with_ai(self, screenshot, instruction):

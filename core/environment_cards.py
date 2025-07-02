@@ -119,10 +119,16 @@ class EnvironmentCards:
         # TensorFlow
         try:
             import tensorflow as tf
+            gpu_available = False
+            try:
+                gpu_available = len(tf.config.list_physical_devices('GPU')) > 0
+            except:
+                gpu_available = False
+                
             ai_libs["tensorflow"] = {
                 "available": True,
                 "version": tf.__version__,
-                "gpu_available": len(tf.config.list_physical_devices('GPU')) > 0
+                "gpu_available": gpu_available
             }
         except:
             ai_libs["tensorflow"] = {"available": False}

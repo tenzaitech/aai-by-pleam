@@ -11,12 +11,15 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional
 import logging
 
+# ตั้งค่า logger
+logger = logging.getLogger(__name__)
+
 try:
     from supabase import create_client, Client
     SUPABASE_AVAILABLE = True
 except ImportError:
     SUPABASE_AVAILABLE = False
-    logging.warning("Supabase library not installed. Run: pip install supabase")
+    logger.warning("Supabase library not installed. Run: pip install supabase")
 
 class SupabaseIntegration:
     """Supabase Integration Controller"""
@@ -25,6 +28,7 @@ class SupabaseIntegration:
         self.client: Optional[Client] = None
         self.is_connected = False
         self.config = self._load_config()
+        self.logger = logging.getLogger(__name__)
         
     def _load_config(self) -> Dict[str, str]:
         """โหลด Supabase configuration"""
@@ -49,19 +53,21 @@ class SupabaseIntegration:
                     json.dump(default_config, f, indent=2, ensure_ascii=False)
                 return default_config
         except Exception as e:
-            logging.error(f"Error loading Supabase config: {e}")
+            self.logger.error(f"Error loading Supabase config: {e}")
             return default_config
     
     def connect(self) -> bool:
         """เชื่อมต่อกับ Supabase"""
         if not SUPABASE_AVAILABLE:
-            logging.error("Supabase library not available")
+            self.logger.warning("Supabase library not available - skipping connection")
             return False
             
         try:
+            # ตรวจสอบว่า credentials ถูกตั้งค่าหรือไม่
             if (self.config["supabase_url"] == "YOUR_SUPABASE_URL" or 
                 self.config["supabase_key"] == "YOUR_SUPABASE_ANON_KEY"):
-                logging.warning("Supabase credentials not configured")
+                self.logger.info("Supabase credentials not configured - using local mode")
+                self.is_connected = False
                 return False
                 
             self.client = create_client(
@@ -70,19 +76,25 @@ class SupabaseIntegration:
             )
             
             # ทดสอบการเชื่อมต่อ
-            response = self.client.table('system_status').select('*').limit(1).execute()
-            self.is_connected = True
-            logging.info("✅ Supabase connected successfully")
-            return True
+            try:
+                response = self.client.table('system_status').select('*').limit(1).execute()
+                self.is_connected = True
+                self.logger.info("✅ Supabase connected successfully")
+                return True
+            except Exception as e:
+                self.logger.warning(f"Supabase connection test failed: {e}")
+                self.is_connected = False
+                return False
             
         except Exception as e:
-            logging.error(f"❌ Supabase connection failed: {e}")
+            self.logger.error(f"❌ Supabase connection failed: {e}")
             self.is_connected = False
             return False
     
     def save_backup_log(self, backup_data: Dict[str, Any]) -> bool:
         """บันทึก backup log ลง Supabase"""
         if not self.is_connected:
+            self.logger.debug("Supabase not connected - skipping backup log save")
             return False
             
         try:
@@ -97,16 +109,17 @@ class SupabaseIntegration:
             }
             
             result = self.client.table('backup_logs').insert(log_entry).execute()
-            logging.info(f"✅ Backup log saved: {backup_data.get('type')}")
+            self.logger.info(f"✅ Backup log saved: {backup_data.get('type')}")
             return True
             
         except Exception as e:
-            logging.error(f"❌ Failed to save backup log: {e}")
+            self.logger.error(f"❌ Failed to save backup log: {e}")
             return False
     
     def get_backup_history(self, limit: int = 50) -> List[Dict[str, Any]]:
         """ดึงประวัติ backup จาก Supabase"""
         if not self.is_connected:
+            self.logger.debug("Supabase not connected - returning empty backup history")
             return []
             
         try:
@@ -119,12 +132,13 @@ class SupabaseIntegration:
             return result.data if result.data else []
             
         except Exception as e:
-            logging.error(f"❌ Failed to get backup history: {e}")
+            self.logger.error(f"❌ Failed to get backup history: {e}")
             return []
     
     def save_system_status(self, status_data: Dict[str, Any]) -> bool:
         """บันทึกสถานะระบบลง Supabase"""
         if not self.is_connected:
+            self.logger.debug("Supabase not connected - skipping system status save")
             return False
             
         try:
@@ -142,13 +156,20 @@ class SupabaseIntegration:
             return True
             
         except Exception as e:
-            logging.error(f"❌ Failed to save system status: {e}")
+            self.logger.error(f"❌ Failed to save system status: {e}")
             return False
     
     def get_system_analytics(self, days: int = 7) -> Dict[str, Any]:
         """ดึงข้อมูล analytics จาก Supabase"""
         if not self.is_connected:
-            return {}
+            self.logger.debug("Supabase not connected - returning empty analytics")
+            return {
+                "backup_success_rate": 0,
+                "total_backups": 0,
+                "avg_cpu_usage": 0,
+                "avg_memory_usage": 0,
+                "data_points": 0
+            }
             
         try:
             # ดึงข้อมูล backup success rate
@@ -179,14 +200,31 @@ class SupabaseIntegration:
             }
             
         except Exception as e:
-            logging.error(f"❌ Failed to get analytics: {e}")
-            return {}
+            self.logger.error(f"❌ Failed to get analytics: {e}")
+            return {
+                "backup_success_rate": 0,
+                "total_backups": 0,
+                "avg_cpu_usage": 0,
+                "avg_memory_usage": 0,
+                "data_points": 0
+            }
     
     def disconnect(self):
         """ปิดการเชื่อมต่อ Supabase"""
         self.client = None
         self.is_connected = False
-        logging.info("🔌 Supabase disconnected")
+        self.logger.info("🔌 Supabase disconnected")
+        
+    def get_status(self) -> Dict[str, Any]:
+        """ดึงสถานะการเชื่อมต่อ"""
+        return {
+            "connected": self.is_connected,
+            "library_available": SUPABASE_AVAILABLE,
+            "credentials_configured": (
+                self.config["supabase_url"] != "YOUR_SUPABASE_URL" and 
+                self.config["supabase_key"] != "YOUR_SUPABASE_ANON_KEY"
+            )
+        }
 
 # Global instance
 supabase_integration = SupabaseIntegration() 

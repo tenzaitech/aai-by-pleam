@@ -240,6 +240,7 @@ class FinalUpgradeLauncher:
     async def init_chrome_controller(self):
         """เริ่มต้น Chrome Controller แบบขั้นสูง"""
         api_key = os.getenv("OPENAI_API_KEY", "")
+        # ใช้ Singleton
         self.chrome_controller = AIChromeController(api_key)
         await self.chrome_controller.start_ai_browser(
             headless=self.config["chrome"]["headless"]

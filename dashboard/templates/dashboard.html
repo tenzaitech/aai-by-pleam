@@ -297,6 +297,181 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Knowledge Manager Styles */
+        .knowledge-controls {
+            padding: 20px 0;
+        }
+
+        .knowledge-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .tab-button:hover {
+            background: #f8f9fa;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .search-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-controls input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-controls select {
+            min-width: 150px;
+        }
+
+        .search-results {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .knowledge-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+        }
+
+        .knowledge-item h4 {
+            margin: 0 0 8px 0;
+            color: #2c3e50;
+        }
+
+        .knowledge-item p {
+            margin: 0 0 8px 0;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .knowledge-item .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .knowledge-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .category-stats {
+            margin-top: 20px;
+        }
+
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
         @media (max-width: 768px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
@@ -308,6 +483,14 @@
             
             .container {
                 padding: 10px;
+            }
+
+            .search-controls {
+                flex-direction: column;
+            }
+
+            .knowledge-tabs {
+                flex-wrap: wrap;
             }
         }
     </style>
@@ -362,6 +545,82 @@
                     <div class="loading">
                         <div class="spinner"></div>
                         <p>กำลังโหลดสถานะ...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Knowledge Manager Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🧠</div>
+                    <div class="card-title">Knowledge Manager</div>
+                </div>
+                <div id="knowledgeContainer">
+                    <div class="knowledge-controls">
+                        <div class="knowledge-tabs">
+                            <button class="tab-button active" onclick="switchTab('add')">➕ เพิ่มความรู้</button>
+                            <button class="tab-button" onclick="switchTab('search')">🔍 ค้นหา</button>
+                            <button class="tab-button" onclick="switchTab('stats')">📊 สถิติ</button>
+                        </div>
+                        
+                        <!-- Add Knowledge Tab -->
+                        <div id="addTab" class="tab-content active">
+                            <div class="form-group">
+                                <label>ประเภท:</label>
+                                <select id="categorySelect">
+                                    <option value="n8n">🔧 n8n</option>
+                                    <option value="zapier">⚡ Zapier</option>
+                                    <option value="make">🔄 Make</option>
+                                    <option value="general">📚 General</option>
+                                    <option value="chrome">🌐 Chrome</option>
+                                    <option value="ai">🧠 AI</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>เพิ่มจาก URL:</label>
+                                <input type="url" id="urlInput" placeholder="https://example.com" />
+                                <input type="text" id="titleInput" placeholder="ชื่อเรื่อง (ไม่บังคับ)" />
+                                <textarea id="descriptionInput" placeholder="คำอธิบาย (ไม่บังคับ)"></textarea>
+                                <button onclick="addKnowledgeFromUrl()" class="btn-primary">➕ เพิ่มจาก URL</button>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>เพิ่มจากข้อความ:</label>
+                                <input type="text" id="textTitleInput" placeholder="ชื่อเรื่อง" required />
+                                <textarea id="textContentInput" placeholder="เนื้อหา" required></textarea>
+                                <textarea id="textDescriptionInput" placeholder="คำอธิบาย (ไม่บังคับ)"></textarea>
+                                <button onclick="addKnowledgeFromText()" class="btn-primary">📝 เพิ่มจากข้อความ</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Search Tab -->
+                        <div id="searchTab" class="tab-content">
+                            <div class="search-controls">
+                                <input type="text" id="searchInput" placeholder="ค้นหาความรู้..." />
+                                <select id="searchCategory">
+                                    <option value="">ทุกหมวดหมู่</option>
+                                    <option value="n8n">🔧 n8n</option>
+                                    <option value="zapier">⚡ Zapier</option>
+                                    <option value="make">🔄 Make</option>
+                                    <option value="general">📚 General</option>
+                                    <option value="chrome">🌐 Chrome</option>
+                                    <option value="ai">🧠 AI</option>
+                                </select>
+                                <button onclick="searchKnowledge()" class="btn-primary">🔍 ค้นหา</button>
+                            </div>
+                            <div id="searchResults" class="search-results"></div>
+                        </div>
+                        
+                        <!-- Stats Tab -->
+                        <div id="statsTab" class="tab-content">
+                            <div id="knowledgeStats" class="knowledge-stats">
+                                <div class="loading">
+                                    <div class="spinner"></div>
+                                    <p>กำลังโหลดสถิติ...</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -561,6 +820,293 @@
         window.addEventListener('beforeunload', function() {
             socket.disconnect();
         });
+
+        // Knowledge Manager Functions
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.target.classList.add('active');
+            
+            // Load data for specific tabs
+            if (tabName === 'stats') {
+                loadKnowledgeStats();
+            }
+        }
+
+        function addKnowledgeFromUrl() {
+            const url = document.getElementById('urlInput').value;
+            const category = document.getElementById('categorySelect').value;
+            const title = document.getElementById('titleInput').value;
+            const description = document.getElementById('descriptionInput').value;
+            
+            if (!url) {
+                alert('กรุณาใส่ URL');
+                return;
+            }
+            
+            const data = {
+                type: 'url',
+                url: url,
+                category: category,
+                title: title || null,
+                description: description || null
+            };
+            
+            fetch('/api/knowledge/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert('เพิ่มความรู้สำเร็จ!');
+                    clearForm('url');
+                } else {
+                    alert('เกิดข้อผิดพลาด: ' + result.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('เกิดข้อผิดพลาดในการเชื่อมต่อ');
+            });
+        }
+
+        function addKnowledgeFromText() {
+            const title = document.getElementById('textTitleInput').value;
+            const content = document.getElementById('textContentInput').value;
+            const category = document.getElementById('categorySelect').value;
+            const description = document.getElementById('textDescriptionInput').value;
+            
+            if (!title || !content) {
+                alert('กรุณาใส่ชื่อเรื่องและเนื้อหา');
+                return;
+            }
+            
+            const data = {
+                type: 'text',
+                title: title,
+                content: content,
+                category: category,
+                description: description || null
+            };
+            
+            fetch('/api/knowledge/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert('เพิ่มความรู้สำเร็จ!');
+                    clearForm('text');
+                } else {
+                    alert('เกิดข้อผิดพลาด: ' + result.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('เกิดข้อผิดพลาดในการเชื่อมต่อ');
+            });
+        }
+
+        function searchKnowledge() {
+            const query = document.getElementById('searchInput').value;
+            const category = document.getElementById('searchCategory').value;
+            
+            if (!query) {
+                alert('กรุณาใส่คำค้นหา');
+                return;
+            }
+            
+            const url = `/api/knowledge/search?q=${encodeURIComponent(query)}&limit=10`;
+            if (category) {
+                url += `&category=${encodeURIComponent(category)}`;
+            }
+            
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('เกิดข้อผิดพลาด: ' + data.error);
+                    return;
+                }
+                displaySearchResults(data.results, data.query);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('เกิดข้อผิดพลาดในการค้นหา');
+            });
+        }
+
+        function displaySearchResults(results, query) {
+            const container = document.getElementById('searchResults');
+            
+            if (results.length === 0) {
+                container.innerHTML = '<p>ไม่พบผลลัพธ์สำหรับ: "' + query + '"</p>';
+                return;
+            }
+            
+            let html = `<h4>ผลลัพธ์สำหรับ: "${query}" (${results.length} รายการ)</h4>`;
+            
+            results.forEach(item => {
+                html += `
+                    <div class="knowledge-item">
+                        <h4>${item.title}</h4>
+                        <p>${item.description}</p>
+                        <p><strong>หมวดหมู่:</strong> ${item.category}</p>
+                        <p><strong>วันที่สร้าง:</strong> ${new Date(item.metadata.created).toLocaleDateString('th-TH')}</p>
+                        ${item.tags && item.tags.length > 0 ? `
+                            <div class="tags">
+                                ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        <div style="margin-top: 10px;">
+                            <button onclick="viewKnowledge('${item.id}')" class="btn-primary" style="margin-right: 10px;">👁️ ดูรายละเอียด</button>
+                            <button onclick="deleteKnowledge('${item.id}')" class="btn-primary" style="background: #dc3545;">🗑️ ลบ</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function loadKnowledgeStats() {
+            fetch('/api/knowledge/statistics')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('knowledgeStats').innerHTML = '<p>เกิดข้อผิดพลาด: ' + data.error + '</p>';
+                    return;
+                }
+                displayKnowledgeStats(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('knowledgeStats').innerHTML = '<p>เกิดข้อผิดพลาดในการโหลดสถิติ</p>';
+            });
+        }
+
+        function displayKnowledgeStats(stats) {
+            const container = document.getElementById('knowledgeStats');
+            
+            let html = `
+                <div class="stat-item">
+                    <div class="stat-value">${stats.total_items}</div>
+                    <div class="stat-label">ความรู้ทั้งหมด</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${Object.keys(stats.categories).length}</div>
+                    <div class="stat-label">หมวดหมู่</div>
+                </div>
+            `;
+            
+            if (stats.last_updated) {
+                html += `
+                    <div class="stat-item">
+                        <div class="stat-value">📅</div>
+                        <div class="stat-label">อัปเดตล่าสุด</div>
+                    </div>
+                `;
+            }
+            
+            html += '<div class="category-stats">';
+            html += '<h4>สถิติตามหมวดหมู่</h4>';
+            
+            for (const [category, count] of Object.entries(stats.categories)) {
+                html += `
+                    <div class="category-item">
+                        <span>${category}</span>
+                        <span>${count} รายการ</span>
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            
+            container.innerHTML = html;
+        }
+
+        function clearForm(type) {
+            if (type === 'url') {
+                document.getElementById('urlInput').value = '';
+                document.getElementById('titleInput').value = '';
+                document.getElementById('descriptionInput').value = '';
+            } else if (type === 'text') {
+                document.getElementById('textTitleInput').value = '';
+                document.getElementById('textContentInput').value = '';
+                document.getElementById('textDescriptionInput').value = '';
+            }
+        }
+
+        function viewKnowledge(knowledgeId) {
+            fetch(`/api/knowledge/${knowledgeId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('เกิดข้อผิดพลาด: ' + data.error);
+                    return;
+                }
+                
+                const content = `
+                    <h3>${data.title}</h3>
+                    <p><strong>หมวดหมู่:</strong> ${data.category}</p>
+                    <p><strong>คำอธิบาย:</strong> ${data.description}</p>
+                    <p><strong>เนื้อหา:</strong></p>
+                    <div style="max-height: 300px; overflow-y: auto; background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                        ${data.content.substring(0, 1000)}${data.content.length > 1000 ? '...' : ''}
+                    </div>
+                    <p><strong>วันที่สร้าง:</strong> ${new Date(data.metadata.created).toLocaleString('th-TH')}</p>
+                    ${data.url ? `<p><strong>URL:</strong> <a href="${data.url}" target="_blank">${data.url}</a></p>` : ''}
+                `;
+                
+                alert(content.replace(/<[^>]*>/g, '')); // Simple text display
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('เกิดข้อผิดพลาดในการดูรายละเอียด');
+            });
+        }
+
+        function deleteKnowledge(knowledgeId) {
+            if (!confirm('คุณแน่ใจหรือไม่ที่จะลบความรู้นี้?')) {
+                return;
+            }
+            
+            fetch(`/api/knowledge/delete/${knowledgeId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert('ลบความรู้สำเร็จ!');
+                    // Refresh search results if on search tab
+                    if (document.getElementById('searchTab').classList.contains('active')) {
+                        searchKnowledge();
+                    }
+                } else {
+                    alert('เกิดข้อผิดพลาด: ' + result.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('เกิดข้อผิดพลาดในการลบ');
+            });
+        }
     </script>
 </body>
 </html> 

@@ -51,9 +51,10 @@ class InteractiveSystem:
             try:
                 api_key = os.getenv("OPENAI_API_KEY", "")
                 self.chrome_controller = AIChromeController(api_key)
-                await self.chrome_controller.start_ai_browser(headless=False)
+                # ไม่เริ่ม Chrome อัตโนมัติ - ให้ผู้ใช้เลือกเอง
+                # await self.chrome_controller.start_ai_browser(headless=False)
                 self.components["chrome"] = self.chrome_controller
-                print("✅ Chrome Controller พร้อม")
+                print("✅ Chrome Controller พร้อม (ยังไม่ได้เริ่ม browser)")
             except Exception as e:
                 print(f"❌ Chrome Controller ผิดพลาด: {e}")
                 
@@ -120,10 +121,14 @@ class InteractiveSystem:
         """เมนู Chrome Automation"""
         while True:
             print("\n🌐 Chrome Automation Menu:")
-            print("1. เปิดเว็บไซต์")
-            print("2. ค้นหาข้อมูล")
-            print("3. ทำงานอัตโนมัติ")
-            print("4. ดูหน้าจอ")
+            print("1. เริ่ม Chrome Browser")
+            print("2. ปิด Chrome Browser")
+            print("3. Force Restart Chrome Browser")
+            print("4. ดูสถานะ Chrome Browser")
+            print("5. เปิดเว็บไซต์")
+            print("6. ค้นหาข้อมูล")
+            print("7. ทำงานอัตโนมัติ")
+            print("8. ดูหน้าจอ")
             print("0. กลับเมนูหลัก")
             
             choice = input("เลือก: ").strip()
@@ -131,6 +136,38 @@ class InteractiveSystem:
             if choice == "0":
                 break
             elif choice == "1":
+                try:
+                    print("🔍 DEBUG: User selected 'Start Chrome Browser'")
+                    await self.start_chrome_browser(headless=False)
+                except Exception as e:
+                    print(f"❌ ผิดพลาด: {e}")
+                    import traceback
+                    print(f"🔍 DEBUG: Full traceback: {traceback.format_exc()}")
+            elif choice == "2":
+                try:
+                    await self.stop_chrome_browser()
+                except Exception as e:
+                    print(f"❌ ผิดพลาด: {e}")
+            elif choice == "3":
+                try:
+                    print("🔄 Force Restart Chrome Browser...")
+                    await self.start_chrome_browser(headless=False, force_restart=True)
+                except Exception as e:
+                    print(f"❌ ผิดพลาด: {e}")
+            elif choice == "4":
+                try:
+                    status = await self.get_chrome_status()
+                    print(f"📊 Chrome Status:")
+                    print(f"   Driver Active: {'✅' if status['driver_active'] else '❌'}")
+                    print(f"   Initializing: {'🔄' if status['is_initializing'] else '⏸️'}")
+                    print(f"   Session ID: {status['session_id']}")
+                    print(f"   Last Activity: {status['last_activity']}")
+                except Exception as e:
+                    print(f"❌ ผิดพลาด: {e}")
+            elif choice == "5":
+                if not hasattr(self.chrome_controller, 'driver') or not self.chrome_controller.driver:
+                    print("❌ กรุณาเริ่ม Chrome Browser ก่อน")
+                    continue
                 url = input("ใส่ URL: ").strip()
                 if url:
                     try:
@@ -138,7 +175,10 @@ class InteractiveSystem:
                         print(f"✅ เปิด {url} แล้ว")
                     except Exception as e:
                         print(f"❌ ผิดพลาด: {e}")
-            elif choice == "2":
+            elif choice == "6":
+                if not hasattr(self.chrome_controller, 'driver') or not self.chrome_controller.driver:
+                    print("❌ กรุณาเริ่ม Chrome Browser ก่อน")
+                    continue
                 query = input("ค้นหาอะไร: ").strip()
                 if query:
                     try:
@@ -146,10 +186,16 @@ class InteractiveSystem:
                         print(f"✅ ค้นหา {query} แล้ว")
                     except Exception as e:
                         print(f"❌ ผิดพลาด: {e}")
-            elif choice == "3":
+            elif choice == "7":
+                if not hasattr(self.chrome_controller, 'driver') or not self.chrome_controller.driver:
+                    print("❌ กรุณาเริ่ม Chrome Browser ก่อน")
+                    continue
                 print("🤖 ทำงานอัตโนมัติ...")
                 # Add automation logic here
-            elif choice == "4":
+            elif choice == "8":
+                if not hasattr(self.chrome_controller, 'driver') or not self.chrome_controller.driver:
+                    print("❌ กรุณาเริ่ม Chrome Browser ก่อน")
+                    continue
                 print("👁️ ดูหน้าจอ...")
                 # Add screenshot logic here
                 
@@ -350,6 +396,43 @@ class InteractiveSystem:
         """ทดสอบ Backup Controller"""
         if "backup" in self.components:
             print("ทดสอบ Backup Controller")
+            
+    async def start_chrome_browser(self, headless=False, force_restart=False):
+        """เริ่ม Chrome browser เมื่อต้องการ"""
+        import traceback
+        import threading
+        
+        # DEBUG: Log caller information
+        caller_frame = traceback.extract_stack()[-2]
+        print(f"🔍 DEBUG: start_chrome_browser called from {caller_frame.filename}:{caller_frame.lineno}")
+        print(f"🔍 DEBUG: Thread ID: {threading.current_thread().ident}")
+        print(f"🔍 DEBUG: headless={headless}, force_restart={force_restart}")
+        print(f"🔍 DEBUG: chrome in components: {'chrome' in self.components}")
+        
+        if "chrome" in self.components:
+            print("🔍 DEBUG: Calling chrome_controller.start_ai_browser...")
+            success = await self.chrome_controller.start_ai_browser(headless=headless)
+            if success:
+                print("✅ Chrome browser เริ่มต้นแล้ว")
+                return True
+            else:
+                print("❌ ไม่สามารถเริ่ม Chrome browser ได้")
+                return False
+        else:
+            print("❌ Chrome Controller ยังไม่ได้เริ่มต้น")
+            return False
+            
+    async def stop_chrome_browser(self):
+        """ปิด Chrome browser"""
+        if "chrome" in self.components:
+            self.chrome_controller.cleanup()
+            print("🔌 Chrome browser ปิดแล้ว")
+            
+    async def get_chrome_status(self):
+        """ดูสถานะ Chrome browser"""
+        if "chrome" in self.components:
+            return self.chrome_controller.get_status()
+        return {'driver_active': False, 'is_initializing': False, 'last_activity': 0, 'session_id': None}
             
     async def run(self):
         """รันระบบ interactive"""

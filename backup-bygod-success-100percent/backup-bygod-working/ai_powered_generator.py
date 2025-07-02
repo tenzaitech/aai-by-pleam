@@ -120,14 +120,15 @@ class ChromeController:
         
     async def start_browser(self, headless=False):
         """เริ่มต้น browser"""
-        options = Options()
-        if headless:
-            options.add_argument("--headless")
-        self.driver = webdriver.Chrome(options=options)
+        # ใช้ Singleton pattern แทนการสร้างใหม่
+        from core.chrome_controller import AIChromeController
+        controller = AIChromeController()
+        self.driver = await controller.start_ai_browser(headless=headless)
         
     async def navigate_to(self, url):
         """ไปยัง URL"""
-        self.driver.get(url)
+        if self.driver:
+            self.driver.get(url)
         
     async def smart_click(self, element_description):
         """คลิกอัจฉริยะ"""

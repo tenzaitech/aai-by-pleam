@@ -45,16 +45,10 @@ async def main():
     
     try:
         # Import และเริ่มต้นระบบ
-        from master_controller import ChromeAutomationMaster
+        from master_controller import FullSystemLauncher
         
-        master = ChromeAutomationMaster()
-        await master.initialize_all_controllers()
-        
-        print("✅ ระบบพร้อมใช้งานแล้ว!")
-        print("🇹🇭 พร้อมรับคำสั่งภาษาไทย")
-        
-        # รันระบบต่อ
-        await master.run_system()
+        launcher = FullSystemLauncher()
+        return await launcher.launch_full_system()
         
     except Exception as e:
         print(f"❌ เกิดข้อผิดพลาด: {e}")
