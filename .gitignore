@@ -105,4 +105,14 @@ coverage.xml
 # mypy
 .mypy_cache/
 .dmypy.json
-dmypy.json 
+dmypy.json
+
+# Secrets and Credentials
+config/service_account_google.json
+config/credentials_google.json
+config/credentials_supabase.json
+*.key
+*.pem
+*.p12
+.env.local
+.env.production 
