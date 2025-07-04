@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAWAGOT.AI - Quick Start Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step {
+            margin-bottom: 40px;
+            padding: 25px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .step h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .step-number {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .step h3 {
+            color: #34495e;
+            margin: 20px 0 15px 0;
+            font-size: 1.4em;
+        }
+        
+        .step p {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 1.1em;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-size: 0.9em;
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: "Terminal";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #34495e;
+            color: #ecf0f1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #856404;
+        }
+        
+        .warning::before {
+            content: "⚠️ ";
+            font-weight: bold;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #155724;
+        }
+        
+        .success::before {
+            content: "✅ ";
+            font-weight: bold;
+        }
+        
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #0c5460;
+        }
+        
+        .info::before {
+            content: "ℹ️ ";
+            font-weight: bold;
+        }
+        
+        .checklist {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .checklist h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .checklist ul {
+            list-style: none;
+        }
+        
+        .checklist li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .checklist li.checked::before {
+            content: "☑";
+            color: #27ae60;
+        }
+        
+        .button {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer p {
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .step {
+                padding: 20px;
+            }
+            
+            .code-block {
+                font-size: 0.8em;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Quick Start Guide</h1>
+            <p>WAWAGOT.AI - การติดตั้งและใช้งานอย่างรวดเร็ว</p>
+            <p>เริ่มต้นใช้งานระบบ AI/ML ขั้นสูงใน 10 นาที</p>
+        </div>
+        
+        <div class="content">
+            <div class="step">
+                <h2><span class="step-number">1</span>ข้อกำหนดระบบ</h2>
+                
+                <div class="checklist">
+                    <h4>ตรวจสอบระบบของคุณ</h4>
+                    <ul>
+                        <li class="checked">Python 3.8 หรือใหม่กว่า</li>
+                        <li class="checked">Git</li>
+                        <li class="checked">8GB RAM (ขั้นต่ำ)</li>
+                        <li class="checked">10GB เนื้อที่ว่าง</li>
+                        <li>NVIDIA GPU (ไม่บังคับ)</li>
+                        <li>Node.js 16+ (ไม่บังคับ)</li>
+                    </ul>
+                </div>
+                
+                <div class="info">
+                    <strong>หมายเหตุ:</strong> ระบบสามารถทำงานได้บน CPU แต่จะช้ากว่าการใช้ GPU
+                </div>
+                
+                <h3>ตรวจสอบ Python Version</h3>
+                <div class="code-block">
+python --version
+# ควรแสดง Python 3.8.0 หรือใหม่กว่า
+                </div>
+                
+                <h3>ตรวจสอบ Git</h3>
+                <div class="code-block">
+git --version
+# ควรแสดง Git version 2.x.x
+                </div>
+            </div>
+            
+            <div class="step">
+                <h2><span class="step-number">2</span>Clone Repository</h2>
+                
+                <p>ดาวน์โหลดโปรเจกต์จาก GitHub repository</p>
+                
+                <div class="code-block">
+# Clone repository
+git clone git@github.com:tenzaitech/aai-by-pleam.git
+
+# เข้าไปในโฟลเดอร์โปรเจกต์
+cd aai-by-pleam
+
+# ตรวจสอบไฟล์ในโปรเจกต์
+ls -la
+                </div>
+                
+                <div class="success">
+                    <strong>สำเร็จ!</strong> คุณได้ดาวน์โหลดโปรเจกต์ WAWAGOT.AI แล้ว
+                </div>
+                
+                <div class="warning">
+                    <strong>สำคัญ:</strong> ตรวจสอบให้แน่ใจว่าคุณมี SSH key ที่ตั้งค่าไว้กับ GitHub
+                </div>
+            </div>
+            
+            <div class="step">
+                <h2><span class="step-number">3</span>ติดตั้ง Dependencies</h2>
+                
+                <h3>สร้าง Virtual Environment</h3>
+                <div class="code-block">
+# สร้าง virtual environment
+python -m venv venv
+
+# เปิดใช้งาน virtual environment
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+                </div>
+                
+                <h3>ติดตั้ง Python Packages</h3>
+                <div class="code-block">
+# อัปเดต pip
+pip install --upgrade pip
+
+# ติดตั้ง dependencies
+pip install -r requirements.txt
+
+# หรือติดตั้งแบบ minimal
+pip install -r requirements_minimal.txt
+                </div>
+                
+                <div class="info">
+                    <strong>หมายเหตุ:</strong> การติดตั้งอาจใช้เวลาสักครู่ ขึ้นอยู่กับความเร็วอินเทอร์เน็ต
+                </div>
+                
+                <h3>ตรวจสอบการติดตั้ง</h3>
+                <div class="code-block">
+# ตรวจสอบ PyTorch และ CUDA
+python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA: {torch.cuda.is_available()}')"
+
+# ตรวจสอบ Supabase
+python -c "import supabase; print('Supabase: OK')"
+                </div>
+            </div>
+            
+            <div class="step">
+                <h2><span class="step-number">4</span>ตั้งค่า Environment Variables</h2>
+                
+                <h3>สร้างไฟล์ .env</h3>
+                <div class="code-block">
+# คัดลอกเทมเพลต
+cp pleamthinking/cursorsettingv1/04_environment_variables_template.env .env
+
+# แก้ไขไฟล์ .env ด้วย editor ที่คุณชอบ
+# Windows:
+notepad .env
+# macOS:
+open -e .env
+# Linux:
+nano .env
+                </div>
+                
+                <h3>ตั้งค่า Supabase</h3>
+                <div class="code-block">
+# ในไฟล์ .env ให้ตั้งค่า:
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+                </div>
+                
+                <div class="warning">
+                    <strong>สำคัญ:</strong> อย่าลืมตั้งค่า Supabase credentials ให้ถูกต้อง
+                </div>
+                
+                <h3>ตั้งค่า AI Services (ไม่บังคับ)</h3>
+                <div class="code-block">
+# OpenAI (ไม่บังคับ)
+OPENAI_API_KEY=your_openai_api_key
+
+# Google Services (ไม่บังคับ)
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+                </div>
+            </div>
+            
+            <div class="step">
+                <h2><span class="step-number">5</span>ทดสอบระบบ</h2>
+                
+                <h3>ตรวจสอบสุขภาพระบบ</h3>
+                <div class="code-block">
+# รัน system health checker
+python system_health_checker.py
+                </div>
+                
+                <h3>ทดสอบ MCP Server</h3>
+                <div class="code-block">
+# เริ่ม MCP server
+python wawagot_mcp_server.py
+
+# ใน terminal อีกอัน ตรวจสอบ server
+curl http://localhost:3000/health
+                </div>
+                
+                <h3>ทดสอบ Dashboard</h3>
+                <div class="code-block">
+# เริ่ม dashboard
+python dashboard/app.py
+
+# เปิดเบราว์เซอร์ไปที่
+# http://localhost:8080
+                </div>
+                
+                <div class="success">
+                    <strong>ยินดีด้วย!</strong> ระบบ WAWAGOT.AI พร้อมใช้งานแล้ว
+                </div>
+            </div>
+            
+            <div class="step">
+                <h2><span class="step-number">6</span>ตั้งค่า Cursor IDE</h2>
+                
+                <h3>สร้างไฟล์ Cursor Rules</h3>
+                <div class="code-block">
+# คัดลอกไฟล์ rules
+cp pleamthinking/cursorsettingv1/01_cursor_rules_main.md .cursorrules
+
+# สร้างโฟลเดอร์ .cursor
+mkdir -p .cursor
+
+# คัดลอก MCP config
+cp pleamthinking/cursorsettingv1/02_mcp_server_config.json .cursor/mcp.json
+                </div>
+                
+                <h3>เปิด Cursor IDE</h3>
+                <div class="code-block">
+# เปิด Cursor IDE ในโฟลเดอร์โปรเจกต์
+cursor .
+                </div>
+                
+                <div class="info">
+                    <strong>หมายเหตุ:</strong> Cursor จะโหลด rules และ MCP configuration อัตโนมัติ
+                </div>
+                
+                <h3>ตรวจสอบ MCP Integration</h3>
+                <p>ใน Cursor IDE:</p>
+                <ol>
+                    <li>กด <code>Ctrl+Shift+P</code> (Windows/Linux) หรือ <code>Cmd+Shift+P</code> (macOS)</li>
+                    <li>พิมพ์ "MCP" เพื่อดู MCP commands</li>
+                    <li>ทดสอบ "MCP: List Tools"</li>
+                </ol>
+            </div>
+            
+            <div class="step">
+                <h2><span class="step-number">7</span>ทดสอบการทำงาน</h2>
+                
+                <h3>ทดสอบ AI Processing</h3>
+                <div class="code-block">
+# ทดสอบ Thai language processing
+python -c "
+from core.thai_processor import ThaiProcessor
+processor = ThaiProcessor()
+result = processor.process_text('สวัสดีครับ')
+print(result)
+"
+                </div>
+                
+                <h3>ทดสอบ Database Connection</h3>
+                <div class="code-block">
+# ทดสอบ Supabase connection
+python test_supabase.py
+                </div>
+                
+                <h3>ทดสอบ GPU (ถ้ามี)</h3>
+                <div class="code-block">
+# ทดสอบ CUDA
+python -c "
+import torch
+if torch.cuda.is_available():
+    print(f'GPU: {torch.cuda.get_device_name(0)}')
+    print(f'Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.1f} GB')
+else:
+    print('GPU: Not available')
+"
+                </div>
+            </div>
+            
+            <div class="step">
+                <h2><span class="step-number">8</span>เริ่มใช้งาน</h2>
+                
+                <h3>คำสั่งเริ่มต้นระบบ</h3>
+                <div class="code-block">
+# เริ่มระบบทั้งหมด
+python START_SYSTEM_FIXED.py
+
+# หรือเริ่มแยกส่วน
+python wawagot_mcp_server.py &  # MCP Server
+python dashboard/app.py &       # Dashboard
+python system_health_checker.py # Health Check
+                </div>
+                
+                <h3>URLs สำคัญ</h3>
+                <ul>
+                    <li><strong>Dashboard:</strong> <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
+                    <li><strong>MCP Server:</strong> <a href="http://localhost:3000" target="_blank">http://localhost:3000</a></li>
+                    <li><strong>Health Check:</strong> <a href="http://localhost:8080/api/health" target="_blank">http://localhost:8080/api/health</a></li>
+                </ul>
+                
+                <h3>คำสั่งที่มีประโยชน์</h3>
+                <div class="code-block">
+# ตรวจสอบสถานะระบบ
+python system_health_checker.py
+
+# สร้าง backup
+python tools/backup_tool.py
+
+# ตรวจสอบ logs
+tail -f logs/*.log
+
+# อัปเดตระบบ
+git pull origin main
+pip install -r requirements.txt
+                </div>
+            </div>
+            
+            <div class="step">
+                <h2><span class="step-number">9</span>การแก้ปัญหา</h2>
+                
+                <h3>ปัญหาที่พบบ่อย</h3>
+                
+                <div class="warning">
+                    <strong>MCP Server ไม่ทำงาน:</strong>
+                    <ul>
+                        <li>ตรวจสอบ port 3000 ไม่ถูกใช้งาน</li>
+                        <li>ตรวจสอบไฟล์ .cursor/mcp.json</li>
+                        <li>รีสตาร์ท Cursor IDE</li>
+                    </ul>
+                </div>
+                
+                <div class="warning">
+                    <strong>Database Connection Error:</strong>
+                    <ul>
+                        <li>ตรวจสอบ Supabase credentials ใน .env</li>
+                        <li>ตรวจสอบการเชื่อมต่ออินเทอร์เน็ต</li>
+                        <li>ตรวจสอบ Supabase project status</li>
+                    </ul>
+                </div>
+                
+                <div class="warning">
+                    <strong>GPU ไม่ทำงาน:</strong>
+                    <ul>
+                        <li>ตรวจสอบ CUDA drivers</li>
+                        <li>ตรวจสอบ PyTorch CUDA installation</li>
+                        <li>ระบบสามารถทำงานบน CPU ได้</li>
+                    </ul>
+                </div>
+                
+                <h3>คำสั่งแก้ปัญหา</h3>
+                <div class="code-block">
+# ตรวจสอบ processes
+ps aux | grep python
+
+# ตรวจสอบ ports
+netstat -an | grep 3000
+netstat -an | grep 8080
+
+# ตรวจสอบ logs
+tail -f logs/*.log
+
+# รีสตาร์ทระบบ
+pkill -f "python.*wawagot"
+python START_SYSTEM_FIXED.py
+                </div>
+            </div>
+            
+            <div class="step">
+                <h2><span class="step-number">10</span>ขั้นตอนต่อไป</h2>
+                
+                <h3>เรียนรู้เพิ่มเติม</h3>
+                <ul>
+                    <li><a href="docs/index.html" target="_blank">📚 Documentation</a></li>
+                    <li><a href="docs/api-reference.html" target="_blank">🔌 API Reference</a></li>
+                    <li><a href="docs/architecture.html" target="_blank">🏗️ Architecture</a></li>
+                    <li><a href="pleamthinking/cursorsettingv1/07_troubleshooting_guide.md" target="_blank">🔧 Troubleshooting Guide</a></li>
+                </ul>
+                
+                <h3>การพัฒนาต่อ</h3>
+                <ul>
+                    <li>เพิ่ม AI models ใหม่</li>
+                    <li>ปรับแต่ง dashboard</li>
+                    <li>เพิ่ม MCP tools ใหม่</li>
+                    <li>ปรับปรุงประสิทธิภาพ</li>
+                </ul>
+                
+                <div class="success">
+                    <strong>ยินดีด้วย!</strong> คุณได้ติดตั้งและตั้งค่า WAWAGOT.AI สำเร็จแล้ว
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="docs/index.html" class="button">📚 ดู Documentation</a>
+                    <a href="dashboard/app.py" class="button">📊 เปิด Dashboard</a>
+                    <a href="pleamthinking/cursorsettingv1/README.md" class="button">📖 คู่มือการใช้งาน</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>WAWAGOT.AI Quick Start Guide</strong> - สร้างเมื่อ 2024-12-19</p>
+            <p>สำหรับ Cursor IDE Integration และ AI Assistant Development</p>
+        </div>
+    </div>
+</body>
+</html> 

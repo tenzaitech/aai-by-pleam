@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAWAGOT.AI - API Reference</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .endpoint {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .endpoint h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .endpoint h3 {
+            color: #34495e;
+            margin: 15px 0 10px 0;
+            font-size: 1.3em;
+        }
+        
+        .method {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .get { background: #27ae60; }
+        .post { background: #3498db; }
+        .put { background: #f39c12; }
+        .delete { background: #e74c3c; }
+        
+        .url {
+            font-family: 'Courier New', monospace;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: inline-block;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .param-table th,
+        .param-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .param-table th {
+            background: #667eea;
+            color: white;
+        }
+        
+        .param-table tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+        
+        .response-example {
+            background: #ecf0f1;
+            border-left: 4px solid #27ae60;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .error-example {
+            background: #fdf2f2;
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer p {
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .endpoint {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔌 API Reference</h1>
+            <p>WAWAGOT.AI - Complete API Documentation</p>
+            <p>สำหรับ MCP Server และ Dashboard APIs</p>
+        </div>
+        
+        <nav class="nav">
+            <ul>
+                <li><a href="#mcp-server">MCP Server</a></li>
+                <li><a href="#dashboard-api">Dashboard API</a></li>
+                <li><a href="#ai-services">AI Services</a></li>
+                <li><a href="#database-api">Database API</a></li>
+                <li><a href="#authentication">Authentication</a></li>
+                <li><a href="#examples">Examples</a></li>
+            </ul>
+        </nav>
+        
+        <div class="content">
+            <section id="mcp-server">
+                <h1>🤖 MCP Server API</h1>
+                <p>Model Context Protocol Server สำหรับ Cursor IDE Integration</p>
+                
+                <div class="endpoint">
+                    <h2><span class="method get">GET</span> /tools</h2>
+                    <p><strong>Description:</strong> รายการ tools ที่ใช้ได้ทั้งหมด</p>
+                    <div class="url">http://localhost:3000/tools</div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "tools": [
+    {
+      "name": "system_health_check",
+      "description": "ตรวจสอบสถานะระบบ",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "detailed": {
+            "type": "boolean",
+            "description": "แสดงรายละเอียดเพิ่มเติม"
+          }
+        }
+      }
+    },
+    {
+      "name": "create_backup",
+      "description": "สร้าง backup ของระบบ",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "include_logs": {
+            "type": "boolean",
+            "description": "รวม logs ใน backup"
+          },
+          "compression": {
+            "type": "boolean",
+            "description": "บีบอัดไฟล์ backup"
+          }
+        }
+      }
+    }
+  ]
+}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <h2><span class="method post">POST</span> /tools/{tool}/invoke</h2>
+                    <p><strong>Description:</strong> เรียกใช้ tool ที่ระบุ</p>
+                    <div class="url">http://localhost:3000/tools/{tool}/invoke</div>
+                    
+                    <h3>Parameters</h3>
+                    <table class="param-table">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>tool</td>
+                            <td>string</td>
+                            <td>Yes</td>
+                            <td>ชื่อ tool ที่ต้องการเรียกใช้</td>
+                        </tr>
+                        <tr>
+                            <td>parameters</td>
+                            <td>object</td>
+                            <td>No</td>
+                            <td>พารามิเตอร์สำหรับ tool</td>
+                        </tr>
+                    </table>
+                    
+                    <h3>Request Body</h3>
+                    <div class="code-block">
+{
+  "parameters": {
+    "detailed": true,
+    "include_logs": false
+  }
+}
+                    </div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "success": true,
+  "result": {
+    "status": "healthy",
+    "components": {
+      "database": "connected",
+      "gpu": "available",
+      "memory": "normal"
+    },
+    "timestamp": "2024-12-19T10:30:00Z"
+  }
+}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <h2><span class="method get">GET</span> /health</h2>
+                    <p><strong>Description:</strong> ตรวจสอบสถานะของ MCP server</p>
+                    <div class="url">http://localhost:3000/health</div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "status": "healthy",
+  "timestamp": "2024-12-19T10:30:00Z",
+  "uptime": "2h 15m 30s",
+  "version": "1.0.0"
+}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <h2><span class="method get">GET</span> /status</h2>
+                    <p><strong>Description:</strong> ข้อมูลสถานะระบบโดยละเอียด</p>
+                    <div class="url">http://localhost:3000/status</div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "system": {
+    "cpu_usage": 45.2,
+    "memory_usage": 67.8,
+    "disk_usage": 23.4,
+    "gpu_usage": 12.5
+  },
+  "services": {
+    "database": "connected",
+    "ai_services": "available",
+    "backup_service": "running"
+  },
+  "tools": {
+    "total": 15,
+    "available": 15,
+    "last_used": "2024-12-19T10:25:00Z"
+  }
+}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="dashboard-api">
+                <h1>📊 Dashboard API</h1>
+                <p>Web Dashboard APIs สำหรับการจัดการระบบ</p>
+                
+                <div class="endpoint">
+                    <h2><span class="method get">GET</span> /</h2>
+                    <p><strong>Description:</strong> หน้า Dashboard หลัก</p>
+                    <div class="url">http://localhost:8080/</div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <p>HTML page ของ Dashboard</p>
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <h2><span class="method get">GET</span> /api/health</h2>
+                    <p><strong>Description:</strong> ตรวจสอบสถานะ Dashboard</p>
+                    <div class="url">http://localhost:8080/api/health</div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "status": "healthy",
+  "dashboard": "running",
+  "database": "connected",
+  "timestamp": "2024-12-19T10:30:00Z"
+}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <h2><span class="method get">GET</span> /api/status</h2>
+                    <p><strong>Description:</strong> สถานะระบบโดยละเอียด</p>
+                    <div class="url">http://localhost:8080/api/status</div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "system": {
+    "cpu": 45.2,
+    "memory": 67.8,
+    "disk": 23.4,
+    "gpu": 12.5
+  },
+  "services": {
+    "mcp_server": "running",
+    "database": "connected",
+    "ai_services": "available"
+  },
+  "performance": {
+    "response_time": 125,
+    "requests_per_minute": 45,
+    "error_rate": 0.1
+  }
+}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <h2><span class="method post">POST</span> /api/backup</h2>
+                    <p><strong>Description:</strong> สร้าง backup ของระบบ</p>
+                    <div class="url">http://localhost:8080/api/backup</div>
+                    
+                    <h3>Request Body</h3>
+                    <div class="code-block">
+{
+  "include_logs": true,
+  "compression": true,
+  "description": "Daily backup"
+}
+                    </div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "success": true,
+  "backup_id": "backup_20241219_103000",
+  "filename": "backup_20241219_103000.tar.gz",
+  "size": "156.7 MB",
+  "created_at": "2024-12-19T10:30:00Z"
+}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <h2><span class="method post">POST</span> /api/restore</h2>
+                    <p><strong>Description:</strong> กู้คืนระบบจาก backup</p>
+                    <div class="url">http://localhost:8080/api/restore</div>
+                    
+                    <h3>Request Body</h3>
+                    <div class="code-block">
+{
+  "backup_id": "backup_20241219_103000",
+  "confirm": true
+}
+                    </div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "success": true,
+  "message": "Restore completed successfully",
+  "restored_at": "2024-12-19T10:35:00Z"
+}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="ai-services">
+                <h1>🧠 AI Services API</h1>
+                <p>APIs สำหรับการใช้งาน AI/ML services</p>
+                
+                <div class="endpoint">
+                    <h2><span class="method post">POST</span> /api/ai/process-text</h2>
+                    <p><strong>Description:</strong> ประมวลผลข้อความภาษาไทย</p>
+                    <div class="url">http://localhost:8080/api/ai/process-text</div>
+                    
+                    <h3>Request Body</h3>
+                    <div class="code-block">
+{
+  "text": "สวัสดีครับ นี่คือข้อความภาษาไทย",
+  "language": "th",
+  "tasks": ["tokenization", "normalization"]
+}
+                    </div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "success": true,
+  "result": {
+    "original": "สวัสดีครับ นี่คือข้อความภาษาไทย",
+    "normalized": "สวัสดีครับ นี่คือข้อความภาษาไทย",
+    "tokens": ["สวัสดี", "ครับ", "นี่", "คือ", "ข้อความ", "ภาษาไทย"],
+    "language": "th"
+  }
+}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <h2><span class="method post">POST</span> /api/ai/ocr</h2>
+                    <p><strong>Description:</strong> OCR สำหรับข้อความภาษาไทย</p>
+                    <div class="url">http://localhost:8080/api/ai/ocr</div>
+                    
+                    <h3>Request Body</h3>
+                    <div class="code-block">
+{
+  "image_url": "https://example.com/image.jpg",
+  "language": "th",
+  "confidence_threshold": 0.8
+}
+                    </div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "success": true,
+  "result": {
+    "text": "ข้อความที่ได้จาก OCR",
+    "confidence": 0.95,
+    "language": "th",
+    "processing_time": 1.2
+  }
+}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="database-api">
+                <h1>🗄️ Database API</h1>
+                <p>APIs สำหรับการจัดการฐานข้อมูล</p>
+                
+                <div class="endpoint">
+                    <h2><span class="method get">GET</span> /api/db/status</h2>
+                    <p><strong>Description:</strong> ตรวจสอบสถานะฐานข้อมูล</p>
+                    <div class="url">http://localhost:8080/api/db/status</div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "status": "connected",
+  "database": "postgresql",
+  "host": "db.supabase.co",
+  "port": 5432,
+  "uptime": "5d 12h 30m"
+}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <h2><span class="method get">GET</span> /api/db/tables</h2>
+                    <p><strong>Description:</strong> รายการตารางในฐานข้อมูล</p>
+                    <div class="url">http://localhost:8080/api/db/tables</div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "tables": [
+    {
+      "name": "users",
+      "rows": 1250,
+      "size": "2.3 MB"
+    },
+    {
+      "name": "sessions",
+      "rows": 567,
+      "size": "1.1 MB"
+    },
+    {
+      "name": "backups",
+      "rows": 89,
+      "size": "0.5 MB"
+    }
+  ]
+}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="authentication">
+                <h1>🔐 Authentication</h1>
+                <p>การยืนยันตัวตนและการอนุญาต</p>
+                
+                <div class="endpoint">
+                    <h2><span class="method post">POST</span> /api/auth/login</h2>
+                    <p><strong>Description:</strong> เข้าสู่ระบบ</p>
+                    <div class="url">http://localhost:8080/api/auth/login</div>
+                    
+                    <h3>Request Body</h3>
+                    <div class="code-block">
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+                    </div>
+                    
+                    <h3>Response</h3>
+                    <div class="response-example">
+                        <h4>Success Response (200)</h4>
+                        <div class="code-block">
+{
+  "success": true,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "user_123",
+    "email": "user@example.com",
+    "role": "admin"
+  },
+  "expires_at": "2024-12-20T10:30:00Z"
+}
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Authentication Headers</h3>
+                <div class="code-block">
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                </div>
+            </section>
+            
+            <section id="examples">
+                <h1>💡 Examples</h1>
+                <p>ตัวอย่างการใช้งาน APIs</p>
+                
+                <div class="endpoint">
+                    <h2>ตัวอย่างการใช้งาน MCP Tools</h2>
+                    <div class="code-block">
+# ตรวจสอบ tools ที่ใช้ได้
+curl http://localhost:3000/tools
+
+# เรียกใช้ system health check
+curl -X POST http://localhost:3000/tools/system_health_check/invoke \
+  -H "Content-Type: application/json" \
+  -d '{"parameters": {"detailed": true}}'
+
+# สร้าง backup
+curl -X POST http://localhost:3000/tools/create_backup/invoke \
+  -H "Content-Type: application/json" \
+  -d '{"parameters": {"include_logs": true, "compression": true}}'
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <h2>ตัวอย่างการใช้งาน Dashboard API</h2>
+                    <div class="code-block">
+# ตรวจสอบสถานะระบบ
+curl http://localhost:8080/api/status
+
+# สร้าง backup
+curl -X POST http://localhost:8080/api/backup \
+  -H "Content-Type: application/json" \
+  -d '{"include_logs": true, "compression": true}'
+
+# ประมวลผลข้อความภาษาไทย
+curl -X POST http://localhost:8080/api/ai/process-text \
+  -H "Content-Type: application/json" \
+  -d '{"text": "สวัสดีครับ", "language": "th"}'
+                    </div>
+                </div>
+                
+                <div class="endpoint">
+                    <h2>ตัวอย่างการใช้งาน Python</h2>
+                    <div class="code-block">
+import requests
+import json
+
+# MCP Server
+mcp_base = "http://localhost:3000"
+dashboard_base = "http://localhost:8080"
+
+# ตรวจสอบ tools
+response = requests.get(f"{mcp_base}/tools")
+tools = response.json()
+
+# เรียกใช้ tool
+response = requests.post(
+    f"{mcp_base}/tools/system_health_check/invoke",
+    json={"parameters": {"detailed": True}}
+)
+result = response.json()
+
+# สร้าง backup
+response = requests.post(
+    f"{dashboard_base}/api/backup",
+    json={"include_logs": True, "compression": True}
+)
+backup_result = response.json()
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <div class="footer">
+            <p><strong>WAWAGOT.AI API Reference</strong> - สร้างเมื่อ 2024-12-19</p>
+            <p>สำหรับ Cursor IDE Integration และ AI Assistant Development</p>
+        </div>
+    </div>
+</body>
+</html> 

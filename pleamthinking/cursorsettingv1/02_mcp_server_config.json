@@ -1,12 +1,12 @@
 {
   "mcpServers": {
-    "wawagot-ai": {
+    "wawagot-ai-server": {
       "command": "python",
-      "args": ["mcp_flask_server.py"],
+      "args": ["wawagot_mcp_server.py"],
       "env": {
         "PYTHONPATH": ".",
-        "FLASK_ENV": "development"
+        "WAWAGOT_ENV": "development"
       }
     }
   }
-}
+} 

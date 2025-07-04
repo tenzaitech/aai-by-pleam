@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 class GoogleServicesTestSuite:
     def __init__(self):
-        self.api_key = "AIzaSyDXoRsK0eZK2nMuVzSLsRItBiH7OEfZ0y0"
+        self.api_key = os.getenv("GOOGLE_API_KEY", "your_google_api_key_here")
         self.credentials = None
         self.test_results = {}
         self.total_tests = 0
@@ -366,7 +366,7 @@ def main():
     """Main function"""
     print("🧪 Google Services Complete Test Suite")
     print("=" * 60)
-    print(f"🔐 API Key: {GoogleServicesTestSuite().api_key[:20]}...")
+            print(f"🔐 API Key: {'*' * 20}... (hidden for security)")
     print("=" * 60)
     
     # สร้าง test suite และรันการทดสอบ

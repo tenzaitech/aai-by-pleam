@@ -1,0 +1,256 @@
+===============================================================================
+                              SOLUTIONS & FIXES
+===============================================================================
+
+📅 Created: 2024-12-19
+📝 Purpose: บันทึกวิธีแก้ปัญหาต่างๆ ที่ใช้ได้ผล
+📁 Location: pleamthinking/solutions.txt
+
+===============================================================================
+                            GIT & VERSION CONTROL
+===============================================================================
+
+🔧 Problem: Git repository มีไฟล์เปลี่ยนแปลงมากเกินไป
+✅ Solution: 
+   1. สร้าง .gitignore ที่ครอบคลุม
+   2. ลบไฟล์ที่ไม่ต้องการออกจาก git tracking
+   3. ล้างประวัติ git ด้วย orphan branch
+   4. Commit ใหม่ที่มีเฉพาะไฟล์ที่จำเป็น
+
+🔧 Problem: GitHub ปฏิเสธการ push เพราะ secrets
+✅ Solution:
+   1. ตรวจสอบไฟล์ที่มี secrets
+   2. ลบหรือแทนที่ secrets ด้วย placeholder
+   3. ย้าย credentials ไป .env
+   4. เพิ่ม .env ใน .gitignore
+
+🔧 Problem: Virtual environment ถูก track ใน git
+✅ Solution:
+   1. git rm -r --cached .venv-gpu/
+   2. เพิ่ม .venv*/ ใน .gitignore
+   3. Commit การเปลี่ยนแปลง
+
+===============================================================================
+                            DEPENDENCY & ENVIRONMENT
+===============================================================================
+
+🔧 Problem: ModuleNotFoundError: No module named 'flask_cors'
+✅ Solution:
+   1. pip install flask-cors
+   2. ตรวจสอบ requirements.txt
+   3. อัปเดต virtual environment
+
+🔧 Problem: CUDA/PyTorch ไม่ทำงาน
+✅ Solution:
+   1. ตรวจสอบ GPU driver
+   2. ติดตั้ง CUDA toolkit
+   3. ติดตั้ง PyTorch with CUDA support
+   4. ทดสอบ torch.cuda.is_available()
+
+🔧 Problem: Python version conflicts
+✅ Solution:
+   1. ใช้ virtual environment
+   2. ระบุ Python version ใน requirements
+   3. ใช้ pyenv หรือ conda
+
+===============================================================================
+                            MCP & INTEGRATION
+===============================================================================
+
+🔧 Problem: MCP tools ไม่แสดงใน Cursor
+✅ Solution:
+   1. ตรวจสอบ .cursor/mcp.json format
+   2. ใช้ object แทน array สำหรับ servers
+   3. ตรวจสอบ MCP server endpoint
+   4. Restart Cursor
+
+🔧 Problem: MCP server ไม่ทำงาน
+✅ Solution:
+   1. สร้าง Flask server ใหม่
+   2. เพิ่ม /tools endpoint
+   3. ตรวจสอบ CORS settings
+   4. ทดสอบ endpoint ด้วย curl
+
+🔧 Problem: Dashboard ไม่แสดงข้อมูล
+✅ Solution:
+   1. ตรวจสอบ WebSocket connection
+   2. ตรวจสอบ API endpoints
+   3. ตรวจสอบ database connection
+   4. เพิ่ม error logging
+
+===============================================================================
+                            SECURITY & CREDENTIALS
+===============================================================================
+
+🔧 Problem: Credentials หลุดใน git
+✅ Solution:
+   1. ใช้ .env file
+   2. เพิ่ม .env ใน .gitignore
+   3. ใช้ environment variables
+   4. ตรวจสอบไฟล์ก่อน commit
+
+🔧 Problem: API keys ถูก expose
+✅ Solution:
+   1. ใช้ secret management service
+   2. เข้ารหัส credentials
+   3. ใช้ temporary tokens
+   4. หมุนเวียน keys เป็นประจำ
+
+🔧 Problem: Unauthorized access
+✅ Solution:
+   1. เพิ่ม authentication
+   2. ใช้ JWT tokens
+   3. เพิ่ม rate limiting
+   4. ตรวจสอบ permissions
+
+===============================================================================
+                            PERFORMANCE & OPTIMIZATION
+===============================================================================
+
+🔧 Problem: ระบบช้า
+✅ Solution:
+   1. เพิ่ม caching (Redis)
+   2. Optimize database queries
+   3. ใช้ async/await
+   4. เพิ่ม connection pooling
+
+🔧 Problem: Memory leaks
+✅ Solution:
+   1. ใช้ memory profiling
+   2. เพิ่ม garbage collection
+   3. ปิด connections หลังใช้งาน
+   4. ใช้ context managers
+
+🔧 Problem: CPU usage สูง
+✅ Solution:
+   1. ใช้ GPU acceleration
+   2. Parallel processing
+   3. Optimize algorithms
+   4. ใช้ background tasks
+
+===============================================================================
+                            DEPLOYMENT & CONFIGURATION
+===============================================================================
+
+🔧 Problem: Environment differences
+✅ Solution:
+   1. ใช้ environment variables
+   2. สร้าง config files
+   3. ใช้ Docker
+   4. ใช้ configuration management
+
+🔧 Problem: Dependency conflicts
+✅ Solution:
+   1. ใช้ virtual environment
+   2. Pin dependency versions
+   3. ใช้ requirements.txt
+   4. ใช้ dependency lock files
+
+🔧 Problem: Configuration กระจาย
+✅ Solution:
+   1. Centralized configuration
+   2. ใช้ config management tools
+   3. Environment-specific configs
+   4. ใช้ secrets management
+
+===============================================================================
+                            TESTING & DEBUGGING
+===============================================================================
+
+🔧 Problem: Tests fail
+✅ Solution:
+   1. ตรวจสอบ test environment
+   2. Mock external services
+   3. ใช้ test databases
+   4. เพิ่ม error handling
+
+🔧 Problem: Debugging ยาก
+✅ Solution:
+   1. เพิ่ม logging
+   2. ใช้ debugger
+   3. เพิ่ม error tracking
+   4. ใช้ monitoring tools
+
+🔧 Problem: Integration tests fail
+✅ Solution:
+   1. ตรวจสอบ service dependencies
+   2. ใช้ test containers
+   3. Mock external APIs
+   4. เพิ่ม retry logic
+
+===============================================================================
+                            MONITORING & LOGGING
+===============================================================================
+
+🔧 Problem: ไม่รู้ว่าระบบมีปัญหา
+✅ Solution:
+   1. เพิ่ม health checks
+   2. ใช้ monitoring tools
+   3. เพิ่ม alerting
+   4. ใช้ log aggregation
+
+🔧 Problem: Logs ไม่มีประโยชน์
+✅ Solution:
+   1. ใช้ structured logging
+   2. เพิ่ม log levels
+   3. ใช้ log rotation
+   4. เพิ่ม context information
+
+🔧 Problem: Performance monitoring
+✅ Solution:
+   1. ใช้ APM tools
+   2. เพิ่ม metrics
+   3. ใช้ tracing
+   4. เพิ่ม profiling
+
+===============================================================================
+                            USEFUL COMMANDS
+===============================================================================
+
+📋 Git Commands:
+   git status --short
+   git rm -r --cached <folder>
+   git checkout --orphan <branch>
+   git branch -D <branch>
+   git push -f origin <branch>
+
+📋 Python Commands:
+   pip install -r requirements.txt
+   python -m venv .venv
+   source .venv/bin/activate  # Linux/Mac
+   .venv\Scripts\activate     # Windows
+
+📋 System Commands:
+   curl http://localhost:5000/tools
+   netstat -an | findstr :5000
+   tasklist | findstr python
+
+📋 Debug Commands:
+   python -c "import torch; print(torch.cuda.is_available())"
+   pip list | grep flask
+   git log --oneline
+
+===============================================================================
+                                NOTES
+===============================================================================
+
+💡 Best Practices:
+   - ตรวจสอบก่อน commit
+   - ใช้ virtual environment
+   - เก็บ credentials ปลอดภัย
+   - เพิ่ม logging และ monitoring
+   - ทดสอบก่อน deploy
+
+🎯 Tips:
+   - ใช้ .gitignore อย่างเหมาะสม
+   - ตรวจสอบ dependencies เป็นประจำ
+   - ใช้ environment variables
+   - เพิ่ม error handling
+   - ใช้ automated testing
+
+===============================================================================
+                                END
+===============================================================================
+
+Last Updated: 2024-12-19
+Next Review: 2025-01-19 

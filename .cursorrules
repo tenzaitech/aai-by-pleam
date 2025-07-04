@@ -1,0 +1,194 @@
+# ===============================================================================
+# WAWAGOT.AI - CURSOR RULES & CONFIGURATION
+# ===============================================================================
+# Created: 2024-12-19
+# Purpose: Advanced AI assistant configuration for AI_ULTRA_PROJECT
+# ===============================================================================
+
+# ===============================================================================
+# USER RULES & PREFERENCES
+# ===============================================================================
+
+## Communication Style
+- Always communicate in Thai language unless technical terms require English
+- Provide extremely detailed and thorough analysis for all requests
+- Show explicit reasoning and thought process
+- Consider all angles and potential implications
+- Use structured output with headings, bullet points, and clear formatting
+- Provide percentage confidence when confirming knowledge
+
+## Work Style
+- Operate with extreme level of detail and thoroughness
+- Perform comprehensive analysis without leaving out relevant details
+- Consider holistic perspective with all interdependencies
+- Actively leverage long-term memory from previous interactions
+- Prioritize context from ongoing conversation
+- Proactively recall and integrate past information
+- Report potential issues, ambiguities, or gaps immediately
+- Prevent errors and suggest remedies proactively
+
+## Technical Preferences
+- Prefer practical, usable solutions with current tools
+- Avoid forcibly closing Chrome (interferes with user workflow)
+- Use Thai language for user communication
+- Specify percentage confidence when confirming knowledge
+- Focus on production-ready, scalable solutions
+
+# ===============================================================================
+# PROJECT RULES & ARCHITECTURE
+# ===============================================================================
+
+## Project Context
+- AI/ML system with multimodal capabilities
+- Thai language processing and OCR
+- Real-time dashboard and monitoring
+- MCP server integration with Cursor/VSCode
+- GPU acceleration with CUDA/PyTorch
+- Supabase database integration
+- Google Services integration
+- Comprehensive logging and performance monitoring
+
+## Code Standards
+- Use English for code, comments, and technical identifiers
+- Use Thai only for user-facing messages and documentation
+- Follow Python best practices (PEP 8)
+- Implement comprehensive error handling
+- Use type hints where appropriate
+- Add detailed docstrings
+- Implement logging for all major operations
+
+## Security Requirements
+- Never hardcode credentials or secrets
+- Use environment variables for all sensitive data
+- Implement proper authentication and authorization
+- Validate all inputs and sanitize data
+- Use HTTPS for all external communications
+- Implement rate limiting and security headers
+
+## Performance Requirements
+- Optimize for GPU acceleration when available
+- Implement caching strategies (Redis recommended)
+- Use async/await for I/O operations
+- Monitor memory usage and implement garbage collection
+- Profile code regularly for bottlenecks
+- Use connection pooling for database operations
+
+## Architecture Patterns
+- Use virtual environments for dependency management
+- Implement modular, testable components
+- Use configuration management for environment-specific settings
+- Implement health checks and monitoring
+- Use structured logging with appropriate levels
+- Implement graceful error recovery
+
+# ===============================================================================
+# AI ASSISTANT CAPABILITIES
+# ===============================================================================
+
+## Memory Integration
+- Access and integrate information from pleamthinking/ folder
+- Remember user preferences and past decisions
+- Use context from previous conversations
+- Maintain long-term project knowledge
+- Reference system status and health information
+
+## Problem Solving Approach
+- Analyze problems comprehensively before proposing solutions
+- Consider multiple solution approaches
+- Evaluate trade-offs and implications
+- Provide step-by-step implementation guidance
+- Include error handling and edge cases
+- Suggest testing and validation strategies
+
+## Code Generation
+- Generate production-ready, well-documented code
+- Include proper error handling and logging
+- Add type hints and docstrings
+- Follow project-specific patterns and conventions
+- Consider security implications
+- Optimize for performance and maintainability
+
+## Documentation
+- Create comprehensive documentation for all components
+- Include setup instructions and configuration guides
+- Document API endpoints and usage examples
+- Provide troubleshooting guides
+- Update documentation when making changes
+
+# ===============================================================================
+# INTEGRATION REQUIREMENTS
+# ===============================================================================
+
+## MCP Server Integration
+- Ensure MCP server provides proper /tools endpoint
+- Validate .cursor/mcp.json configuration
+- Test MCP tools functionality in Cursor
+- Maintain compatibility with Cursor IDE features
+
+## Database Integration
+- Use Supabase for structured data storage
+- Implement proper connection pooling
+- Handle database errors gracefully
+- Use transactions for data consistency
+- Implement backup and recovery procedures
+
+## External Services
+- Google Services (OAuth, APIs)
+- Supabase (Database, Auth, Storage)
+- CUDA/GPU acceleration
+- Monitoring and logging services
+- Backup and storage services
+
+# ===============================================================================
+# DEVELOPMENT WORKFLOW
+# ===============================================================================
+
+## Git Workflow
+- Use meaningful commit messages
+- Maintain clean git history
+- Update .gitignore appropriately
+- Never commit credentials or secrets
+- Use feature branches for major changes
+
+## Testing Strategy
+- Implement unit tests for core functionality
+- Add integration tests for external services
+- Include performance and security tests
+- Test error handling and edge cases
+- Maintain good test coverage
+
+## Deployment
+- Use environment-specific configurations
+- Implement health checks and monitoring
+- Set up automated backup procedures
+- Configure proper logging and error tracking
+- Implement graceful deployment strategies
+
+# ===============================================================================
+# MONITORING & MAINTENANCE
+# ===============================================================================
+
+## Health Monitoring
+- Monitor system performance and resource usage
+- Track error rates and response times
+- Monitor external service dependencies
+- Implement alerting for critical issues
+- Maintain system health reports
+
+## Maintenance Tasks
+- Regular dependency updates
+- Security audits and vulnerability scans
+- Performance optimization
+- Database maintenance and cleanup
+- Log rotation and archival
+
+## Backup & Recovery
+- Automated backup procedures
+- Test recovery procedures regularly
+- Maintain backup integrity
+- Document recovery procedures
+- Monitor backup success rates
+
+# ===============================================================================
+# END OF CURSOR RULES
+# =============================================================================== 

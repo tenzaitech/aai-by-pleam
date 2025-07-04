@@ -1,0 +1,233 @@
+===============================================================================
+                              GENERAL NOTES
+===============================================================================
+
+📅 Created: 2024-12-19
+📝 Purpose: บันทึกทั่วไปและข้อสังเกตต่างๆ
+📁 Location: pleamthinking/notes.txt
+
+===============================================================================
+                            DAILY NOTES
+===============================================================================
+
+📝 2024-12-19:
+   - สร้างโฟลเดอร์ pleamthinking สำหรับบันทึกส่วนตัว
+   - ล้างประวัติ git และปรับ .gitignore
+   - แก้ไขปัญหา MCP server และ dashboard
+   - อัปเดต dependencies และ CUDA support
+   - ระบบทำงานได้สมบูรณ์ 95%
+
+===============================================================================
+                            SYSTEM ARCHITECTURE
+===============================================================================
+
+🏗️ Core Components:
+   - AI Integration (Multimodal, Thai Language)
+   - Dashboard (Real-time monitoring)
+   - MCP Server (IDE integration)
+   - Performance Monitor
+   - Health Checker
+   - Logger System
+
+🔧 Technologies Used:
+   - Python (Flask, PyTorch, CUDA)
+   - JavaScript (Frontend)
+   - Supabase (Database)
+   - Google Services (OAuth, APIs)
+   - Git (Version Control)
+
+===============================================================================
+                            CONFIGURATION FILES
+===============================================================================
+
+📁 Important Configs:
+   - .cursor/mcp.json (MCP server config)
+   - .gitignore (Git ignore patterns)
+   - requirements.txt (Python dependencies)
+   - config/ (System configurations)
+   - data/ (Data storage)
+
+🔐 Security Files:
+   - .env (Environment variables - NOT in git)
+   - credentials_*.json (API keys - NOT in git)
+   - google_oauth_*.json (OAuth configs - NOT in git)
+
+===============================================================================
+                            USEFUL PATTERNS
+===============================================================================
+
+💡 Code Patterns:
+   - Use virtual environments (.venv)
+   - Environment variables for configs
+   - Structured logging
+   - Error handling with try/catch
+   - Async/await for I/O operations
+   - Context managers for resources
+
+🔧 Git Patterns:
+   - Feature branches
+   - Meaningful commit messages
+   - Regular commits
+   - Clean history
+   - Proper .gitignore
+
+===============================================================================
+                            COMMON ISSUES & FIXES
+===============================================================================
+
+⚠️ Frequent Problems:
+   1. Git repository too many changes
+   2. MCP tools not showing in Cursor
+   3. Credentials in git history
+   4. Virtual environment tracking
+   5. Dependency conflicts
+
+✅ Quick Fixes:
+   1. Clean git history with orphan branch
+   2. Check .cursor/mcp.json format
+   3. Use .env for credentials
+   4. Update .gitignore
+   5. Use virtual environments
+
+===============================================================================
+                            PERFORMANCE TIPS
+===============================================================================
+
+⚡ Optimization:
+   - Use GPU acceleration when possible
+   - Implement caching (Redis)
+   - Optimize database queries
+   - Use async operations
+   - Monitor memory usage
+   - Profile code regularly
+
+🔍 Monitoring:
+   - Health checks
+   - Performance metrics
+   - Error tracking
+   - Resource monitoring
+   - Log aggregation
+
+===============================================================================
+                            SECURITY CHECKLIST
+===============================================================================
+
+🔒 Security Measures:
+   - ✅ Credentials in .env (not in git)
+   - ✅ .gitignore covers sensitive files
+   - ✅ Virtual environment isolation
+   - ⚠️ Need to remove secrets from history
+   - ⚠️ Add authentication system
+   - ⚠️ Implement rate limiting
+
+🛡️ Best Practices:
+   - Never commit credentials
+   - Use environment variables
+   - Regular security audits
+   - Update dependencies
+   - Monitor for vulnerabilities
+
+===============================================================================
+                            DEPLOYMENT NOTES
+===============================================================================
+
+🚀 Deployment Options:
+   - Local development (current)
+   - Docker containers
+   - Cloud platforms (AWS, GCP, Azure)
+   - VPS/Server deployment
+   - Serverless functions
+
+📋 Deployment Checklist:
+   - Environment variables set
+   - Dependencies installed
+   - Database configured
+   - SSL certificates
+   - Monitoring setup
+   - Backup strategy
+
+===============================================================================
+                            TESTING STRATEGY
+===============================================================================
+
+🧪 Testing Types:
+   - Unit tests
+   - Integration tests
+   - End-to-end tests
+   - Performance tests
+   - Security tests
+
+📊 Test Coverage:
+   - Core functionality
+   - API endpoints
+   - Database operations
+   - Error handling
+   - Edge cases
+
+===============================================================================
+                            FUTURE PLANS
+===============================================================================
+
+🎯 Short Term (1-3 months):
+   - Fix GitHub push issues
+   - Add comprehensive testing
+   - Improve documentation
+   - Add user authentication
+   - Optimize performance
+
+🎯 Medium Term (3-6 months):
+   - Add CI/CD pipeline
+   - Implement monitoring
+   - Add mobile support
+   - Scale architecture
+   - Add advanced features
+
+🎯 Long Term (6+ months):
+   - AI-powered features
+   - Real-time collaboration
+   - Advanced analytics
+   - Cloud deployment
+   - Enterprise features
+
+===============================================================================
+                            RESOURCES & REFERENCES
+===============================================================================
+
+📚 Documentation:
+   - Flask documentation
+   - PyTorch documentation
+   - MCP specification
+   - Git documentation
+   - CUDA documentation
+
+🔗 Useful Links:
+   - GitHub repository
+   - Supabase dashboard
+   - Google Cloud Console
+   - Cursor IDE
+   - Development tools
+
+===============================================================================
+                            PERSONAL NOTES
+===============================================================================
+
+💭 Thoughts:
+   - ระบบมีความซับซ้อนแต่ทำงานได้ดี
+   - ต้องให้ความสำคัญกับ security
+   - Documentation สำคัญมาก
+   - Testing ควรทำตั้งแต่เริ่มต้น
+   - Performance optimization ต้องทำต่อเนื่อง
+
+🎯 Goals:
+   - ทำให้ระบบใช้งานง่ายขึ้น
+   - เพิ่มความปลอดภัย
+   - ปรับปรุงประสิทธิภาพ
+   - เพิ่มฟีเจอร์ใหม่
+   - ทำให้ scalable
+
+===============================================================================
+                                END
+===============================================================================
+
+Last Updated: 2024-12-19
+Next Review: 2025-01-19 

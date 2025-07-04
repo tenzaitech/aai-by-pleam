@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAWAGOT.AI - Architecture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .section h3 {
+            color: #34495e;
+            margin: 20px 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .section p {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 1.1em;
+        }
+        
+        .architecture-diagram {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .diagram-box {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .diagram-arrow {
+            font-size: 1.5em;
+            color: #667eea;
+            margin: 0 10px;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-size: 0.9em;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .feature-card p {
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .feature-card ul {
+            margin-left: 20px;
+            color: #555;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .tech-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer p {
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ System Architecture</h1>
+            <p>WAWAGOT.AI - สถาปัตยกรรมระบบขั้นสูง</p>
+            <p>AI/ML System with Multimodal Capabilities</p>
+        </div>
+        
+        <nav class="nav">
+            <ul>
+                <li><a href="#overview">ภาพรวม</a></li>
+                <li><a href="#components">Components</a></li>
+                <li><a href="#data-flow">Data Flow</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#scalability">Scalability</a></li>
+                <li><a href="#deployment">Deployment</a></li>
+            </ul>
+        </nav>
+        
+        <div class="content">
+            <section id="overview" class="section">
+                <h2>📋 ภาพรวมสถาปัตยกรรม</h2>
+                
+                <p>WAWAGOT.AI ใช้สถาปัตยกรรมแบบ Microservices ที่ออกแบบมาเพื่อรองรับการประมวลผล AI/ML ขั้นสูง การทำงานแบบ real-time และการขยายตัวในอนาคต</p>
+                
+                <div class="architecture-diagram">
+                    <div class="diagram-box">Frontend (Dashboard)</div>
+                    <div class="diagram-arrow">↔</div>
+                    <div class="diagram-box">API Gateway</div>
+                    <div class="diagram-arrow">↔</div>
+                    <div class="diagram-box">MCP Server</div>
+                    <br><br>
+                    <div class="diagram-box">AI/ML Services</div>
+                    <div class="diagram-arrow">↔</div>
+                    <div class="diagram-box">Database (Supabase)</div>
+                    <div class="diagram-arrow">↔</div>
+                    <div class="diagram-box">External APIs</div>
+                </div>
+                
+                <h3>หลักการออกแบบ</h3>
+                <ul>
+                    <li><strong>Modularity:</strong> แต่ละ component ทำงานอิสระ</li>
+                    <li><strong>Scalability:</strong> รองรับการขยายตัวทั้งแนวตั้งและแนวนอน</li>
+                    <li><strong>Reliability:</strong> ระบบ fault-tolerant และ self-healing</li>
+                    <li><strong>Security:</strong> การรักษาความปลอดภัยหลายชั้น</li>
+                    <li><strong>Performance:</strong> การปรับแต่งประสิทธิภาพอัตโนมัติ</li>
+                </ul>
+            </section>
+            
+            <section id="components" class="section">
+                <h2>🔧 Core Components</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🤖 AI Integration Layer</h4>
+                        <p>ชั้นการเชื่อมต่อ AI services ต่างๆ</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">CUDA</span>
+                        </div>
+                        <ul>
+                            <li>Text Processing (Thai NLP)</li>
+                            <li>Image Recognition (OCR)</li>
+                            <li>Audio Processing</li>
+                            <li>Model Management</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>🗄️ Data Management</h4>
+                        <p>การจัดการข้อมูลและฐานข้อมูล</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Supabase</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                        <ul>
+                            <li>Structured Data Storage</li>
+                            <li>Real-time Synchronization</li>
+                            <li>Data Backup & Recovery</li>
+                            <li>Data Validation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>🔗 MCP Server</h4>
+                        <p>Model Context Protocol Server</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">WebSocket</span>
+                            <span class="tech-tag">JSON-RPC</span>
+                        </div>
+                        <ul>
+                            <li>Tool Management</li>
+                            <li>Context Handling</li>
+                            <li>Real-time Communication</li>
+                            <li>Cursor IDE Integration</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📊 Dashboard & Monitoring</h4>
+                        <p>ระบบ Dashboard และการติดตาม</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">WebSocket</span>
+                        </div>
+                        <ul>
+                            <li>Real-time Monitoring</li>
+                            <li>System Health Check</li>
+                            <li>Performance Metrics</li>
+                            <li>User Interface</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>🔒 Security Layer</h4>
+                        <p>ชั้นการรักษาความปลอดภัย</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">JWT</span>
+                            <span class="tech-tag">OAuth2</span>
+                            <span class="tech-tag">HTTPS</span>
+                        </div>
+                        <ul>
+                            <li>Authentication</li>
+                            <li>Authorization</li>
+                            <li>Data Encryption</li>
+                            <li>Rate Limiting</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>🧠 Memory System</h4>
+                        <p>ระบบความทรงจำระยะยาว</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Vector DB</span>
+                            <span class="tech-tag">Embeddings</span>
+                            <span class="tech-tag">RAG</span>
+                        </div>
+                        <ul>
+                            <li>Long-term Memory</li>
+                            <li>Knowledge Retrieval</li>
+                            <li>Context Management</li>
+                            <li>Learning Integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="data-flow" class="section">
+                <h2>🔄 Data Flow Architecture</h2>
+                
+                <h3>การไหลของข้อมูล</h3>
+                <div class="code-block">
+User Request → API Gateway → Authentication → Service Router → Processing → Response
+
+1. User Request (Frontend/Dashboard)
+   ↓
+2. API Gateway (Load Balancer, Rate Limiting)
+   ↓
+3. Authentication & Authorization
+   ↓
+4. Service Router (MCP Server/Dashboard API)
+   ↓
+5. Business Logic Processing
+   ↓
+6. Data Access Layer (Database/External APIs)
+   ↓
+7. Response Generation
+   ↓
+8. Response Delivery
+                </div>
+                
+                <h3>Real-time Data Flow</h3>
+                <div class="code-block">
+WebSocket Connection → Event Handler → Message Queue → Processing → Broadcast
+
+1. WebSocket Connection (Dashboard/MCP)
+   ↓
+2. Event Handler (Message Parsing)
+   ↓
+3. Message Queue (Redis/RabbitMQ)
+   ↓
+4. Processing (AI/ML Services)
+   ↓
+5. Result Broadcasting
+   ↓
+6. Client Update
+                </div>
+                
+                <h3>AI/ML Processing Pipeline</h3>
+                <div class="code-block">
+Input Data → Preprocessing → Model Selection → Inference → Post-processing → Output
+
+1. Input Data (Text/Image/Audio)
+   ↓
+2. Data Preprocessing (Normalization, Tokenization)
+   ↓
+3. Model Selection (Based on task type)
+   ↓
+4. GPU/CPU Inference
+   ↓
+5. Post-processing (Formatting, Validation)
+   ↓
+6. Output Generation
+                </div>
+            </section>
+            
+            <section id="security" class="section">
+                <h2>🔒 Security Architecture</h2>
+                
+                <h3>Security Layers</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Network Security</h4>
+                        <ul>
+                            <li>HTTPS/TLS Encryption</li>
+                            <li>Firewall Protection</li>
+                            <li>DDoS Protection</li>
+                            <li>VPN Access</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>Application Security</h4>
+                        <ul>
+                            <li>Input Validation</li>
+                            <li>SQL Injection Prevention</li>
+                            <li>XSS Protection</li>
+                            <li>CSRF Protection</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>Authentication & Authorization</h4>
+                        <ul>
+                            <li>JWT Token Management</li>
+                            <li>OAuth2 Integration</li>
+                            <li>Role-based Access Control</li>
+                            <li>Multi-factor Authentication</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>Data Security</h4>
+                        <ul>
+                            <li>Data Encryption at Rest</li>
+                            <li>Data Encryption in Transit</li>
+                            <li>Secure Backup Storage</li>
+                            <li>Data Anonymization</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>Security Configuration</h3>
+                <div class="code-block">
+# Security Headers
+SECURITY_HEADERS = {
+    'X-Frame-Options': 'DENY',
+    'X-Content-Type-Options': 'nosniff',
+    'X-XSS-Protection': '1; mode=block',
+    'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+    'Content-Security-Policy': "default-src 'self'"
+}
+
+# Rate Limiting
+RATE_LIMIT_CONFIG = {
+    'requests_per_minute': 100,
+    'burst_limit': 200,
+    'window_size': 60
+}
+
+# JWT Configuration
+JWT_CONFIG = {
+    'algorithm': 'HS256',
+    'expiration_hours': 24,
+    'refresh_token_expiration': 168  # 7 days
+}
+                </div>
+            </section>
+            
+            <section id="scalability" class="section">
+                <h2>📈 Scalability Architecture</h2>
+                
+                <h3>Horizontal Scaling</h3>
+                <p>ระบบรองรับการขยายตัวในแนวนอนผ่านการเพิ่ม instances และ load balancing</p>
+                
+                <div class="code-block">
+# Load Balancer Configuration
+upstream backend {
+    server backend1:8000;
+    server backend2:8000;
+    server backend3:8000;
+}
+
+# Auto-scaling Rules
+scaling_rules = {
+    'cpu_threshold': 70,
+    'memory_threshold': 80,
+    'min_instances': 2,
+    'max_instances': 10,
+    'scale_up_cooldown': 300,
+    'scale_down_cooldown': 600
+}
+                </div>
+                
+                <h3>Vertical Scaling</h3>
+                <p>การเพิ่มประสิทธิภาพของแต่ละ component ผ่านการเพิ่มทรัพยากร</p>
+                
+                <ul>
+                    <li><strong>GPU Scaling:</strong> การเพิ่ม GPU instances สำหรับ AI processing</li>
+                    <li><strong>Memory Scaling:</strong> การเพิ่ม RAM สำหรับ caching และ processing</li>
+                    <li><strong>Storage Scaling:</strong> การเพิ่ม storage capacity</li>
+                    <li><strong>Network Scaling:</strong> การเพิ่ม bandwidth</li>
+                </ul>
+                
+                <h3>Database Scaling</h3>
+                <div class="code-block">
+# Database Replication
+primary_db = "supabase-primary"
+read_replicas = [
+    "supabase-replica-1",
+    "supabase-replica-2",
+    "supabase-replica-3"
+]
+
+# Connection Pooling
+pool_config = {
+    'min_connections': 5,
+    'max_connections': 20,
+    'connection_timeout': 30,
+    'idle_timeout': 300
+}
+                </div>
+            </section>
+            
+            <section id="deployment" class="section">
+                <h2>🚀 Deployment Architecture</h2>
+                
+                <h3>Deployment Strategy</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Development Environment</h4>
+                        <ul>
+                            <li>Local Development</li>
+                            <li>Docker Containers</li>
+                            <li>Hot Reloading</li>
+                            <li>Debug Mode</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>Staging Environment</h4>
+                        <ul>
+                            <li>Production-like Setup</li>
+                            <li>Integration Testing</li>
+                            <li>Performance Testing</li>
+                            <li>Security Testing</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>Production Environment</h4>
+                        <ul>
+                            <li>High Availability</li>
+                            <li>Auto-scaling</li>
+                            <li>Monitoring & Alerting</li>
+                            <li>Backup & Recovery</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>Container Architecture</h3>
+                <div class="code-block">
+# Docker Compose Configuration
+version: '3.8'
+services:
+  mcp-server:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - redis
+      - database
+  
+  dashboard:
+    build: ./dashboard
+    ports:
+      - "8080:8080"
+    environment:
+      - FLASK_ENV=production
+    depends_on:
+      - mcp-server
+  
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  
+  database:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=wawagot
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=secure_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+                </div>
+                
+                <h3>CI/CD Pipeline</h3>
+                <div class="code-block">
+# GitHub Actions Workflow
+name: Deploy to Production
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Tests
+        run: python -m pytest
+  
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Docker Images
+        run: docker-compose build
+  
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Production
+        run: |
+          docker-compose -f docker-compose.prod.yml up -d
+          docker system prune -f
+                </div>
+            </section>
+        </div>
+        
+        <div class="footer">
+            <p><strong>WAWAGOT.AI Architecture Documentation</strong> - สร้างเมื่อ 2024-12-19</p>
+            <p>สำหรับ Cursor IDE Integration และ AI Assistant Development</p>
+        </div>
+    </div>
+</body>
+</html> 

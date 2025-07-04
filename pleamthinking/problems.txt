@@ -1,0 +1,191 @@
+===============================================================================
+                              PROBLEMS & ISSUES
+===============================================================================
+
+📅 Created: 2024-12-19
+📝 Purpose: บันทึกปัญหาที่เจอและวิธีแก้ไข
+📁 Location: pleamthinking/problems.txt
+
+===============================================================================
+                            CURRENT ISSUES
+===============================================================================
+
+🔴 CRITICAL - GitHub Push Blocked:
+   Problem: GitHub ปฏิเสธการ push เพราะตรวจพบ secrets ในไฟล์
+   Files: google_oauth_setup.py, google_services_integration.py, 
+          GOOGLE_SERVICES_COMPLETE_REPORT.md, google_oauth_setup_fixed.py
+   Status: UNRESOLVED
+   Priority: HIGH
+   Solution: ลบ/ซ่อน secrets ในไฟล์เหล่านี้
+
+🟡 WARNING - Security Concerns:
+   Problem: Credentials ยังอยู่ในไฟล์ที่ถูก track ด้วย git
+   Status: PARTIALLY RESOLVED (.gitignore updated)
+   Priority: HIGH
+   Solution: ย้าย credentials ไป .env
+
+🟡 WARNING - Documentation:
+   Problem: เอกสารยังไม่ครบถ้วนและไม่เป็นระเบียบ
+   Status: UNRESOLVED
+   Priority: MEDIUM
+   Solution: จัดระเบียบและเพิ่มเอกสาร
+
+===============================================================================
+                            RESOLVED ISSUES
+===============================================================================
+
+✅ SOLVED - Git Repository Too Many Changes:
+   Problem: Git repository มีไฟล์เปลี่ยนแปลงมากเกินไป
+   Solution: ล้างประวัติ git และปรับ .gitignore
+   Date: 2024-12-19
+
+✅ SOLVED - Virtual Environment Tracking:
+   Problem: .venv-gpu/ ถูก track ใน git
+   Solution: ลบออกจาก git tracking และเพิ่มใน .gitignore
+   Date: 2024-12-19
+
+✅ SOLVED - Credentials in Git:
+   Problem: ไฟล์ credentials ถูก track ใน git
+   Solution: ลบออกจาก git tracking และเพิ่มใน .gitignore
+   Date: 2024-12-19
+
+✅ SOLVED - MCP Server Issues:
+   Problem: MCP server ไม่ทำงานหรือ tools endpoint ไม่ถูกต้อง
+   Solution: สร้าง mcp_flask_server.py ใหม่
+   Date: 2024-12-19
+
+✅ SOLVED - Dependency Issues:
+   Problem: ModuleNotFoundError: No module named 'flask_cors'
+   Solution: pip install flask-cors
+   Date: 2024-12-19
+
+===============================================================================
+                            POTENTIAL ISSUES
+===============================================================================
+
+🟠 WATCH - Performance:
+   Problem: ระบบอาจช้าลงเมื่อมีข้อมูลมากขึ้น
+   Risk: MEDIUM
+   Mitigation: เพิ่ม caching, optimize queries
+
+🟠 WATCH - Scalability:
+   Problem: ระบบอาจไม่รองรับผู้ใช้จำนวนมาก
+   Risk: MEDIUM
+   Mitigation: Implement microservices, load balancing
+
+🟠 WATCH - Security:
+   Problem: อาจมี security vulnerabilities ที่ยังไม่พบ
+   Risk: HIGH
+   Mitigation: Security audit, penetration testing
+
+🟠 WATCH - Maintenance:
+   Problem: การบำรุงรักษาระบบอาจซับซ้อนขึ้น
+   Risk: LOW
+   Mitigation: Automated testing, CI/CD pipeline
+
+===============================================================================
+                            BUG REPORTS
+===============================================================================
+
+🐛 Bug #001:
+   Description: Chrome Controller ไม่สามารถ start ได้
+   Status: INVESTIGATING
+   Priority: LOW
+   Notes: อาจเป็นปัญหากับ Chrome driver version
+
+🐛 Bug #002:
+   Description: Dashboard บางครั้งไม่แสดงข้อมูล real-time
+   Status: INVESTIGATING
+   Priority: MEDIUM
+   Notes: อาจเป็นปัญหากับ WebSocket connection
+
+🐛 Bug #003:
+   Description: MCP tools ไม่แสดงใน Cursor
+   Status: RESOLVED
+   Priority: HIGH
+   Notes: แก้ไขโดยปรับ .cursor/mcp.json
+
+===============================================================================
+                            PERFORMANCE ISSUES
+===============================================================================
+
+⚡ Slow Startup:
+   Problem: ระบบใช้เวลานานในการ startup
+   Impact: MEDIUM
+   Solution: Optimize imports, lazy loading
+
+⚡ Memory Usage:
+   Problem: ระบบใช้ memory มาก
+   Impact: LOW
+   Solution: Memory profiling, garbage collection
+
+⚡ CPU Usage:
+   Problem: ระบบใช้ CPU มากเมื่อประมวลผล AI
+   Impact: MEDIUM
+   Solution: GPU acceleration, parallel processing
+
+===============================================================================
+                            INTEGRATION ISSUES
+===============================================================================
+
+🔗 Google Services:
+   Problem: Google OAuth integration อาจมีปัญหา
+   Status: INVESTIGATING
+   Priority: MEDIUM
+   Notes: ต้องตรวจสอบ credentials และ permissions
+
+🔗 Supabase:
+   Problem: Database connection อาจไม่เสถียร
+   Status: MONITORING
+   Priority: LOW
+   Notes: เพิ่ม connection pooling
+
+🔗 MCP Integration:
+   Problem: MCP tools อาจไม่ทำงานในบาง IDE
+   Status: RESOLVED
+   Priority: HIGH
+   Notes: แก้ไขโดยปรับ configuration
+
+===============================================================================
+                            DEPLOYMENT ISSUES
+===============================================================================
+
+🚀 Environment Differences:
+   Problem: ระบบทำงานต่างกันใน development และ production
+   Status: UNRESOLVED
+   Priority: MEDIUM
+   Solution: Environment configuration management
+
+🚀 Dependency Conflicts:
+   Problem: Dependencies อาจขัดแย้งกัน
+   Status: MONITORING
+   Priority: LOW
+   Solution: Virtual environment, dependency pinning
+
+🚀 Configuration Management:
+   Problem: Configuration กระจายอยู่ในหลายไฟล์
+   Status: UNRESOLVED
+   Priority: LOW
+   Solution: Centralized configuration management
+
+===============================================================================
+                                NOTES
+===============================================================================
+
+📝 General Notes:
+   - ปัญหาส่วนใหญ่เกี่ยวกับ security และ configuration
+   - ต้องให้ความสำคัญกับการจัดการ credentials
+   - ควรเพิ่ม automated testing เพื่อป้องกันปัญหา
+
+🎯 Action Items:
+   - แก้ไข GitHub push issue
+   - เพิ่ม security audit
+   - ปรับปรุง documentation
+   - เพิ่ม automated testing
+
+===============================================================================
+                                END
+===============================================================================
+
+Last Updated: 2024-12-19
+Next Review: 2025-01-19 

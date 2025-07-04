@@ -1,0 +1,85 @@
+# Thai Language Processing Rules
+
+## 🗣️ Communication Guidelines
+- **Always respond in Thai language** unless technical terms require English
+- Use **polite and respectful Thai language** (ภาษาไทยที่สุภาพ)
+- Provide **detailed explanations** in Thai
+- Use **appropriate Thai pronouns** (ผม/ดิฉัน, คุณ)
+- **Avoid direct translation** from English - use natural Thai expressions
+
+## 📝 Text Processing
+- **Always use UTF-8 encoding** for Thai text
+- **Handle Thai characters properly** in all string operations
+- **Use proper Thai text segmentation** when needed
+- **Consider Thai language patterns** in regex operations
+- **Validate Thai text input** appropriately
+
+## 🎯 User Interface
+- **Use Thai language** for user-facing messages
+- **Provide Thai translations** for error messages
+- **Consider Thai text length** in UI design
+- **Use appropriate Thai fonts** and typography
+- **Handle Thai text alignment** properly
+
+## 🔧 Code Comments
+- **Use English for code comments** and technical documentation
+- **Use Thai for user-facing documentation** and guides
+- **Provide Thai explanations** in README files
+- **Use Thai for configuration descriptions**
+
+## 📊 Data Handling
+- **Store Thai text in UTF-8** format
+- **Handle Thai text in database** operations
+- **Use proper Thai text indexing** when needed
+- **Consider Thai language search** functionality
+- **Handle Thai text in API responses**
+
+## 🧠 AI/ML Considerations
+- **Use Thai language models** when appropriate
+- **Handle Thai text preprocessing** for ML tasks
+- **Consider Thai language patterns** in NLP tasks
+- **Use appropriate Thai tokenization** methods
+- **Handle Thai text in OCR** operations
+
+## 🔍 Testing
+- **Test with Thai text input** thoroughly
+- **Verify Thai text output** correctly
+- **Test Thai text encoding** in all scenarios
+- **Validate Thai text processing** functions
+- **Test Thai language UI** elements
+
+## 📚 Documentation
+- **Write user documentation in Thai**
+- **Provide Thai examples** in guides
+- **Use Thai for troubleshooting** guides
+- **Include Thai language** in help text
+- **Provide Thai translations** for technical terms
+
+## 🎨 UI/UX for Thai Users
+- **Use Thai language** in navigation menus
+- **Provide Thai labels** for form fields
+- **Use Thai for button text** and actions
+- **Consider Thai reading patterns** in layout
+- **Use appropriate Thai date/time** formats
+
+## 🔒 Security for Thai Text
+- **Validate Thai text input** to prevent injection
+- **Sanitize Thai text** appropriately
+- **Handle Thai text in logging** safely
+- **Consider Thai text in error messages**
+- **Use proper encoding** in all operations
+
+## 📈 Performance for Thai Text
+- **Optimize Thai text processing** operations
+- **Use efficient Thai text** algorithms
+- **Handle large Thai text** datasets
+- **Optimize Thai text search** functionality
+- **Monitor Thai text processing** performance
+
+---
+
+**Remember:** Thai language support should be natural and user-friendly, not just a translation. Consider cultural context and Thai language patterns in all implementations.
+description:
+globs:
+alwaysApply: false
+---

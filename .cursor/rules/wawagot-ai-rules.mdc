@@ -1,0 +1,251 @@
+# WAWAGOT.AI - AI Assistant Rules
+
+## 🎯 Project Context
+You are working on WAWAGOT.AI, an advanced AI/ML system with multimodal capabilities, Thai language processing, real-time dashboard, MCP server integration, GPU acceleration, and comprehensive monitoring.
+
+## 🗣️ Communication Style
+- **Always communicate in Thai language** unless technical terms require English
+- Provide **extremely detailed and thorough analysis** for all requests
+- Show **explicit reasoning and thought process**
+- Consider **all angles and potential implications**
+- Use **structured output** with headings, bullet points, and clear formatting
+- Provide **percentage confidence** when confirming knowledge
+
+## 💼 Work Style
+- Operate with **extreme level of detail and thoroughness**
+- Perform **comprehensive analysis** without leaving out relevant details
+- Consider **holistic perspective** with all interdependencies
+- **Actively leverage long-term memory** from previous interactions
+- **Prioritize context** from ongoing conversation
+- **Proactively recall and integrate** past information
+- **Report potential issues, ambiguities, or gaps** immediately
+- **Prevent errors and suggest remedies** proactively
+
+## 🔧 Technical Preferences
+- Prefer **practical, usable solutions** with current tools
+- **Avoid forcibly closing Chrome** (interferes with user workflow)
+- Use **Thai language for user communication**
+- Specify **percentage confidence** when confirming knowledge
+- Focus on **production-ready, scalable solutions**
+
+## 🏗️ Code Standards
+- Use **English for code, comments, and technical identifiers**
+- Use **Thai only for user-facing messages and documentation**
+- Follow **Python best practices (PEP 8)**
+- Implement **comprehensive error handling**
+- Use **type hints** where appropriate
+- Add **detailed docstrings**
+- Implement **logging for all major operations**
+
+## 🔒 Security Requirements
+- **Never hardcode credentials or secrets**
+- Use **environment variables** for all sensitive data
+- Implement **proper authentication and authorization**
+- **Validate all inputs** and sanitize data
+- Use **HTTPS** for all external communications
+- Implement **rate limiting and security headers**
+
+## ⚡ Performance Requirements
+- **Optimize for GPU acceleration** when available
+- Implement **caching strategies** (Redis recommended)
+- Use **async/await** for I/O operations
+- **Monitor memory usage** and implement garbage collection
+- **Profile code regularly** for bottlenecks
+- Use **connection pooling** for database operations
+
+## 🧠 Memory Integration
+- **Access and integrate information** from pleamthinking/ folder
+- **Remember user preferences** and past decisions
+- **Use context from previous conversations**
+- **Maintain long-term project knowledge**
+- **Reference system status** and health information
+
+## 🔍 Problem Solving Approach
+- **Analyze problems comprehensively** before proposing solutions
+- Consider **multiple solution approaches**
+- **Evaluate trade-offs and implications**
+- Provide **step-by-step implementation guidance**
+- Include **error handling and edge cases**
+- Suggest **testing and validation strategies**
+
+## 📝 Code Generation
+- Generate **production-ready, well-documented code**
+- Include **proper error handling and logging**
+- Add **type hints and docstrings**
+- Follow **project-specific patterns and conventions**
+- Consider **security implications**
+- **Optimize for performance and maintainability**
+
+## 📚 Documentation
+- Create **comprehensive documentation** for all components
+- Include **setup instructions and configuration guides**
+- Document **API endpoints and usage examples**
+- Provide **troubleshooting guides**
+- **Update documentation** when making changes
+
+## 🔗 Integration Requirements
+- **Ensure MCP server** provides proper /tools endpoint
+- **Validate .cursor/mcp.json** configuration
+- **Test MCP tools functionality** in Cursor
+- **Maintain compatibility** with Cursor IDE features
+
+## 🗄️ Database Integration
+- Use **Supabase for structured data storage**
+- Implement **proper connection pooling**
+- **Handle database errors gracefully**
+- Use **transactions for data consistency**
+- Implement **backup and recovery procedures**
+
+## 🌐 External Services
+- **Google Services** (OAuth, APIs)
+- **Supabase** (Database, Auth, Storage)
+- **CUDA/GPU acceleration**
+- **Monitoring and logging services**
+- **Backup and storage services**
+
+## 🔄 Development Workflow
+- Use **meaningful commit messages**
+- **Maintain clean git history**
+- **Update .gitignore appropriately**
+- **Never commit credentials or secrets**
+- Use **feature branches** for major changes
+
+## 🧪 Testing Strategy
+- Implement **unit tests** for core functionality
+- Add **integration tests** for external services
+- Include **performance and security tests**
+- **Test error handling and edge cases**
+- **Maintain good test coverage**
+
+## 🚀 Deployment
+- Use **environment-specific configurations**
+- Implement **health checks and monitoring**
+- Set up **automated backup procedures**
+- Configure **proper logging and error tracking**
+- Implement **graceful deployment strategies**
+
+## 📊 Monitoring & Maintenance
+- **Monitor system performance** and resource usage
+- **Track error rates and response times**
+- **Monitor external service dependencies**
+- Implement **alerting for critical issues**
+- **Maintain system health reports**
+
+## 🛠️ Maintenance Tasks
+- **Regular dependency updates**
+- **Security audits and vulnerability scans**
+- **Performance optimization**
+- **Database maintenance and cleanup**
+- **Log rotation and archival**
+
+## 💾 Backup & Recovery
+- **Automated backup procedures**
+- **Test recovery procedures regularly**
+- **Maintain backup integrity**
+- **Document recovery procedures**
+- **Monitor backup success rates**
+
+## 🎨 UI/UX Guidelines
+- **Use consistent design patterns**
+- **Implement responsive design**
+- **Provide clear user feedback**
+- **Ensure accessibility compliance**
+- **Optimize for performance**
+
+## 🔍 Code Review Guidelines
+- **Check for security vulnerabilities**
+- **Verify error handling**
+- **Ensure proper logging**
+- **Validate input sanitization**
+- **Review performance implications**
+
+## 📈 Performance Guidelines
+- **Use async operations** where appropriate
+- **Implement caching strategies**
+- **Optimize database queries**
+- **Monitor memory usage**
+- **Profile critical paths**
+
+## 🛡️ Security Guidelines
+- **Validate all inputs**
+- **Sanitize user data**
+- **Use secure communication protocols**
+- **Implement proper authentication**
+- **Regular security audits**
+
+## 📋 Project-Specific Rules
+
+### AI/ML Components
+- **Optimize for GPU usage** when available
+- **Use appropriate ML frameworks** (PyTorch, TensorFlow)
+- **Implement model versioning**
+- **Monitor model performance**
+- **Handle large datasets efficiently**
+
+### Thai Language Processing
+- **Use proper Thai text encoding** (UTF-8)
+- **Implement Thai-specific NLP** when needed
+- **Handle Thai text input validation**
+- **Consider Thai language UI/UX**
+
+### Real-time Systems
+- **Use WebSocket connections** for real-time updates
+- **Implement proper connection management**
+- **Handle connection failures gracefully**
+- **Monitor real-time performance**
+
+### Dashboard & Monitoring
+- **Provide real-time system status**
+- **Implement interactive visualizations**
+- **Ensure responsive design**
+- **Handle large data sets efficiently**
+
+## 🚨 Error Handling
+- **Log all errors** with appropriate context
+- **Provide user-friendly error messages**
+- **Implement graceful degradation**
+- **Monitor error patterns**
+- **Alert on critical failures**
+
+## 📝 Logging Guidelines
+- **Use structured logging**
+- **Include relevant context**
+- **Set appropriate log levels**
+- **Implement log rotation**
+- **Monitor log volume**
+
+## 🔧 Configuration Management
+- **Use environment variables** for configuration
+- **Validate configuration on startup**
+- **Provide default values**
+- **Document all configuration options**
+- **Use configuration validation**
+
+## 🎯 Quality Assurance
+- **Write comprehensive tests**
+- **Perform code reviews**
+- **Use static analysis tools**
+- **Monitor code quality metrics**
+- **Maintain documentation**
+
+## 📊 Metrics & Monitoring
+- **Track key performance indicators**
+- **Monitor system health**
+- **Alert on anomalies**
+- **Maintain historical data**
+- **Provide dashboards**
+
+## 🔄 Continuous Improvement
+- **Regularly review and update** these rules
+- **Learn from past experiences**
+- **Incorporate best practices**
+- **Adapt to new technologies**
+- **Maintain code quality**
+
+---
+
+**Remember:** These rules are designed to ensure high-quality, secure, and maintainable code while providing an excellent user experience. Always prioritize the user's needs and the project's long-term success.
+description:
+globs:
+alwaysApply: false
+---

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAWAGOT.AI - Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .card h3 {
+            color: #34495e;
+            margin: 15px 0 10px 0;
+            font-size: 1.2em;
+        }
+        
+        .card p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        .card ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .card li {
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .highlight {
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer p {
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 WAWAGOT.AI</h1>
+            <p>Advanced AI/ML System with Multimodal Capabilities</p>
+            <p>Documentation for Cursor IDE Integration</p>
+        </div>
+        
+        <nav class="nav">
+            <ul>
+                <li><a href="#overview">ภาพรวม</a></li>
+                <li><a href="#architecture">สถาปัตยกรรม</a></li>
+                <li><a href="#setup">การตั้งค่า</a></li>
+                <li><a href="#api">API</a></li>
+                <li><a href="#ai-ml">AI/ML</a></li>
+                <li><a href="#database">ฐานข้อมูล</a></li>
+                <li><a href="#security">ความปลอดภัย</a></li>
+                <li><a href="#troubleshooting">การแก้ปัญหา</a></li>
+            </ul>
+        </nav>
+        
+        <div class="content">
+            <div class="card" id="overview">
+                <h2>📋 ภาพรวมระบบ</h2>
+                <p><strong>WAWAGOT.AI</strong> เป็นระบบ AI/ML ขั้นสูงที่มีความสามารถในการประมวลผลหลายรูปแบบ (multimodal) พร้อมการสนับสนุนภาษาไทยและการทำงานแบบ real-time</p>
+                
+                <h3>คุณสมบัติหลัก</h3>
+                <ul>
+                    <li>🤖 AI/ML processing with GPU acceleration</li>
+                    <li>🇹🇭 Thai language processing และ OCR</li>
+                    <li>📊 Real-time dashboard และ monitoring</li>
+                    <li>🔗 MCP server integration</li>
+                    <li>🗄️ Supabase database integration</li>
+                    <li>🌐 Google Services integration</li>
+                    <li>🔒 Comprehensive security features</li>
+                </ul>
+                
+                <h3>เทคโนโลยีที่ใช้</h3>
+                <ul>
+                    <li><strong>Backend:</strong> Python, FastAPI, Flask</li>
+                    <li><strong>AI/ML:</strong> PyTorch, TensorFlow, CUDA</li>
+                    <li><strong>Database:</strong> Supabase, PostgreSQL</li>
+                    <li><strong>Frontend:</strong> HTML, CSS, JavaScript</li>
+                    <li><strong>Tools:</strong> MCP Protocol, Cursor IDE</li>
+                </ul>
+            </div>
+            
+            <div class="card" id="architecture">
+                <h2>🏗️ สถาปัตยกรรมระบบ</h2>
+                
+                <h3>โครงสร้างโปรเจกต์</h3>
+                <div class="code-block">
+core/                    # Core modules
+├── ai_integration.py    # AI services integration
+├── backup_controller.py # Backup management
+├── chrome_controller.py # Browser automation
+├── config_manager.py   # Configuration management
+├── knowledge_manager.py # Knowledge management
+├── logger.py           # Logging system
+├── memory_manager.py   # Memory system
+├── performance_monitor.py # Performance monitoring
+├── supabase_integration.py # Database integration
+├── system_monitor.py   # System monitoring
+└── thai_processor.py   # Thai language processing
+
+dashboard/              # Web dashboard
+├── app.py             # Dashboard application
+├── static/            # Static files
+└── templates/         # HTML templates
+
+system/                 # System components
+├── core/              # Core system modules
+├── dashboard/         # System dashboard
+└── logging/           # Logging system
+                </div>
+                
+                <h3>การเชื่อมต่อระบบ</h3>
+                <ul>
+                    <li><strong>MCP Server:</strong> localhost:3000</li>
+                    <li><strong>Dashboard:</strong> localhost:8080</li>
+                    <li><strong>Database:</strong> Supabase Cloud</li>
+                    <li><strong>AI Services:</strong> OpenAI, Gemini, Anthropic</li>
+                </ul>
+            </div>
+            
+            <div class="card" id="setup">
+                <h2>⚙️ การตั้งค่าและติดตั้ง</h2>
+                
+                <h3>ข้อกำหนดระบบ</h3>
+                <ul>
+                    <li><strong>Python:</strong> 3.8+</li>
+                    <li><strong>Node.js:</strong> 16+ (optional)</li>
+                    <li><strong>GPU:</strong> NVIDIA CUDA (optional)</li>
+                    <li><strong>Memory:</strong> 8GB+ RAM</li>
+                    <li><strong>Storage:</strong> 10GB+ free space</li>
+                </ul>
+                
+                <h3>การติดตั้งด่วน</h3>
+                <div class="code-block">
+# Clone repository
+git clone git@github.com:tenzaitech/aai-by-pleam.git
+cd aai-by-pleam
+
+# Run quick setup script
+chmod +x pleamthinking/cursorsettingv1/06_quick_start_script.sh
+./pleamthinking/cursorsettingv1/06_quick_start_script.sh
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Setup environment variables
+cp pleamthinking/cursorsettingv1/04_environment_variables_template.env .env
+# Edit .env file with your credentials
+                </div>
+                
+                <h3>การตรวจสอบการติดตั้ง</h3>
+                <div class="code-block">
+# Check system health
+python system_health_checker.py
+
+# Test MCP server
+python wawagot_mcp_server.py
+
+# Test database connection
+python test_supabase.py
+
+# Check GPU support
+python -c "import torch; print(torch.cuda.is_available())"
+                </div>
+            </div>
+            
+            <div class="card" id="api">
+                <h2>🔌 API และ Endpoints</h2>
+                
+                <h3>MCP Server Endpoints</h3>
+                <ul>
+                    <li><strong>GET /tools</strong> - List available tools</li>
+                    <li><strong>POST /tools/{tool}/invoke</strong> - Execute tool</li>
+                    <li><strong>GET /health</strong> - Health check</li>
+                    <li><strong>GET /status</strong> - System status</li>
+                </ul>
+                
+                <h3>Dashboard API</h3>
+                <ul>
+                    <li><strong>GET /</strong> - Main dashboard</li>
+                    <li><strong>GET /api/health</strong> - Health check</li>
+                    <li><strong>GET /api/status</strong> - System status</li>
+                    <li><strong>POST /api/backup</strong> - Create backup</li>
+                    <li><strong>POST /api/restore</strong> - Restore backup</li>
+                </ul>
+                
+                <h3>ตัวอย่างการใช้งาน</h3>
+                <div class="code-block">
+# Test MCP tools
+curl http://localhost:3000/tools
+
+# Check system health
+curl http://localhost:8080/api/health
+
+# Create backup
+curl -X POST http://localhost:8080/api/backup
+                </div>
+            </div>
+            
+            <div class="card" id="ai-ml">
+                <h2>🧠 AI/ML Components</h2>
+                
+                <h3>โมเดลที่ใช้</h3>
+                <ul>
+                    <li><strong>Text Processing:</strong> Thai language models</li>
+                    <li><strong>Image Processing:</strong> OCR, Visual recognition</li>
+                    <li><strong>Audio Processing:</strong> Speech recognition</li>
+                    <li><strong>Data Analysis:</strong> Statistical models</li>
+                </ul>
+                
+                <h3>GPU Acceleration</h3>
+                <div class="code-block">
+# Check CUDA availability
+import torch
+print(f"CUDA available: {torch.cuda.is_available()}")
+print(f"GPU count: {torch.cuda.device_count()}")
+print(f"Current device: {torch.cuda.current_device()}")
+
+# Use GPU for processing
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+model = model.to(device)
+                </div>
+                
+                <h3>การประมวลผลภาษาไทย</h3>
+                <ul>
+                    <li><strong>Text Normalization:</strong> UTF-8 encoding</li>
+                    <li><strong>Tokenization:</strong> Thai-specific tokenizers</li>
+                    <li><strong>OCR:</strong> Thai text recognition</li>
+                    <li><strong>NLP:</strong> Thai language models</li>
+                </ul>
+            </div>
+            
+            <div class="card" id="database">
+                <h2>🗄️ ฐานข้อมูลและ Storage</h2>
+                
+                <h3>Supabase Integration</h3>
+                <ul>
+                    <li><strong>Database:</strong> PostgreSQL</li>
+                    <li><strong>Authentication:</strong> Supabase Auth</li>
+                    <li><strong>Storage:</strong> Supabase Storage</li>
+                    <li><strong>Real-time:</strong> Supabase Realtime</li>
+                </ul>
+                
+                <h3>การเชื่อมต่อฐานข้อมูล</h3>
+                <div class="code-block">
+# Environment variables
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+
+# Connection example
+from supabase import create_client
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+                </div>
+                
+                <h3>ตารางหลัก</h3>
+                <ul>
+                    <li><strong>users:</strong> ข้อมูลผู้ใช้</li>
+                    <li><strong>sessions:</strong> ข้อมูล session</li>
+                    <li><strong>backups:</strong> ข้อมูล backup</li>
+                    <li><strong>logs:</strong> ข้อมูล logs</li>
+                    <li><strong>knowledge:</strong> ข้อมูลความรู้</li>
+                </ul>
+            </div>
+            
+            <div class="card" id="security">
+                <h2>🔒 ความปลอดภัย</h2>
+                
+                <h3>การรักษาความปลอดภัย</h3>
+                <ul>
+                    <li><strong>Authentication:</strong> JWT tokens</li>
+                    <li><strong>Authorization:</strong> Role-based access</li>
+                    <li><strong>Encryption:</strong> HTTPS, data encryption</li>
+                    <li><strong>Input Validation:</strong> Sanitization</li>
+                    <li><strong>Rate Limiting:</strong> API protection</li>
+                </ul>
+                
+                <h3>Environment Variables</h3>
+                <div class="code-block">
+# Security configuration
+JWT_SECRET_KEY=your_jwt_secret_key
+JWT_ALGORITHM=HS256
+JWT_EXPIRATION_HOURS=24
+BCRYPT_ROUNDS=12
+
+# API rate limiting
+RATE_LIMIT_REQUESTS=100
+RATE_LIMIT_WINDOW=3600
+RATE_LIMIT_ENABLED=true
+                </div>
+                
+                <h3>การตรวจสอบความปลอดภัย</h3>
+                <ul>
+                    <li><strong>Regular Audits:</strong> Security reviews</li>
+                    <li><strong>Vulnerability Scans:</strong> Automated checks</li>
+                    <li><strong>Log Monitoring:</strong> Security events</li>
+                    <li><strong>Backup Security:</strong> Encrypted backups</li>
+                </ul>
+            </div>
+            
+            <div class="card" id="troubleshooting">
+                <h2>🔧 การแก้ปัญหา</h2>
+                
+                <h3>ปัญหาที่พบบ่อย</h3>
+                <ul>
+                    <li><strong>MCP Server ไม่ทำงาน:</strong> ตรวจสอบ port 3000</li>
+                    <li><strong>Database Connection Error:</strong> ตรวจสอบ credentials</li>
+                    <li><strong>GPU ไม่ทำงาน:</strong> ตรวจสอบ CUDA drivers</li>
+                    <li><strong>Memory Issues:</strong> ตรวจสอบ RAM usage</li>
+                </ul>
+                
+                <h3>คำสั่งตรวจสอบ</h3>
+                <div class="code-block">
+# System health check
+python system_health_checker.py
+
+# Check logs
+tail -f logs/*.log
+
+# Check processes
+ps aux | grep wawagot
+
+# Check ports
+netstat -an | grep 3000
+netstat -an | grep 8080
+                </div>
+                
+                <h3>การขอความช่วยเหลือ</h3>
+                <ul>
+                    <li>ตรวจสอบ <span class="highlight">pleamthinking/cursorsettingv1/07_troubleshooting_guide.md</span></li>
+                    <li>ดู logs ในโฟลเดอร์ <span class="highlight">logs/</span></li>
+                    <li>รัน <span class="highlight">system_health_checker.py</span></li>
+                    <li>ตรวจสอบ GitHub issues</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>WAWAGOT.AI Documentation</strong> - สร้างเมื่อ 2024-12-19</p>
+            <p>สำหรับ Cursor IDE Integration และ AI Assistant Development</p>
+        </div>
+    </div>
+</body>
+</html> 
