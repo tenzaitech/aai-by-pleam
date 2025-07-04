@@ -95,13 +95,11 @@ class FullThaiProcessor:
                 })
         return processed
 
-    # เพิ่ม Missing Methods ที่ระบบเรียกใช้
     def process_thai_text(self, text: str) -> Dict[str, any]:
         """ประมวลผลข้อความภาษาไทย (Method ที่ระบบเรียกใช้)"""
         try:
             normalized = self.normalize_thai_text(text)
             tokens = self.tokenize_thai(normalized)
-            
             result = {
                 'original_text': text,
                 'normalized_text': normalized,
@@ -111,32 +109,26 @@ class FullThaiProcessor:
                 'has_thai': any('\u0e00' <= char <= '\u0e7f' for char in text),
                 'confidence': 0.9
             }
-            
             # ตรวจสอบคำสั่ง
             command_info = self.process_natural_command(text)
             if command_info['action']:
                 result['detected_command'] = command_info
-                
             return result
-            
         except Exception as e:
             return {
                 'error': f'การประมวลผลข้อความผิดพลาด: {e}',
                 'original_text': text,
                 'confidence': 0.0
             }
-    
+
     def analyze_thai_sentiment(self, text: str) -> Dict[str, any]:
         """วิเคราะห์ความรู้สึกของข้อความภาษาไทย"""
         try:
-            # วิเคราะห์พื้นฐาน
             positive_words = ['ดี', 'เยี่ยม', 'ยอดเยี่ยม', 'ชอบ', 'ดีใจ', 'สุข']
             negative_words = ['แย่', 'ไม่ดี', 'เสียใจ', 'โกรธ', 'หงุดหงิด']
-            
             tokens = self.tokenize_thai(text)
             positive_count = sum(1 for token in tokens if token in positive_words)
             negative_count = sum(1 for token in tokens if token in negative_words)
-            
             if positive_count > negative_count:
                 sentiment = 'positive'
                 score = positive_count / len(tokens) if tokens else 0
@@ -146,7 +138,6 @@ class FullThaiProcessor:
             else:
                 sentiment = 'neutral'
                 score = 0.0
-                
             return {
                 'text': text,
                 'sentiment': sentiment,
@@ -155,7 +146,6 @@ class FullThaiProcessor:
                 'negative_words': negative_count,
                 'confidence': 0.8
             }
-            
         except Exception as e:
             return {
                 'error': f'การวิเคราะห์ความรู้สึกผิดพลาด: {e}',
@@ -163,26 +153,20 @@ class FullThaiProcessor:
                 'sentiment': 'unknown',
                 'confidence': 0.0
             }
-    
+
     def extract_thai_keywords(self, text: str, max_keywords: int = 10) -> List[str]:
         """สกัดคำสำคัญจากข้อความภาษาไทย"""
         try:
             tokens = self.tokenize_thai(text)
-            # กรอง stopwords และคำสั้นๆ
             keywords = [
                 token for token in tokens 
                 if token not in self.stopwords 
                 and len(token) > 1
                 and not token.isdigit()
             ]
-            
-            # นับความถี่
             from collections import Counter
             keyword_freq = Counter(keywords)
-            
-            # เรียงตามความถี่และคืนค่า top keywords
             return [word for word, freq in keyword_freq.most_common(max_keywords)]
-            
         except Exception as e:
             print(f"❌ การสกัดคำสำคัญผิดพลาด: {e}")
             return []

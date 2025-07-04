@@ -1,0 +1,48 @@
+{
+  "total_tasks": 4,
+  "successful_tasks": 4,
+  "failed_tasks": 0,
+  "success_rate": 100.0,
+  "total_time": 0.5464489459991455,
+  "total_duration": 1.7628154754638672,
+  "avg_duration": 0.4407038688659668,
+  "parallel_efficiency": 3.2259472515601186,
+  "results": [
+    {
+      "task_name": "Memory Usage Test",
+      "start_time": 1751418639.6833103,
+      "end_time": 1751418640.000247,
+      "duration": 0.316936731338501,
+      "success": true,
+      "result": "{'memory_available': 'sufficient', 'memory_usage': 'optimal'}",
+      "error": null
+    },
+    {
+      "task_name": "File Operations Test",
+      "start_time": 1751418639.686826,
+      "end_time": 1751418640.0933945,
+      "duration": 0.4065685272216797,
+      "success": true,
+      "result": "{'file_read': 'success', 'file_write': 'success'}",
+      "error": null
+    },
+    {
+      "task_name": "System Performance Test",
+      "start_time": 1751418639.6793098,
+      "end_time": 1751418640.1862082,
+      "duration": 0.5068984031677246,
+      "success": true,
+      "result": "{'cpu_usage': 'normal', 'memory_usage': 'stable'}",
+      "error": null
+    },
+    {
+      "task_name": "Tenzai Templates Loading",
+      "start_time": 1751418639.6729739,
+      "end_time": 1751418640.2053857,
+      "duration": 0.5324118137359619,
+      "success": true,
+      "result": "{'total_tasks': 4, 'successful_tasks': 4, 'failed_tasks': 0, 'success_rate': 100.0, 'total_time': 0.5295941829681396, 'total_duration': 1.4440357685089111, 'avg_duration': 0.3610089421272278, 'parallel_efficiency': 2.7266835908501363, 'results': [TaskResult(task_name='Load Launcher Templates', start_time=1751418639.6998296, end_time=1751418639.9074903, duration=0.20766067504882812, success=True, result={'launcher_templates': ['base', 'simple', 'advanced', 'full']}, error=None), TaskResult(task_name='Load Thai Templates', start_time=1751418639.6918278, end_time=1751418640.0012577, duration=0.3094298839569092, success=True, result={'thai_templates': ['base', 'basic', 'advanced', 'full']}, error=None), TaskResult(task_name='Load AI Templates', start_time=1751418639.6948285, end_time=1751418640.1092176, duration=0.41438913345336914, success=True, result={'ai_templates': ['base', 'openai', 'multimodal', 'custom']}, error=None), TaskResult(task_name='Load Chrome Templates', start_time=1751418639.688829, end_time=1751418640.201385, duration=0.5125560760498047, success=True, result={'chrome_templates': ['base', 'simple', 'advanced', 'ai']}, error=None)]}",
+      "error": null
+    }
+  ]
+}

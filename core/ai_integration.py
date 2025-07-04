@@ -197,8 +197,7 @@ class MultimodalAIIntegration:
             print(f"❌ ไม่สามารถแยกพิกัดได้: {e}")
         
         return None
-
-    # เพิ่ม Missing Methods ที่ระบบเรียกใช้
+    
     def process_text(self, text: str, task: str = "general") -> Dict[str, any]:
         """ประมวลผลข้อความ (Method ที่ระบบเรียกใช้)"""
         try:
