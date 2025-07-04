@@ -1,0 +1,26 @@
+# Development, Testing, and ML dependencies
+
+# AI & Machine Learning
+transformers==4.53.0
+torch==2.7.1
+torchvision==0.22.1
+sentence-transformers==5.0.0
+
+# Image Processing
+scikit-image==0.25.2
+scipy==1.15.3
+
+# Plotting
+matplotlib==3.9.1
+seaborn==0.13.2
+
+# Testing
+pytest==8.2.2
+pytest-html==4.1.1
+
+# Development Tools
+black==24.1.1
+flake8==7.0.0
+mypy==1.8.0
+
+aiofiles==23.2.1 

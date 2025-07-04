@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAWAGOT V.2 - Real-time Monitor</title>
+    <link rel="stylesheet" href="/static/css/real-time-monitor.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="real-time-monitor">
+        <!-- Header Section -->
+        <header class="monitor-header">
+            <h1 class="monitor-title">
+                <i class="fas fa-chart-line"></i>
+                Real-time Monitor
+            </h1>
+            <div class="monitor-controls">
+                <div class="connection-status">
+                    <span class="status-indicator status-disconnected" id="status-indicator"></span>
+                    <span class="status-text">Disconnected</span>
+                </div>
+                <div class="dashboard-stats" id="dashboard-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Logs</span>
+                        <span class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Workflows</span>
+                        <span class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Alerts</span>
+                        <span class="stat-value">0</span>
+                    </div>
+                </div>
+                <div class="control-buttons">
+                    <button class="btn btn-primary" id="refresh-btn">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="auto-refresh-toggle" checked>
+                        <span class="checkmark"></span>
+                        Auto Refresh
+                    </label>
+                    <button class="btn btn-secondary" onclick="showResetStatus()">
+                        <i class="fas fa-info-circle"></i> Reset Status
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Log Container -->
+        <section class="log-container">
+            <div class="log-header">
+                <h2 class="log-title">
+                    <i class="fas fa-file-alt"></i>
+                    System Logs
+                </h2>
+                <div class="log-controls">
+                    <button class="btn btn-sm btn-primary" onclick="clearLogs()">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                    <button class="btn btn-sm btn-secondary" onclick="exportLogs()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+            
+            <div class="log-filters">
+                <select id="log-level-filter">
+                    <option value="">All Levels</option>
+                    <option value="debug">Debug</option>
+                    <option value="info">Info</option>
+                    <option value="warning">Warning</option>
+                    <option value="error">Error</option>
+                    <option value="critical">Critical</option>
+                </select>
+                <select id="module-filter">
+                    <option value="">All Modules</option>
+                    <option value="auto_learning_manager">Auto Learning</option>
+                    <option value="knowledge_manager">Knowledge Manager</option>
+                    <option value="chrome_controller">Chrome Controller</option>
+                    <option value="ai_integration">AI Integration</option>
+                    <option value="smart_command_processor">Command Processor</option>
+                    <option value="supabase_integration">Supabase</option>
+                    <option value="visual_recognition">Visual Recognition</option>
+                    <option value="backup_controller">Backup Controller</option>
+                    <option value="system_monitor">System Monitor</option>
+                    <option value="thai_processor">Thai Processor</option>
+                    <option value="direct_control">Direct Control</option>
+                    <option value="advanced_screen_reader">Screen Reader</option>
+                    <option value="master_controller">Master Controller</option>
+                    <option value="environment_cards">Environment Cards</option>
+                    <option value="config_manager">Config Manager</option>
+                </select>
+            </div>
+            
+            <div class="log-content" id="log-container">
+                <!-- Log entries will be populated here -->
+                <div class="log-entry level-info">
+                    <div class="log-header">
+                        <span class="log-timestamp">Loading...</span>
+                        <span class="log-level level-info">INFO</span>
+                        <span class="badge badge-secondary">system</span>
+                    </div>
+                    <div class="log-message">Initializing real-time monitor...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workflow Container -->
+        <section class="workflow-container">
+            <div class="workflow-header">
+                <h2 class="workflow-title">
+                    <i class="fas fa-project-diagram"></i>
+                    Active Workflows
+                </h2>
+                <div class="workflow-controls">
+                    <button class="btn btn-sm btn-primary" onclick="refreshWorkflows()">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="workflow-content">
+                <div class="active-workflows">
+                    <!-- Active workflows will be populated here -->
+                    <div class="workflow-entry status-pending">
+                        <div class="workflow-header">
+                            <span class="workflow-id">Loading...</span>
+                            <span class="workflow-type">system</span>
+                            <span class="workflow-status status-pending">pending</span>
+                        </div>
+                        <div class="workflow-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span class="progress-text">0%</span>
+                        </div>
+                        <div class="workflow-stats">
+                            <span>Steps: 0/0</span>
+                            <span>Started: --</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workflow-history">
+                    <h3>Recent History</h3>
+                    <!-- Workflow history will be populated here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Performance Container -->
+        <section class="performance-container">
+            <div class="performance-header">
+                <h2 class="performance-title">
+                    <i class="fas fa-tachometer-alt"></i>
+                    System Performance
+                </h2>
+                <div class="performance-controls">
+                    <button class="btn btn-sm btn-primary" onclick="refreshPerformance()">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="performance-grid">
+                <div class="performance-metric">
+                    <div class="metric-label">CPU Usage (Current)</div>
+                    <div class="metric-value" id="cpu-current">0.0%</div>
+                </div>
+                <div class="performance-metric">
+                    <div class="metric-label">Memory Usage (Current)</div>
+                    <div class="metric-value" id="memory-current">0.0%</div>
+                </div>
+                <div class="performance-metric">
+                    <div class="metric-label">Disk Usage (Current)</div>
+                    <div class="metric-value" id="disk-current">0.0%</div>
+                </div>
+                <div class="performance-metric">
+                    <div class="metric-label">Active Processes</div>
+                    <div class="metric-value" id="processes-current">0</div>
+                </div>
+                <div class="performance-metric">
+                    <div class="metric-label">CPU Usage (1h Avg)</div>
+                    <div class="metric-value" id="cpu-average">0.0%</div>
+                </div>
+                <div class="performance-metric">
+                    <div class="metric-label">Memory Usage (1h Avg)</div>
+                    <div class="metric-value" id="memory-average">0.0%</div>
+                </div>
+                <div class="performance-metric">
+                    <div class="metric-label">Disk Usage (1h Avg)</div>
+                    <div class="metric-value" id="disk-average">0.0%</div>
+                </div>
+                <div class="performance-metric">
+                    <div class="metric-label">Performance Alerts</div>
+                    <div class="metric-value" id="alerts-total">0</div>
+                </div>
+            </div>
+            
+            <div class="performance-charts">
+                <!-- Performance charts will be added here -->
+                <div class="chart-container">
+                    <canvas id="cpu-chart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="memory-chart"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Alert Container (Fixed Position) -->
+    <div class="alert-container" id="alert-container">
+        <div class="alert-header">
+            <h3 class="alert-title">
+                <i class="fas fa-exclamation-triangle"></i>
+                Active Alerts
+            </h3>
+            <div class="alert-controls">
+                <span class="alert-counter">
+                    <span id="alert-total">0</span> total,
+                    <span id="alert-critical">0</span> critical,
+                    <span id="alert-warning">0</span> warnings
+                </span>
+                <button class="btn btn-sm btn-secondary" onclick="dismissAllAlerts()">
+                    <i class="fas fa-times"></i> Dismiss All
+                </button>
+            </div>
+        </div>
+        
+        <div class="alert-content">
+            <!-- Alerts will be populated here -->
+            <div class="alert-entry severity-info">
+                <div class="alert-header">
+                    <span class="alert-severity severity-info">INFO</span>
+                    <span class="alert-type">system</span>
+                    <span class="alert-timestamp">Loading...</span>
+                </div>
+                <div class="alert-title">System Initializing</div>
+                <div class="alert-message">Real-time monitor is starting up...</div>
+                <div class="alert-actions">
+                    <button class="btn btn-sm btn-primary">Acknowledge</button>
+                    <button class="btn btn-sm btn-secondary">Dismiss</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reset Status Popup -->
+    <div class="reset-status-popup" id="reset-status-popup" style="display: none;">
+        <div class="reset-status-content">
+            <h4>Log Reset Status</h4>
+            <p><strong>Last Reset:</strong> <span id="last-reset-time">Loading...</span></p>
+            <p><strong>Status:</strong> <span id="reset-status">Loading...</span></p>
+            <p><strong>Retention:</strong> <span id="retention-days">1</span> day(s)</p>
+            <button class="btn btn-primary" onclick="cleanupLogs()">Cleanup Now</button>
+            <button class="btn btn-secondary" onclick="hideResetStatus()">Close</button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading real-time monitor...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/real-time-monitor.js"></script>
+    
+    <script>
+        // Additional utility functions
+        function showResetStatus() {
+            document.getElementById('reset-status-popup').style.display = 'block';
+        }
+        
+        function hideResetStatus() {
+            document.getElementById('reset-status-popup').style.display = 'none';
+        }
+        
+        function clearLogs() {
+            if (confirm('Are you sure you want to clear the log display?')) {
+                document.getElementById('log-container').innerHTML = '';
+            }
+        }
+        
+        function exportLogs() {
+            // Export logs functionality
+            alert('Export functionality will be implemented');
+        }
+        
+        function refreshWorkflows() {
+            if (monitor) {
+                monitor.fetchWorkflows().then(workflows => {
+                    monitor.updateWorkflowDisplay(workflows);
+                });
+            }
+        }
+        
+        function refreshPerformance() {
+            if (monitor) {
+                monitor.fetchPerformance().then(performance => {
+                    monitor.updatePerformanceDisplay(performance);
+                });
+            }
+        }
+        
+        function dismissAllAlerts() {
+            if (confirm('Are you sure you want to dismiss all alerts?')) {
+                // Dismiss all alerts functionality
+                alert('Dismiss all alerts functionality will be implemented');
+            }
+        }
+        
+        function cleanupLogs() {
+            if (monitor) {
+                monitor.cleanupLogs();
+                hideResetStatus();
+            }
+        }
+        
+        // Hide loading overlay when page is ready
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const overlay = document.getElementById('loading-overlay');
+                if (overlay) {
+                    overlay.style.display = 'none';
+                }
+            }, 2000);
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch (e.key) {
+                    case 'r':
+                        e.preventDefault();
+                        if (monitor) monitor.updateAllData();
+                        break;
+                    case 'l':
+                        e.preventDefault();
+                        clearLogs();
+                        break;
+                    case 'a':
+                        e.preventDefault();
+                        showResetStatus();
+                        break;
+                }
+            }
+        });
+    </script>
+    
+    <style>
+        /* Additional styles for loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .loading-spinner {
+            text-align: center;
+            color: white;
+        }
+        
+        .loading-spinner i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .loading-spinner p {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        
+        /* Checkbox styles */
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            display: none;
+        }
+        
+        .checkmark {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ddd;
+            border-radius: 3px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .checkbox-container input[type="checkbox"]:checked + .checkmark {
+            background: #007bff;
+            border-color: #007bff;
+        }
+        
+        .checkbox-container input[type="checkbox"]:checked + .checkmark::after {
+            content: '✓';
+            position: absolute;
+            top: -2px;
+            left: 2px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</body>
+</html> 

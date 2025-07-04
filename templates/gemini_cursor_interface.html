@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Cursor Integration - WAWAGOT V2.5</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .command-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .command-panel h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .command-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .command-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .status-panel h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .status-dot.online {
+            background: #4CAF50;
+            box-shadow: 0 0 10px #4CAF50;
+        }
+
+        .status-dot.offline {
+            background: #f44336;
+        }
+
+        .status-dot.processing {
+            background: #ff9800;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .results-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            grid-column: 1 / -1;
+        }
+
+        .results-panel h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .result-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .task-id {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .task-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .task-status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .task-status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .task-status.processing {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .result-content {
+            margin-top: 15px;
+        }
+
+        .analysis-section {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .analysis-section h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .report-section {
+            background: #f3e5f5;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .report-section h4 {
+            color: #7b1fa2;
+            margin-bottom: 10px;
+        }
+
+        .recommendations {
+            margin-top: 15px;
+        }
+
+        .recommendations ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .recommendations li {
+            background: #fff;
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            border-left: 3px solid #4CAF50;
+        }
+
+        .history-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            grid-column: 1 / -1;
+        }
+
+        .history-panel h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .history-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 3px solid #667eea;
+        }
+
+        .history-command {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .history-timestamp {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #f44336;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Gemini Cursor Integration</h1>
+            <p>ระบบเชื่อมต่อระหว่าง Gemini CLI, Cursor และ WebApp</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Command Panel -->
+            <div class="command-panel">
+                <h2>📝 ส่งคำสั่ง</h2>
+                <form id="commandForm">
+                    <textarea 
+                        id="commandInput" 
+                        class="command-input" 
+                        placeholder="พิมพ์คำสั่งของคุณ เช่น: เปิดไฟล์ test.py ใน Cursor, รันคำสั่ง python script.py, เปิดเว็บไซต์ google.com"
+                        rows="4"
+                        required
+                    ></textarea>
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        🚀 ส่งคำสั่ง
+                    </button>
+                </form>
+            </div>
+
+            <!-- Status Panel -->
+            <div class="status-panel">
+                <h2>📊 สถานะระบบ</h2>
+                <div class="status-indicator">
+                    <div class="status-dot" id="statusDot"></div>
+                    <span id="statusText">กำลังเชื่อมต่อ...</span>
+                </div>
+                <div id="systemStats">
+                    <p><strong>งานที่กำลังประมวลผล:</strong> <span id="activeTasks">0</span></p>
+                    <p><strong>ประวัติการทำงาน:</strong> <span id="totalHistory">0</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="results-panel">
+            <h2>📋 ผลลัพธ์การทำงาน</h2>
+            <div id="resultsContainer">
+                <div class="loading" id="initialMessage">
+                    <p>รอคำสั่งจากผู้ใช้...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Panel -->
+        <div class="history-panel">
+            <h2>📚 ประวัติการทำงาน</h2>
+            <div id="historyContainer">
+                <div class="loading">
+                    <p>กำลังโหลดประวัติ...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        // WebSocket connection
+        const socket = io();
+        
+        // DOM elements
+        const commandForm = document.getElementById('commandForm');
+        const commandInput = document.getElementById('commandInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const historyContainer = document.getElementById('historyContainer');
+        const activeTasks = document.getElementById('activeTasks');
+        const totalHistory = document.getElementById('totalHistory');
+
+        // WebSocket events
+        socket.on('connect', function() {
+            updateStatus('online', 'เชื่อมต่อสำเร็จ');
+            loadHistory();
+            loadSystemStats();
+        });
+
+        socket.on('disconnect', function() {
+            updateStatus('offline', 'การเชื่อมต่อขาดหาย');
+        });
+
+        socket.on('task_completed', function(data) {
+            displayResult(data);
+            loadHistory();
+            loadSystemStats();
+        });
+
+        socket.on('status', function(data) {
+            console.log('Status:', data.message);
+        });
+
+        // Update system status
+        function updateStatus(status, text) {
+            statusDot.className = `status-dot ${status}`;
+            statusText.textContent = text;
+        }
+
+        // Load system statistics
+        async function loadSystemStats() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                
+                activeTasks.textContent = data.active_tasks;
+                totalHistory.textContent = data.total_history;
+            } catch (error) {
+                console.error('Error loading system stats:', error);
+            }
+        }
+
+        // Load history
+        async function loadHistory() {
+            try {
+                const response = await fetch('/api/history');
+                const data = await response.json();
+                
+                displayHistory(data.history);
+            } catch (error) {
+                console.error('Error loading history:', error);
+            }
+        }
+
+        // Display history
+        function displayHistory(history) {
+            if (history.length === 0) {
+                historyContainer.innerHTML = '<p>ยังไม่มีประวัติการทำงาน</p>';
+                return;
+            }
+
+            const historyHTML = history.map(item => `
+                <div class="history-item">
+                    <div class="history-command">${item.user_command}</div>
+                    <div class="history-timestamp">${new Date(item.timestamp).toLocaleString('th-TH')}</div>
+                </div>
+            `).join('');
+
+            historyContainer.innerHTML = historyHTML;
+        }
+
+        // Display result
+        function displayResult(data) {
+            const resultHTML = `
+                <div class="result-item">
+                    <div class="result-header">
+                        <span class="task-id">Task ID: ${data.task_id}</span>
+                        <span class="task-status ${data.status}">${data.status.toUpperCase()}</span>
+                    </div>
+                    
+                    ${data.analysis ? `
+                        <div class="analysis-section">
+                            <h4>🔍 การวิเคราะห์</h4>
+                            <p><strong>ประเภท:</strong> ${data.analysis.action_type}</p>
+                            <p><strong>เป้าหมาย:</strong> ${data.analysis.target}</p>
+                            <p><strong>การทำงาน:</strong> ${data.analysis.operation}</p>
+                            <p><strong>คำอธิบาย:</strong> ${data.analysis.description}</p>
+                        </div>
+                    ` : ''}
+                    
+                    ${data.results ? `
+                        <div class="result-content">
+                            <h4>📊 ผลลัพธ์</h4>
+                            ${data.results.map(result => `
+                                <div style="background: ${result.status === 'success' ? '#d4edda' : '#f8d7da'}; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                                    <strong>สถานะ:</strong> ${result.status}<br>
+                                    <strong>ข้อความ:</strong> ${result.message || 'ไม่มีข้อความ'}
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    
+                    ${data.report ? `
+                        <div class="report-section">
+                            <h4>📋 รายงาน</h4>
+                            <p><strong>สรุป:</strong> ${data.report.summary}</p>
+                            <p><strong>สถานะ:</strong> ${data.report.status}</p>
+                            <p><strong>เวลาที่ใช้:</strong> ${data.report.execution_time}</p>
+                            
+                            ${data.report.recommendations && data.report.recommendations.length > 0 ? `
+                                <div class="recommendations">
+                                    <h5>💡 คำแนะนำ:</h5>
+                                    <ul>
+                                        ${data.report.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            ` : ''}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            // Remove initial message if exists
+            const initialMessage = document.getElementById('initialMessage');
+            if (initialMessage) {
+                initialMessage.remove();
+            }
+
+            // Add new result at the top
+            resultsContainer.insertAdjacentHTML('afterbegin', resultHTML);
+        }
+
+        // Handle form submission
+        commandForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const command = commandInput.value.trim();
+            if (!command) return;
+
+            // Update UI
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ กำลังประมวลผล...';
+            updateStatus('processing', 'กำลังประมวลผลคำสั่ง...');
+
+            // Show loading in results
+            const loadingHTML = `
+                <div class="result-item">
+                    <div class="result-header">
+                        <span class="task-id">กำลังประมวลผล...</span>
+                        <span class="task-status processing">PROCESSING</span>
+                    </div>
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>กำลังประมวลผลคำสั่ง: "${command}"</p>
+                    </div>
+                </div>
+            `;
+
+            // Remove initial message if exists
+            const initialMessage = document.getElementById('initialMessage');
+            if (initialMessage) {
+                initialMessage.remove();
+            }
+
+            resultsContainer.insertAdjacentHTML('afterbegin', loadingHTML);
+
+            try {
+                const response = await fetch('/api/command', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ command: command })
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                // Clear input
+                commandInput.value = '';
+                
+                // Update status
+                updateStatus('online', 'คำสั่งถูกส่งแล้ว');
+
+            } catch (error) {
+                console.error('Error:', error);
+                
+                // Show error message
+                const errorHTML = `
+                    <div class="error-message">
+                        <strong>เกิดข้อผิดพลาด:</strong> ${error.message}
+                    </div>
+                `;
+                
+                resultsContainer.insertAdjacentHTML('afterbegin', errorHTML);
+                updateStatus('online', 'เกิดข้อผิดพลาด');
+            } finally {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.textContent = '🚀 ส่งคำสั่ง';
+            }
+        });
+
+        // Auto-resize textarea
+        commandInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+
+        // Load initial data
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSystemStats();
+        });
+    </script>
+</body>
+</html> 

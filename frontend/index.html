@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAWAGOT V.2 - AI-Powered Chrome Automation</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>WAWAGOT V.2</h1>
+            </div>
+            <div class="status-indicator">
+                <span class="status-dot" id="systemStatus"></span>
+                <span class="status-text" id="statusText">กำลังเชื่อมต่อ...</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="nav-menu">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>แดชบอร์ด</span>
+                </a>
+                <a href="#commands" class="nav-item" data-section="commands">
+                    <i class="fas fa-terminal"></i>
+                    <span>คำสั่ง AI</span>
+                </a>
+                <a href="#chrome" class="nav-item" data-section="chrome">
+                    <i class="fab fa-chrome"></i>
+                    <span>ควบคุม Chrome</span>
+                </a>
+                <a href="#ai" class="nav-item" data-section="ai">
+                    <i class="fas fa-brain"></i>
+                    <span>AI Processing</span>
+                </a>
+                <a href="#visual" class="nav-item" data-section="visual">
+                    <i class="fas fa-eye"></i>
+                    <span>Visual Recognition</span>
+                </a>
+                <a href="#knowledge" class="nav-item" data-section="knowledge">
+                    <i class="fas fa-database"></i>
+                    <span>ฐานความรู้</span>
+                </a>
+                <a href="#config" class="nav-item" data-section="config">
+                    <i class="fas fa-cog"></i>
+                    <span>การตั้งค่า</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> แดชบอร์ดระบบ</h2>
+                    <p>สถานะและข้อมูลระบบ WAWAGOT V.2</p>
+                </div>
+
+                <!-- System Status Cards -->
+                <div class="status-grid">
+                    <div class="status-card">
+                        <div class="card-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>สถานะระบบ</h3>
+                            <p id="systemHealth">กำลังตรวจสอบ...</p>
+                        </div>
+                    </div>
+
+                    <div class="status-card">
+                        <div class="card-icon">
+                            <i class="fab fa-chrome"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Chrome Controller</h3>
+                            <p id="chromeStatus">กำลังตรวจสอบ...</p>
+                        </div>
+                    </div>
+
+                    <div class="status-card">
+                        <div class="card-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>AI Integration</h3>
+                            <p id="aiStatus">กำลังตรวจสอบ...</p>
+                        </div>
+                    </div>
+
+                    <div class="status-card">
+                        <div class="card-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>ฐานความรู้</h3>
+                            <p id="knowledgeStatus">กำลังตรวจสอบ...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>การดำเนินการด่วน</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="restartSystem()">
+                            <i class="fas fa-redo"></i>
+                            รีสตาร์ทระบบ
+                        </button>
+                        <button class="action-btn" onclick="openChrome()">
+                            <i class="fab fa-chrome"></i>
+                            เปิด Chrome
+                        </button>
+                        <button class="action-btn" onclick="testAI()">
+                            <i class="fas fa-brain"></i>
+                            ทดสอบ AI
+                        </button>
+                        <button class="action-btn" onclick="backupSystem()">
+                            <i class="fas fa-save"></i>
+                            สำรองข้อมูล
+                        </button>
+                    </div>
+                </div>
+
+                <!-- System Logs -->
+                <div class="logs-section">
+                    <h3>บันทึกระบบ</h3>
+                    <div class="logs-container" id="systemLogs">
+                        <div class="log-entry">
+                            <span class="log-time">[2024-01-01 12:00:00]</span>
+                            <span class="log-level info">INFO</span>
+                            <span class="log-message">ระบบ WAWAGOT V.2 เริ่มต้นแล้ว</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Commands Section -->
+            <section id="commands" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-terminal"></i> คำสั่ง AI</h2>
+                    <p>สั่งการระบบด้วยภาษาไทยหรือภาษาอังกฤษ</p>
+                </div>
+
+                <div class="command-interface">
+                    <div class="command-input">
+                        <textarea id="commandInput" placeholder="พิมพ์คำสั่งของคุณที่นี่... เช่น: เปิดเว็บ Google และค้นหาข้อมูล"></textarea>
+                        <div class="command-controls">
+                            <select id="languageSelect">
+                                <option value="thai">ภาษาไทย</option>
+                                <option value="english">English</option>
+                            </select>
+                            <button class="send-btn" onclick="sendCommand()">
+                                <i class="fas fa-paper-plane"></i>
+                                ส่งคำสั่ง
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="command-history">
+                        <h3>ประวัติคำสั่ง</h3>
+                        <div class="history-list" id="commandHistory">
+                            <!-- Command history will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chrome Control Section -->
+            <section id="chrome" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fab fa-chrome"></i> ควบคุม Chrome</h2>
+                    <p>ควบคุมเบราว์เซอร์ Chrome ผ่าน API</p>
+                </div>
+
+                <div class="chrome-controls">
+                    <div class="control-group">
+                        <h3>การนำทาง</h3>
+                        <div class="input-group">
+                            <input type="url" id="urlInput" placeholder="https://www.google.com">
+                            <button onclick="navigateTo()">ไปยัง URL</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <h3>การทำงาน</h3>
+                        <div class="action-buttons">
+                            <button onclick="chromeAction('screenshot')">
+                                <i class="fas fa-camera"></i>
+                                ถ่ายภาพหน้าจอ
+                            </button>
+                            <button onclick="chromeAction('scroll', 'down')">
+                                <i class="fas fa-arrow-down"></i>
+                                เลื่อนลง
+                            </button>
+                            <button onclick="chromeAction('scroll', 'up')">
+                                <i class="fas fa-arrow-up"></i>
+                                เลื่อนขึ้น
+                            </button>
+                            <button onclick="chromeAction('refresh')">
+                                <i class="fas fa-redo"></i>
+                                รีเฟรช
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <h3>การโต้ตอบ</h3>
+                        <div class="input-group">
+                            <input type="text" id="selectorInput" placeholder="CSS Selector">
+                            <input type="text" id="textInput" placeholder="ข้อความ">
+                            <button onclick="chromeAction('click')">คลิก</button>
+                            <button onclick="chromeAction('type')">พิมพ์</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Processing Section -->
+            <section id="ai" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-brain"></i> AI Processing</h2>
+                    <p>ประมวลผลด้วย AI และ OpenAI</p>
+                </div>
+
+                <div class="ai-interface">
+                    <div class="ai-input">
+                        <textarea id="aiPrompt" placeholder="พิมพ์คำถามหรือคำสั่งสำหรับ AI..."></textarea>
+                        <div class="ai-controls">
+                            <label>
+                                <input type="checkbox" id="useVision">
+                                ใช้ Vision Model
+                            </label>
+                            <button onclick="processAI()">
+                                <i class="fas fa-magic"></i>
+                                ประมวลผล
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="ai-results">
+                        <h3>ผลลัพธ์ AI</h3>
+                        <div class="result-container" id="aiResults">
+                            <!-- AI results will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Visual Recognition Section -->
+            <section id="visual" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-eye"></i> Visual Recognition</h2>
+                    <p>วิเคราะห์ภาพและ OCR</p>
+                </div>
+
+                <div class="visual-interface">
+                    <div class="image-upload">
+                        <h3>อัปโหลดภาพ</h3>
+                        <input type="file" id="imageInput" accept="image/*">
+                        <button onclick="analyzeImage()">
+                            <i class="fas fa-search"></i>
+                            วิเคราะห์ภาพ
+                        </button>
+                    </div>
+
+                    <div class="visual-results">
+                        <h3>ผลการวิเคราะห์</h3>
+                        <div class="result-container" id="visualResults">
+                            <!-- Visual analysis results will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Knowledge Management Section -->
+            <section id="knowledge" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-database"></i> ฐานความรู้</h2>
+                    <p>จัดการและค้นหาข้อมูลในฐานความรู้</p>
+                </div>
+
+                <div class="knowledge-interface">
+                    <div class="knowledge-search">
+                        <input type="text" id="knowledgeQuery" placeholder="ค้นหาข้อมูล...">
+                        <button onclick="searchKnowledge()">
+                            <i class="fas fa-search"></i>
+                            ค้นหา
+                        </button>
+                    </div>
+
+                    <div class="knowledge-storage">
+                        <h3>เพิ่มข้อมูลใหม่</h3>
+                        <textarea id="knowledgeData" placeholder="ข้อมูลที่ต้องการเก็บ..."></textarea>
+                        <button onclick="storeKnowledge()">
+                            <i class="fas fa-save"></i>
+                            บันทึก
+                        </button>
+                    </div>
+
+                    <div class="knowledge-results">
+                        <h3>ผลการค้นหา</h3>
+                        <div class="result-container" id="knowledgeResults">
+                            <!-- Knowledge search results will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Configuration Section -->
+            <section id="config" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-cog"></i> การตั้งค่า</h2>
+                    <p>ปรับแต่งการตั้งค่าระบบ</p>
+                </div>
+
+                <div class="config-interface">
+                    <div class="config-group">
+                        <h3>การตั้งค่า Chrome</h3>
+                        <label>
+                            <input type="checkbox" id="chromeHeadless">
+                            เปิด Chrome แบบ Headless
+                        </label>
+                        <label>
+                            <input type="number" id="chromeTimeout" value="30" min="5" max="120">
+                            Timeout (วินาที)
+                        </label>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>การตั้งค่า AI</h3>
+                        <label>
+                            <input type="checkbox" id="aiEnabled" checked>
+                            เปิดใช้งาน AI
+                        </label>
+                        <label>
+                            <input type="checkbox" id="thaiProcessing" checked>
+                            เปิดใช้งานการประมวลผลภาษาไทย
+                        </label>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>การตั้งค่าระบบ</h3>
+                        <label>
+                            <input type="checkbox" id="parallelProcessing" checked>
+                            เปิดใช้งานการประมวลผลแบบขนาน
+                        </label>
+                        <label>
+                            <input type="checkbox" id="autoBackup" checked>
+                            สำรองข้อมูลอัตโนมัติ
+                        </label>
+                    </div>
+
+                    <div class="config-actions">
+                        <button onclick="saveConfig()">
+                            <i class="fas fa-save"></i>
+                            บันทึกการตั้งค่า
+                        </button>
+                        <button onclick="loadConfig()">
+                            <i class="fas fa-download"></i>
+                            โหลดการตั้งค่า
+                        </button>
+                        <button onclick="resetConfig()">
+                            <i class="fas fa-undo"></i>
+                            รีเซ็ตการตั้งค่า
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>กำลังประมวลผล...</p>
+        </div>
+    </div>
+
+    <!-- Notification System -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

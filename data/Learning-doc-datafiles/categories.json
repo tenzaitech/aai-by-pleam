@@ -1,0 +1,44 @@
+{
+  "categories": [
+    {
+      "id": "n8n",
+      "name": "n8n",
+      "description": "n8n Workflow Automation",
+      "icon": "🔧"
+    },
+    {
+      "id": "zapier",
+      "name": "Zapier",
+      "description": "Zapier Automation",
+      "icon": "⚡"
+    },
+    {
+      "id": "make",
+      "name": "Make",
+      "description": "Make (Integromat) Automation",
+      "icon": "🔄"
+    },
+    {
+      "id": "general",
+      "name": "General",
+      "description": "General Automation Knowledge",
+      "icon": "📚"
+    },
+    {
+      "id": "chrome",
+      "name": "Chrome",
+      "description": "Chrome Automation",
+      "icon": "🌐"
+    },
+    {
+      "id": "ai",
+      "name": "AI",
+      "description": "AI Integration",
+      "icon": "🧠"
+    }
+  ],
+  "metadata": {
+    "created": "2025-07-02T08:45:24.801268",
+    "version": "1.0"
+  }
+}

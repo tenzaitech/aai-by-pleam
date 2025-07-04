@@ -1,0 +1,172 @@
+# 🚀 GOD START PROMPT - WAWA AI SYSTEM
+# Version: 0001
+# Auto-Start System Prompt for Cursor IDE
+
+## 🎯 SYSTEM INITIALIZATION COMMANDS
+
+### 1. SYSTEM STATUS CHECK
+```bash
+# ตรวจสอบสถานะระบบทั้งหมด
+python system_status_check.py
+```
+
+### 2. CLEANUP CHROME PROCESSES - DISABLED
+```bash
+# ทำความสะอาด Chrome processes - DISABLED BY USER PREFERENCE
+# taskkill /f /im chrome.exe
+```
+
+### 3. START DASHBOARD
+```bash
+# เริ่มต้น Web Dashboard
+cd dashboard
+python app.py
+```
+
+### 4. GPU BOOST ACTIVATION
+```bash
+# เปิดใช้งาน GPU Boost
+python gpu_cursor_boost.py
+```
+
+### 5. SMART RESOURCE ALLOCATOR
+```bash
+# เปิดใช้งาน Smart Resource Allocator
+python smart_resource_allocator.py
+```
+
+## 🤖 AI ASSISTANT COMMANDS
+
+### AUTO-SYSTEM SETUP
+```
+ตรวจสอบสถานะการทำงานจริงทั้งหมดของโปรแกรม cursor ตอนนี้และสรุปมา
+```
+
+### CHROME AUTOMATION TEST
+```
+ทดสอบ Chrome automation กับ AI integration
+```
+
+### PARALLEL PROCESSING TEST
+```
+ทดสอบ parallel processing กับ GPU acceleration
+```
+
+## 📋 QUICK START SEQUENCE
+
+### Step 1: System Check
+```bash
+python system_status_check.py
+```
+
+### Step 2: Clean Environment - DISABLED
+```bash
+# taskkill /f /im chrome.exe  # DISABLED BY USER PREFERENCE
+```
+
+### Step 3: Start Services
+```bash
+cd dashboard && python app.py &
+python gpu_cursor_boost.py &
+python smart_resource_allocator.py &
+```
+
+### Step 4: Verify Status
+```
+ตรวจสอบสถานะการทำงานจริงทั้งหมดของโปรแกรม cursor ตอนนี้และสรุปมา
+```
+
+## 🎮 ADVANCED COMMANDS
+
+### FULL SYSTEM OPTIMIZATION
+```bash
+# Optimize entire system
+python performance_optimizer.py
+python smart_batcher.py
+```
+
+### AI INTEGRATION TEST
+```bash
+# Test AI features
+python test_knowledge_manager.py
+python test_supabase.py
+```
+
+### PARALLEL CHROME TEST
+```bash
+# Test parallel Chrome automation
+python parallel_chrome_test.py
+```
+
+## 🔧 TROUBLESHOOTING
+
+### IF SYSTEM SLOW
+```bash
+# Clean memory
+# taskkill /f /im chrome.exe  # DISABLED BY USER PREFERENCE
+taskkill /f /im python.exe
+```
+
+### IF DASHBOARD NOT WORKING
+```bash
+# Restart dashboard
+cd dashboard
+python app.py
+```
+
+### IF GPU NOT DETECTED
+```bash
+# Check GPU
+python gpu_cursor_boost.py --check
+```
+
+## 📊 MONITORING COMMANDS
+
+### REAL-TIME MONITORING
+```bash
+# Monitor system resources
+python system_monitor.py
+```
+
+### PERFORMANCE METRICS
+```bash
+# Get performance data
+python performance_optimizer.py --metrics
+```
+
+## 🎯 AUTO-EXECUTION SEQUENCE
+
+### COPY-PASTE THIS COMPLETE SEQUENCE:
+```bash
+# 1. System Status Check
+python system_status_check.py
+
+# 2. Clean Chrome - DISABLED
+# taskkill /f /im chrome.exe  # DISABLED BY USER PREFERENCE
+
+# 3. Start Dashboard
+cd dashboard && python app.py &
+
+# 4. Start GPU Boost
+python gpu_cursor_boost.py &
+
+# 5. Start Smart Allocator
+python smart_resource_allocator.py &
+
+# 6. Final Status Check
+python system_status_check.py
+```
+
+## 🤖 AI PROMPT FOR STATUS
+```
+ตรวจสอบสถานะการทำงานจริงทั้งหมดของโปรแกรม cursor ตอนนี้และสรุปมา
+```
+
+## 📝 NOTES
+- ระบบจะเริ่มทำงานอัตโนมัติหลังจากรันคำสั่งเหล่านี้
+- Dashboard จะเปิดที่ http://localhost:5000
+- GPU Boost จะทำงานในพื้นหลัง
+- Smart Allocator จะจัดการทรัพยากรอัตโนมัติ
+
+## 🚀 READY TO LAUNCH
+ระบบพร้อมใช้งาน! 🎯 

@@ -1,0 +1,37 @@
+OCR Results Export
+==================================================
+Generated: 2025-07-03 09:35:54
+
+File: Screenshot 2025-06-25 225806.png
+------------------------------
+c
+127.0.0.1:9001/browser/nca toolkit
+n. setup
+ngrok
+ workflow automati...
+ deployment enviro...
+object store
+object browser
+ start typing to filter objects in the bucket
+community eaition
+ create bucket
+ rewind
+ refresh
+ upload
+ filter buckets
+ access: public
+622.0 kib
+tobject
+ buckets
+nca toolkit
+ create new path
+ name
+ last modified
+ size
+ today, 08:11
+622.0 kib
+ documentation
+ license
+sign out
+ .paf
+

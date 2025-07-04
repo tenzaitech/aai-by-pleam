@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "wawagot-mcp": {
+      "name": "Wawagot MCP",
+      "url": "http://localhost:5001",
+      "enabled": true
+    }
+  }
+}

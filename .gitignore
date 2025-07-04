@@ -1,0 +1,414 @@
+# ========================================
+# WAWAGOT.AI - COMPREHENSIVE .GITIGNORE
+# ========================================
+
+# ========================================
+# PYTHON ENVIRONMENT
+# ========================================
+# Virtual environments
+.venv/
+.venv310/
+venv/
+venv_py310/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv.bak/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# ========================================
+# IDE & EDITORS
+# ========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-workspace
+*.sublime-project
+
+# ========================================
+# OPERATING SYSTEM
+# ========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.tmp
+*.temp
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ========================================
+# CREDENTIALS & SECURITY
+# ========================================
+# API Keys and Credentials
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+google_credentials.json
+temp_credentials.json
+google_oauth_config.json
+gemini_cursor_config.json
+config/credentials_*.json
+config/*_credentials.json
+config/cloud_config.json
+config/credentials_google.json
+config/credentials_supabase.json
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# ========================================
+# LOGS & TEMPORARY FILES
+# ========================================
+# Logs
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+*.swp
+*.swo
+*~
+
+# ========================================
+# DATA & OUTPUT FILES
+# ========================================
+# Backup directories
+backups/
+backup-bygod/
+backup-bygod-success-100percent/
+backup_old_files/
+chromeautomation100percent/backups/
+chromeautomation100percent/screenshots/
+legacy/chromeautomation100percent/backups/
+legacy/chromeautomation100percent/screenshots/
+
+# Data directories
+data/backups/
+data/logs/
+data/screenshots/
+data/temp/
+data/system_health_report_*.json
+data/chat_trigger_test_report.json
+data/comprehensive_connection_report.json
+data/full_integration_results.json
+data/github_research_*.json
+data/godmode_test_report.json
+data/n8n_status_report.json
+data/ocr_*.json
+data/ocr_*.txt
+data/working_commands_report.json
+data/FINAL_UPGRADE_REPORT.json
+
+# Dashboard data
+dashboard/Learning-doc-datafiles/
+dashboard/static/
+dashboard/templates/
+
+# Tools data
+tools/data/
+tools/scripts/
+
+# Test data
+test_auto_learning_data/
+test_results.json
+full_integration_results.json
+
+# ========================================
+# MEDIA & BINARY FILES
+# ========================================
+# Images
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.ico
+*.svg
+*.webp
+
+# Documents
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.odt
+*.ods
+*.odp
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.tar.bz2
+*.rar
+*.7z
+*.gz
+*.bz2
+
+# Executables
+*.exe
+*.msi
+*.dmg
+*.pkg
+*.deb
+*.rpm
+*.app
+
+# Scripts (if not needed in repo)
+*.bat
+*.ps1
+*.sh
+*.cmd
+
+# ========================================
+# DATABASES
+# ========================================
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# ========================================
+# NODE.JS & FRONTEND
+# ========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
+.yarn-integrity
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ========================================
+# AI/ML SPECIFIC
+# ========================================
+# Model files
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.onnx
+*.pb
+*.tflite
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Training data
+*.csv
+*.tsv
+*.jsonl
+*.parquet
+*.feather
+*.arrow
+
+# Jupyter notebooks (optional - uncomment if not needed)
+# *.ipynb
+# .ipynb_checkpoints/
+
+# ========================================
+# PROJECT SPECIFIC
+# ========================================
+# System health reports
+system_health_report_*.json
+SYSTEM_STATUS_REPORT*.html
+SYSTEM_STATUS_REPORT*.md
+REAL_SYSTEM_STATUS.md
+SYSTEM_FIX_REPORT.md
+
+# Test reports
+*_test_report.json
+*_test_report.md
+*_test_report.html
+
+# Documentation (if auto-generated)
+DEPENDENCIES_INSTALLATION_REPORT.md
+GOOGLE_SERVICES_COMPLETE_REPORT.md
+WAWAGOT_V2_COMPLETE_SUMMARY.md
+WAWAGOT_V2_SUMMARY.html
+KNOWLEDGE_MANAGER_SUCCESS_REPORT.md
+
+# Auto-generated files
+*.generated.*
+*.auto.*
+auto_learning_manager.py
+
+# ========================================
+# MISC
+# ========================================
+# Local configuration
+config.local.json
+settings.local.json
+
+# Cache directories
+.cache/
+cache/
+
+# Lock files (if not needed)
+package-lock.json
+yarn.lock
+poetry.lock
+
+# ========================================
+# END OF .GITIGNORE
+# ======================================== 
+
+# Ignore virtual environments
+.venv-gpu/
+.venv310/
+venv/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore credentials and sensitive config
+*.env
+*credentials*.json
+*oauth*.json
+
+# Ignore logs and temp files
+*.log
+*.tmp
+*.cache
+*.bak
+
+# Ignore output/results
+*.csv
+*.h5
+*.pth
+*.ckpt
+*.db
+*.sqlite
+*.npz
+*.npy
+data/*.json
+data/*.txt
+
+# Ignore IDE and OS files
+.vscode/
+.idea/
+.DS_Store 

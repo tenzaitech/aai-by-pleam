@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Dashboard - backup-bygod</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .results {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        
+        .results h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .result-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .result-item h4 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .result-item p {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+        
+        .error {
+            background: #ffe6e6;
+            color: #d63031;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #d63031;
+        }
+        
+        .success {
+            background: #e6ffe6;
+            color: #00b894;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #00b894;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 OSINT Dashboard</h1>
+            <p>Open Source Intelligence สำหรับ backup-bygod</p>
+        </div>
+        
+        <div class="dashboard-grid">
+            <!-- วิจัย Library -->
+            <div class="card">
+                <h3>📦 วิจัย Library</h3>
+                <div class="form-group">
+                    <label for="libraryName">ชื่อ Library:</label>
+                    <input type="text" id="libraryName" placeholder="เช่น tensorflow/tensorflow">
+                </div>
+                <button class="btn" onclick="researchLibrary()">🔍 วิจัย</button>
+            </div>
+            
+            <!-- ตรวจสอบ Dependencies -->
+            <div class="card">
+                <h3>📊 ตรวจสอบ Dependencies</h3>
+                <p>วิเคราะห์ dependencies ของโปรเจค</p>
+                <button class="btn" onclick="analyzeDependencies()">📋 วิเคราะห์</button>
+            </div>
+            
+            <!-- หา Alternatives -->
+            <div class="card">
+                <h3>🔄 หา Alternatives</h3>
+                <div class="form-group">
+                    <label for="packageName">ชื่อ Package:</label>
+                    <input type="text" id="packageName" placeholder="เช่น requests">
+                </div>
+                <button class="btn" onclick="findAlternatives()">🔍 ค้นหา</button>
+            </div>
+            
+            <!-- ตรวจสอบความปลอดภัย -->
+            <div class="card">
+                <h3>🔒 ตรวจสอบความปลอดภัย</h3>
+                <p>ตรวจสอบช่องโหว่และภัยคุกคาม</p>
+                <button class="btn" onclick="securityAudit()">🛡️ ตรวจสอบ</button>
+            </div>
+            
+            <!-- สร้างรายงาน -->
+            <div class="card">
+                <h3>📄 สร้างรายงาน</h3>
+                <p>สร้างรายงานการวิเคราะห์ทั้งหมด</p>
+                <button class="btn" onclick="generateReport()">📊 สร้างรายงาน</button>
+            </div>
+        </div>
+        
+        <div class="results" id="results" style="display: none;">
+            <h3>📊 ผลลัพธ์</h3>
+            <div id="resultsContent"></div>
+        </div>
+    </div>
+    
+    <script>
+        async function researchLibrary() {
+            const libraryName = document.getElementById('libraryName').value;
+            if (!libraryName) {
+                alert('กรุณาใส่ชื่อ library');
+                return;
+            }
+            
+            showLoading('กำลังวิจัย library...');
+            
+            try {
+                const response = await fetch(`/api/research/${libraryName}`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayResults('วิจัย Library', data);
+                } else {
+                    showError(data.error);
+                }
+            } catch (error) {
+                showError('เกิดข้อผิดพลาดในการเชื่อมต่อ');
+            }
+        }
+        
+        async function analyzeDependencies() {
+            showLoading('กำลังวิเคราะห์ dependencies...');
+            
+            try {
+                const response = await fetch('/api/dependencies');
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayResults('วิเคราะห์ Dependencies', data);
+                } else {
+                    showError(data.error);
+                }
+            } catch (error) {
+                showError('เกิดข้อผิดพลาดในการเชื่อมต่อ');
+            }
+        }
+        
+        async function findAlternatives() {
+            const packageName = document.getElementById('packageName').value;
+            if (!packageName) {
+                alert('กรุณาใส่ชื่อ package');
+                return;
+            }
+            
+            showLoading('กำลังหา alternatives...');
+            
+            try {
+                const response = await fetch(`/api/alternatives/${packageName}`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayResults('Alternatives', data);
+                } else {
+                    showError(data.error);
+                }
+            } catch (error) {
+                showError('เกิดข้อผิดพลาดในการเชื่อมต่อ');
+            }
+        }
+        
+        async function securityAudit() {
+            showLoading('กำลังตรวจสอบความปลอดภัย...');
+            
+            try {
+                const response = await fetch('/api/security-audit');
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayResults('ตรวจสอบความปลอดภัย', data);
+                } else {
+                    showError(data.error);
+                }
+            } catch (error) {
+                showError('เกิดข้อผิดพลาดในการเชื่อมต่อ');
+            }
+        }
+        
+        async function generateReport() {
+            showLoading('กำลังสร้างรายงาน...');
+            
+            try {
+                const response = await fetch('/api/generate-report');
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showSuccess(`สร้างรายงานสำเร็จ: ${data.filename}`);
+                } else {
+                    showError(data.error);
+                }
+            } catch (error) {
+                showError('เกิดข้อผิดพลาดในการเชื่อมต่อ');
+            }
+        }
+        
+        function showLoading(message) {
+            const results = document.getElementById('results');
+            const content = document.getElementById('resultsContent');
+            
+            results.style.display = 'block';
+            content.innerHTML = `<div class="loading">⏳ ${message}</div>`;
+        }
+        
+        function showError(message) {
+            const results = document.getElementById('results');
+            const content = document.getElementById('resultsContent');
+            
+            results.style.display = 'block';
+            content.innerHTML = `<div class="error">❌ ${message}</div>`;
+        }
+        
+        function showSuccess(message) {
+            const results = document.getElementById('results');
+            const content = document.getElementById('resultsContent');
+            
+            results.style.display = 'block';
+            content.innerHTML = `<div class="success">✅ ${message}</div>`;
+        }
+        
+        function displayResults(title, data) {
+            const results = document.getElementById('results');
+            const content = document.getElementById('resultsContent');
+            
+            let html = `<h3>${title}</h3>`;
+            
+            if (typeof data === 'object') {
+                for (const [key, value] of Object.entries(data)) {
+                    if (typeof value === 'object' && value !== null) {
+                        html += `<div class="result-item">
+                            <h4>${key}</h4>
+                            <pre>${JSON.stringify(value, null, 2)}</pre>
+                        </div>`;
+                    } else {
+                        html += `<div class="result-item">
+                            <h4>${key}</h4>
+                            <p>${value}</p>
+                        </div>`;
+                    }
+                }
+            } else {
+                html += `<div class="result-item">
+                    <p>${data}</p>
+                </div>`;
+            }
+            
+            results.style.display = 'block';
+            content.innerHTML = html;
+        }
+    </script>
+</body>
+</html> 

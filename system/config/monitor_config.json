@@ -1,0 +1,91 @@
+{
+  "dashboard_port": 5000,
+  "api_port": 8000,
+  "log_level": "DEBUG",
+  "auto_cleanup": true,
+  "cleanup_interval": 3600,
+  "max_logs": 10000,
+  "max_workflows": 1000,
+  "max_alerts": 500,
+  "log_retention_days": 1,
+  "performance_monitoring": {
+    "enabled": true,
+    "interval_seconds": 30,
+    "metrics_to_track": [
+      "cpu_percent",
+      "memory_percent",
+      "disk_usage_percent",
+      "network_io",
+      "active_processes"
+    ]
+  },
+  "alert_rules": {
+    "high_cpu_threshold": 80,
+    "high_memory_threshold": 85,
+    "high_disk_threshold": 90,
+    "workflow_failure_threshold": 3,
+    "chrome_timeout_threshold": 30
+  },
+  "workflow_monitoring": {
+    "enabled": true,
+    "auto_cleanup_completed": true,
+    "max_history_days": 7,
+    "track_performance": true
+  },
+  "real_time_updates": {
+    "enabled": true,
+    "websocket_enabled": true,
+    "update_interval_ms": 5000,
+    "max_connections": 100
+  },
+  "modules_to_monitor": [
+    "auto_learning_manager",
+    "knowledge_manager",
+    "chrome_controller",
+    "ai_integration",
+    "smart_command_processor",
+    "supabase_integration",
+    "visual_recognition",
+    "backup_controller",
+    "system_monitor",
+    "thai_processor",
+    "direct_control",
+    "advanced_screen_reader",
+    "master_controller",
+    "environment_cards",
+    "config_manager"
+  ],
+  "database": {
+    "sqlite_enabled": true,
+    "log_db_path": "logs/wawagot_logs.db",
+    "performance_db_path": "logs/performance.db",
+    "alert_db_path": "logs/alerts.db"
+  },
+  "file_logging": {
+    "enabled": true,
+    "log_directory": "logs",
+    "max_file_size_mb": 10,
+    "backup_count": 5,
+    "encoding": "utf-8"
+  },
+  "dashboard": {
+    "theme": "modern",
+    "auto_refresh": true,
+    "refresh_interval_seconds": 5,
+    "show_performance_charts": true,
+    "show_workflow_visualization": true,
+    "show_alert_notifications": true
+  },
+  "security": {
+    "enable_authentication": false,
+    "allowed_ips": ["127.0.0.1", "localhost"],
+    "api_rate_limit": 100,
+    "log_sensitive_data": false
+  },
+  "notifications": {
+    "email_enabled": false,
+    "webhook_enabled": false,
+    "desktop_notifications": true,
+    "critical_alerts_only": false
+  }
+} 

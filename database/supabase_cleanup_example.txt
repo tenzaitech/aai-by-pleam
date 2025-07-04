@@ -1,0 +1,65 @@
+-- WAWAGOT V.2 Database Cleanup Script
+-- ⚠️  WARNING: This will DELETE ALL DATA permanently!
+
+-- Disable triggers temporarily to avoid foreign key conflicts
+SET session_replication_role = replica;
+
+-- Clear all data from tables (in reverse dependency order)
+TRUNCATE TABLE results CASCADE;
+TRUNCATE TABLE chrome_logs CASCADE;
+TRUNCATE TABLE ai_interactions CASCADE;
+TRUNCATE TABLE commands CASCADE;
+TRUNCATE TABLE learning_patterns CASCADE;
+TRUNCATE TABLE knowledge_base CASCADE;
+TRUNCATE TABLE file_storage CASCADE;
+TRUNCATE TABLE sessions CASCADE;
+TRUNCATE TABLE users CASCADE;
+
+-- ลบ system_config ทั้งหมดยกเว้นค่า default
+DELETE FROM system_config WHERE config_key NOT IN (
+    'wawagot_version',
+    'ai_models', 
+    'chrome_settings',
+    'storage_settings'
+);
+
+-- Re-enable triggers
+SET session_replication_role = DEFAULT;
+
+-- Reset sequences (auto-increment counters)
+ALTER SEQUENCE IF EXISTS users_id_seq RESTART WITH 1;
+ALTER SEQUENCE IF EXISTS knowledge_base_id_seq RESTART WITH 1;
+ALTER SEQUENCE IF EXISTS commands_id_seq RESTART WITH 1;
+ALTER SEQUENCE IF EXISTS sessions_id_seq RESTART WITH 1;
+ALTER SEQUENCE IF EXISTS learning_patterns_id_seq RESTART WITH 1;
+ALTER SEQUENCE IF EXISTS results_id_seq RESTART WITH 1;
+ALTER SEQUENCE IF EXISTS chrome_logs_id_seq RESTART WITH 1;
+ALTER SEQUENCE IF EXISTS ai_interactions_id_seq RESTART WITH 1;
+ALTER SEQUENCE IF EXISTS file_storage_id_seq RESTART WITH 1;
+ALTER SEQUENCE IF EXISTS system_config_id_seq RESTART WITH 1;
+
+-- ตรวจสอบผลลัพธ์
+SELECT 
+    'users' as table_name, COUNT(*) as remaining_rows FROM users
+UNION ALL
+SELECT 'knowledge_base', COUNT(*) FROM knowledge_base
+UNION ALL
+SELECT 'commands', COUNT(*) FROM commands
+UNION ALL
+SELECT 'sessions', COUNT(*) FROM sessions
+UNION ALL
+SELECT 'learning_patterns', COUNT(*) FROM learning_patterns
+UNION ALL
+SELECT 'results', COUNT(*) FROM results
+UNION ALL
+SELECT 'chrome_logs', COUNT(*) FROM chrome_logs
+UNION ALL
+SELECT 'ai_interactions', COUNT(*) FROM ai_interactions
+UNION ALL
+SELECT 'file_storage', COUNT(*) FROM file_storage
+UNION ALL
+SELECT 'system_config', COUNT(*) FROM system_config
+ORDER BY table_name;
+
+-- Show message
+SELECT '✅ Database cleanup completed successfully!' as status; 

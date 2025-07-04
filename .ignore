@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+venv_py310/
+
+# IDE/Editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs, temp, backup
+logs/
+temp/
+backups/
+backup-bygod/
+backup-bygod-success-100percent/
+legacy/
+uploads/
+*.log
+*.bak
+*.tmp
+
+# Data/output
+data/backups/
+data/logs/
+data/screenshots/
+data/temp/
+dashboard/Learning-doc-datafiles/
+dashboard/static/
+dashboard/templates/
+tools/data/
+tools/scripts/
+chromeautomation100percent/backups/
+chromeautomation100percent/screenshots/
+legacy/chromeautomation100percent/backups/
+legacy/chromeautomation100percent/screenshots/
+
+# Media/Binary
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.db
+*.sqlite
+*.zip
+*.tar
+*.gz
+*.exe
+*.bat
+*.ps1
+*.lnk
+
+# Node/JS
+node_modules/
+*.js.map
+
+# Misc
+*.swp
+*.swo 

@@ -1,0 +1,24 @@
+{
+  "browser": {
+    "name": "chrome",
+    "version": "latest",
+    "headless": false,
+    "timeout": 30
+  },
+  "options": {
+    "no_sandbox": true,
+    "disable_dev_shm_usage": true,
+    "disable_gpu": false,
+    "window_size": "1920x1080"
+  },
+  "wait": {
+    "implicit": 10,
+    "explicit": 30,
+    "page_load": 60
+  },
+  "screenshots": {
+    "auto_save": true,
+    "format": "png",
+    "quality": 90
+  }
+}

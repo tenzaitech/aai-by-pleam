@@ -1,0 +1,114 @@
+{
+  "metadata": {
+    "created": "2025-07-02T08:45:24.801268",
+    "version": "1.0",
+    "total_items": 4,
+    "last_updated": "2025-07-02T08:46:36.541660"
+  },
+  "knowledge": [
+    {
+      "id": "561b90297f51",
+      "title": "ทดสอบ n8n",
+      "description": "ความรู้พื้นฐานเกี่ยวกับ n8n",
+      "url": null,
+      "category": "n8n",
+      "content": "n8n เป็นเครื่องมือ automation ที่ยอดเยี่ยมสำหรับการเชื่อมต่อ API และสร้าง workflow",
+      "metadata": {
+        "created": "2025-07-02T08:45:30.681845",
+        "last_updated": "2025-07-02T08:45:30.681845",
+        "source": "text",
+        "content_length": 82
+      },
+      "tags": [
+        "ยมสำหร",
+        "บการเช",
+        "ยอดเย",
+        "automation",
+        "และสร",
+        "นเคร",
+        "workflow"
+      ],
+      "summary": "n8n เป็นเครื่องมือ automation ที่ยอดเยี่ยมสำหรับการเชื่อมต่อ API และสร้าง workflow"
+    },
+    {
+      "id": "ab3de4e474ec",
+      "title": "n8n Webhook Tutorial",
+      "description": "วิธีการใช้ webhook ใน n8n (อัปเดตแล้ว)",
+      "url": null,
+      "category": "n8n",
+      "content": "n8n webhook เป็นวิธีที่ดีในการรับข้อมูลจาก external services. สามารถสร้าง webhook endpoint ได้ง่ายๆ และรับข้อมูลแบบ real-time",
+      "metadata": {
+        "created": "2025-07-02T08:46:36.539662",
+        "last_updated": "2025-07-02T08:46:36.544660",
+        "source": "text",
+        "content_length": 125
+      },
+      "tags": [
+        "webhook",
+        "ในการร",
+        "external",
+        "ลจาก",
+        "services",
+        "endpoint",
+        "ลแบบ",
+        "สามารถสร",
+        "และร"
+      ],
+      "summary": "n8n webhook เป็นวิธีที่ดีในการรับข้อมูลจาก external services. สามารถสร้าง webhook endpoint ได้ง่ายๆ และรับข้อมูลแบบ real-time"
+    },
+    {
+      "id": "90ecbcaa4c0f",
+      "title": "Zapier Automation Basics",
+      "description": "พื้นฐานการใช้งาน Zapier",
+      "url": null,
+      "category": "zapier",
+      "content": "Zapier เป็นเครื่องมือ automation ที่เชื่อมต่อแอปต่างๆ เข้าด้วยกัน สามารถสร้าง workflow ง่ายๆ โดยไม่ต้องเขียนโค้ด",
+      "metadata": {
+        "created": "2025-07-02T08:46:36.540660",
+        "last_updated": "2025-07-02T08:46:36.540660",
+        "source": "text",
+        "content_length": 112
+      },
+      "tags": [
+        "อแอปต",
+        "zapier",
+        "โดยไม",
+        "workflow",
+        "automation",
+        "นเคร",
+        "ยนโค",
+        "สามารถสร",
+        "องเข"
+      ],
+      "summary": "Zapier เป็นเครื่องมือ automation ที่เชื่อมต่อแอปต่างๆ เข้าด้วยกัน สามารถสร้าง workflow ง่ายๆ โดยไม่ต้องเขียนโค้ด"
+    },
+    {
+      "id": "f9d74f9ac2e2",
+      "title": "Chrome Automation with Selenium",
+      "description": "การใช้งาน Selenium กับ Chrome",
+      "url": null,
+      "category": "chrome",
+      "content": "Selenium เป็นเครื่องมือที่ยอดเยี่ยมสำหรับการควบคุม Chrome browser. สามารถทำ web scraping, form filling, และ automation ได้",
+      "metadata": {
+        "created": "2025-07-02T08:46:36.541660",
+        "last_updated": "2025-07-02T08:46:36.541660",
+        "source": "text",
+        "content_length": 122
+      },
+      "tags": [
+        "ยมสำหร",
+        "บการควบค",
+        "selenium",
+        "browser",
+        "นเคร",
+        "scraping",
+        "form",
+        "chrome",
+        "ยอดเย",
+        "สามารถทำ"
+      ],
+      "summary": "Selenium เป็นเครื่องมือที่ยอดเยี่ยมสำหรับการควบคุม Chrome browser. สามารถทำ web scraping, form filling, และ automation ได้"
+    }
+  ],
+  "categories": []
+}

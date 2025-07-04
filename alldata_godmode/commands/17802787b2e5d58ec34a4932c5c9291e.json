@@ -1,0 +1,8 @@
+{
+  "session_id": "test_session",
+  "command": "test command",
+  "command_type": "test",
+  "success": true,
+  "result_summary": "test result",
+  "timestamp": "2025-07-02T23:11:35.793131"
+}
