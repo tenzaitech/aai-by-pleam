@@ -1,0 +1,3199 @@
+{
+  "system_status": {
+    "cpu_usage": 15.3,
+    "memory_usage": 56.0,
+    "memory_available": 13.999954223632812,
+    "memory_total": 31.839797973632812,
+    "load_average": [
+      0.76,
+      0.63,
+      0.31
+    ],
+    "timestamp": "2025-07-05T06:40:13.668989"
+  },
+  "alerts": [
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 25",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:32:59.522713"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 25",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:34:02.458776"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 25",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:34:02.462010"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 25",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:34:02.463009"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 25",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:35:04.366992"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 25",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:35:04.366992"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 25",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:35:04.368379"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 28",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:36:06.257819"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 28",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:36:06.259825"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 28",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:36:06.261826"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 30",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:37:08.194672"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 30",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:37:08.194672"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 30",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:37:08.194672"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 29",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:38:10.102800"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 29",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:38:10.102800"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 29",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:38:10.102800"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 29",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:39:11.933430"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 29",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:39:11.933430"
+    },
+    {
+      "type": "too_many_chrome_processes",
+      "message": "Too many Chrome processes: 29",
+      "severity": "info",
+      "timestamp": "2025-07-05T06:39:11.933430"
+    }
+  ],
+  "performance_history": [
+    {
+      "timestamp": "2025-07-05T06:32:59.519715",
+      "cpu_usage": 5.6,
+      "memory_usage": 53.0,
+      "chrome_processes": 25,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:34:02.420475",
+      "cpu_usage": 10.1,
+      "memory_usage": 52.2,
+      "chrome_processes": 25,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:34:02.455239",
+      "cpu_usage": 10.1,
+      "memory_usage": 52.2,
+      "chrome_processes": 25,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:34:02.458776",
+      "cpu_usage": 10.1,
+      "memory_usage": 52.2,
+      "chrome_processes": 25,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:35:04.357970",
+      "cpu_usage": 7.6,
+      "memory_usage": 52.2,
+      "chrome_processes": 25,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:35:04.360992",
+      "cpu_usage": 7.6,
+      "memory_usage": 52.2,
+      "chrome_processes": 25,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:35:04.361993",
+      "cpu_usage": 7.6,
+      "memory_usage": 52.2,
+      "chrome_processes": 25,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:36:06.250302",
+      "cpu_usage": 5.0,
+      "memory_usage": 52.7,
+      "chrome_processes": 28,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:36:06.251301",
+      "cpu_usage": 5.0,
+      "memory_usage": 52.7,
+      "chrome_processes": 28,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:36:06.251301",
+      "cpu_usage": 5.0,
+      "memory_usage": 52.7,
+      "chrome_processes": 28,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:37:08.179759",
+      "cpu_usage": 14.2,
+      "memory_usage": 57.3,
+      "chrome_processes": 30,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:37:08.180760",
+      "cpu_usage": 14.2,
+      "memory_usage": 57.3,
+      "chrome_processes": 30,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:37:08.181759",
+      "cpu_usage": 14.2,
+      "memory_usage": 57.3,
+      "chrome_processes": 30,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:38:10.064520",
+      "cpu_usage": 5.0,
+      "memory_usage": 56.5,
+      "chrome_processes": 29,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:38:10.081468",
+      "cpu_usage": 5.0,
+      "memory_usage": 56.5,
+      "chrome_processes": 29,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:38:10.093732",
+      "cpu_usage": 5.0,
+      "memory_usage": 56.5,
+      "chrome_processes": 29,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:39:11.922912",
+      "cpu_usage": 4.1,
+      "memory_usage": 55.9,
+      "chrome_processes": 29,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:39:11.923911",
+      "cpu_usage": 4.1,
+      "memory_usage": 55.9,
+      "chrome_processes": 29,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:39:11.924912",
+      "cpu_usage": 4.1,
+      "memory_usage": 55.9,
+      "chrome_processes": 29,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:40:13.764013",
+      "cpu_usage": 15.3,
+      "memory_usage": 56.0,
+      "chrome_processes": 29,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:40:13.767010",
+      "cpu_usage": 15.3,
+      "memory_usage": 56.0,
+      "chrome_processes": 29,
+      "python_processes": 8
+    },
+    {
+      "timestamp": "2025-07-05T06:40:13.768026",
+      "cpu_usage": 15.3,
+      "memory_usage": 56.0,
+      "chrome_processes": 29,
+      "python_processes": 8
+    }
+  ],
+  "last_check": "2025-07-05T06:40:12.639381",
+  "processes": {
+    "total_processes": 450,
+    "chrome_processes": [
+      {
+        "pid": 488,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 86.75
+      },
+      {
+        "pid": 3360,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 75.1015625
+      },
+      {
+        "pid": 3844,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 64.91796875
+      },
+      {
+        "pid": 4396,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 49.08984375
+      },
+      {
+        "pid": 6332,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 21.1015625
+      },
+      {
+        "pid": 6612,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 81.0078125
+      },
+      {
+        "pid": 7620,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 417.0234375
+      },
+      {
+        "pid": 8196,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 168.6640625
+      },
+      {
+        "pid": 8704,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 37.50390625
+      },
+      {
+        "pid": 9856,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 57.89453125
+      },
+      {
+        "pid": 10136,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 87.9921875
+      },
+      {
+        "pid": 12644,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 344.73046875
+      },
+      {
+        "pid": 13328,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 20.17578125
+      },
+      {
+        "pid": 13548,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 43.734375
+      },
+      {
+        "pid": 14756,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 53.5234375
+      },
+      {
+        "pid": 15084,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 97.765625
+      },
+      {
+        "pid": 21016,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 122.125
+      },
+      {
+        "pid": 21808,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 45.9765625
+      },
+      {
+        "pid": 23584,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 68.81640625
+      },
+      {
+        "pid": 23692,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 79.17578125
+      },
+      {
+        "pid": 24600,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 83.6875
+      },
+      {
+        "pid": 25060,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 9.5078125
+      },
+      {
+        "pid": 25412,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 311.62109375
+      },
+      {
+        "pid": 29288,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 553.1015625
+      },
+      {
+        "pid": 29612,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 229.671875
+      },
+      {
+        "pid": 31248,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 50.234375
+      },
+      {
+        "pid": 35852,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 30.41796875
+      },
+      {
+        "pid": 35924,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 181.86328125
+      },
+      {
+        "pid": 36072,
+        "name": "chrome.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 194.53125
+      }
+    ],
+    "python_processes": [
+      {
+        "pid": 13392,
+        "name": "python.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 47.7265625
+      },
+      {
+        "pid": 13600,
+        "name": "python.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 7.00390625
+      },
+      {
+        "pid": 16496,
+        "name": "python.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 6.88671875
+      },
+      {
+        "pid": 30112,
+        "name": "python.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 35.54296875
+      },
+      {
+        "pid": 31832,
+        "name": "python.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 47.17578125
+      },
+      {
+        "pid": 33404,
+        "name": "python.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 6.90234375
+      },
+      {
+        "pid": 33668,
+        "name": "pythonservice.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 22.0234375
+      },
+      {
+        "pid": 34432,
+        "name": "python.exe",
+        "cpu_percent": 0.0,
+        "memory_mb": 47.13671875
+      }
+    ],
+    "chrome_count": 29,
+    "python_count": 8
+  },
+  "network": {
+    "interfaces": [
+      "Ethernet",
+      "Ethernet 2",
+      "Local Area Connection* 1",
+      "Local Area Connection* 10",
+      "Wi-Fi",
+      "Bluetooth Network Connection",
+      "vEthernet (Default Switch)",
+      "vEthernet (WSL (Hyper-V firewall))",
+      "Loopback Pseudo-Interface 1"
+    ],
+    "connections": [
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:58994",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::55240",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61083",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.56.1:55932",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61074",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::63966",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": "fe80::5ffe:f5c:1c2:a26e:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:63763",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50472",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:59003",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61080",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60528",
+        "raddr": "2404:6800:4003:c06::54:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:52158",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61082",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60779",
+        "raddr": "2404:6800:4001:808::200a:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61072",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:60629",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60682",
+        "raddr": "2404:6800:4001:80d::200e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "127.0.0.1:60218",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60575",
+        "raddr": "2404:6800:4001:809::200e:443",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:58562",
+        "raddr": "79.133.171.16:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50562",
+        "raddr": "127.0.0.1:50654",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.30.208.1:55934",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::62025",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": "fe80::c084:fa52:4988:a355:60215",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61134",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60693",
+        "raddr": "2404:6800:4001:80b::200a:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": "fe80::384d:8171:784c:2da3:60212",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61057",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61099",
+        "raddr": "2001:fb0:100::207:49:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:59017",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61079",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61092",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61095",
+        "raddr": "2001:fb0:100::207:49:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60571",
+        "raddr": "82.202.185.211:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": ":::49667",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:49673",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:52017",
+        "raddr": "2404:6800:4003:c02::bc:5228",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:59393",
+        "raddr": "2404:6800:4001:80a::200a:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61073",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60776",
+        "raddr": "2606:4700::6812:a075:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:64617",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.56.1:138",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": ":::5432",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60480",
+        "raddr": "52.23.66.242:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.56.1:55928",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.18.16.1:68",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": ":::2179",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:60861",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50637",
+        "raddr": "127.0.0.1:50617",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:62274",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "127.0.0.1:54545",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:445",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.30.208.1:27036",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:60221",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:61091",
+        "raddr": "127.0.0.1:5001",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60810",
+        "raddr": "2404:6800:4001:803::200a:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::59062",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60774",
+        "raddr": "2404:6800:4001:813::200a:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60789",
+        "raddr": "2404:6800:4001:811::2003:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:58249",
+        "raddr": "52.187.79.109:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:56668",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:61582",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:60595",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:60595",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60375",
+        "raddr": "18.215.102.81:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:11434",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.1.37:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:59659",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::123",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60637",
+        "raddr": "2404:6800:4003:c0f::64:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": "::1:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60705",
+        "raddr": "2404:6800:4001:808::200e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:60633",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:59371",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.30.208.1:55930",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:53",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60846",
+        "raddr": "2404:6800:4001:80d::2008:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:61045",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61100",
+        "raddr": "2001:fb0:100::207:49:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::500",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60902",
+        "raddr": "35.186.241.51:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:9527",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61094",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:59694",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61088",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:59062",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:56678",
+        "raddr": "3.210.207.4:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60980",
+        "raddr": "2404:6800:4003:c06::54:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:57230",
+        "raddr": "13.216.30.111:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60836",
+        "raddr": "2404:6800:4001:811::200e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60653",
+        "raddr": "2404:6800:4001:809::200e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": ":::49668",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:59392",
+        "raddr": "2404:6800:4001:80a::200a:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60822",
+        "raddr": "2600:9000:2767:6a00:1f:574b:600:93a1:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": "fe80::5ffe:f5c:1c2:a26e:60214",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61056",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60260",
+        "raddr": "2602:f79a::1:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61136",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "127.0.0.1:52157",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:59576",
+        "raddr": "100.29.79.170:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:49668",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": "::1:60213",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:53312",
+        "raddr": "171.102.11.8:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61067",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::56668",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": ":::49664",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "127.0.0.1:49597",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61106",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:60222",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.1.37:137",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:135",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60568",
+        "raddr": "2404:6800:4001:803::2001:443",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.56.1:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60941",
+        "raddr": "2a03:90c0:11:2801::252:80",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60658",
+        "raddr": "184.24.117.245:80",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.18.16.1:5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:62025",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:60570",
+        "raddr": "127.0.0.1:60569",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61051",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:55239",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61131",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::63763",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": ":::7260",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60638",
+        "raddr": "2404:6800:4001:813::200e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61096",
+        "raddr": "2001:fb0:100::207:49:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60584",
+        "raddr": "2404:6800:4001:808::200e:443",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60986",
+        "raddr": "2404:6800:4003:c0f::5e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": ":::49673",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.56.1:137",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:19293",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60564",
+        "raddr": "2404:6800:4001:80b::200a:443",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:59659",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "::1:49669",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.18.16.1:67",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:50461",
+        "raddr": "2603:1030:210:f::1:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:53407",
+        "raddr": "61.91.165.64:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60521",
+        "raddr": "2404:6800:4001:813::2003:443",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::4500",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60857",
+        "raddr": "172.217.25.194:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": "fe80::8a0:8914:e194:d1e7:60211",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61050",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.18.16.1:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50564",
+        "raddr": "127.0.0.1:50562",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:59549",
+        "raddr": "44.215.80.211:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:58248",
+        "raddr": "2404:6800:4003:c03::bc:5228",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:5432",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61135",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "172.18.16.1:139",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61066",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60657",
+        "raddr": "2404:6800:4001:80d::200a:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60838",
+        "raddr": "2404:6800:4001:803::2002:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60704",
+        "raddr": "2606:4700::6812:14d5:80",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.30.208.1:60220",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:58994",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:60712",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60866",
+        "raddr": "66.33.60.67:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:61108",
+        "raddr": "35.217.65.38:443",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:2179",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60734",
+        "raddr": "2606:4700::6812:14d5:80",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:58606",
+        "raddr": "202.163.7.91:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:59371",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60725",
+        "raddr": "2404:6800:4001:811::2006:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:7260",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.1.37:55933",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60839",
+        "raddr": "2404:6800:4001:80a::2004:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": "fe80::8a0:8914:e194:d1e7:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "127.0.0.1:10010",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61130",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60805",
+        "raddr": "2404:6800:4001:80b::2008:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:49664",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.56.1:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:52327",
+        "raddr": "104.18.19.125:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61049",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.30.208.1:138",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:59017",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61044",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60837",
+        "raddr": "2404:6800:4001:80a::2002:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:50736",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.1.37:138",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60646",
+        "raddr": "2404:6800:4001:80d::2001:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50620",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.30.208.1:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:58677",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.56.1:60216",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60751",
+        "raddr": "2606:4700::6812:14d5:80",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61093",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:27036",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "127.0.0.1:10011",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.18.16.1:137",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:10000",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60735",
+        "raddr": "2404:6800:4001:80a::200a:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:49667",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:59648",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:60629",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:55728",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:55582",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:59823",
+        "raddr": "3.218.172.239:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:61075",
+        "raddr": "3.88.247.34:443",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:55972",
+        "raddr": "202.163.7.44:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:60861",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:62125",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.30.208.1:137",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:55758",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61105",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "127.0.0.1:65224",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60791",
+        "raddr": "2a04:4e42:69::485:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61081",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60926",
+        "raddr": "184.73.223.196:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50654",
+        "raddr": "127.0.0.1:50562",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:60862",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.56.1:139",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61089",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:60633",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60787",
+        "raddr": "2a04:4e42:69::485:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61078",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:64834",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:60769",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:5355",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "::1:24642",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:5001",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.1.37:5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:5040",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:61045",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::62125",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "127.0.0.1:54802",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61097",
+        "raddr": "2001:fb0:100::207:49:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:1001",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:50628",
+        "raddr": "103.10.124.4:27019",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61090",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:52214",
+        "raddr": "2603:1040:5:3::16:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61126",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:61101",
+        "raddr": "202.163.7.44:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": "fe80::384d:8171:784c:2da3:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:53406",
+        "raddr": "61.91.165.64:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::55582",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:50472",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:63966",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:60717",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:52156",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "127.0.0.1:52149",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:49665",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60685",
+        "raddr": "2404:6800:4001:808::200e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.30.208.1:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:59656",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60427",
+        "raddr": "2404:6800:4001:811::200e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:5001",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60324",
+        "raddr": "2404:6800:4001:811::2016:443",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:61104",
+        "raddr": "202.1.4.42:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:59694",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61125",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.1.37:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60612",
+        "raddr": "34.110.164.207:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60663",
+        "raddr": "2404:6800:4001:80c::200e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60806",
+        "raddr": "2606:4700::6812:a075:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:55238",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:60569",
+        "raddr": "127.0.0.1:60570",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::5355",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60560",
+        "raddr": "2404:6800:4001:813::200e:443",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:53409",
+        "raddr": "61.91.165.64:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50562",
+        "raddr": "127.0.0.1:50565",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:61001",
+        "raddr": "3.95.129.122:443",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50617",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:60712",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:5001",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61107",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.18.16.1:138",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60795",
+        "raddr": "18.172.0.105:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:4500",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:67",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60642",
+        "raddr": "172.217.25.194:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50736",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:56666",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.18.16.1:55931",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60853",
+        "raddr": "2404:6800:4001:813::200e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.56.1:5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::60221",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "127.0.0.1:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61098",
+        "raddr": "2001:fb0:100::207:49:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61042",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61058",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:60768",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60748",
+        "raddr": "2a04:4e42:69::347:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60817",
+        "raddr": "2600:1901:0:498c:::443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:60717",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:5050",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::61582",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:62274",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:5001",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:60596",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": "fe80::c084:fa52:4988:a355:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:49235",
+        "raddr": "2602:f79a::1:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50562",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:139",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:55728",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60320",
+        "raddr": "2404:6800:4016:80f::2003:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60532",
+        "raddr": "79.133.169.30:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:50673",
+        "raddr": "111.108.51.89:80",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.30.208.1:5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:59648",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61065",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::56666",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:27036",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50565",
+        "raddr": "127.0.0.1:50562",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::57465",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:123",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:49666",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50562",
+        "raddr": "127.0.0.1:50564",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60818",
+        "raddr": "2600:9000:2642:600:1d:7a82:2900:93a1:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60659",
+        "raddr": "2404:6800:4001:80d::200a:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": ":::445",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:60769",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61128",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.18.16.1:27036",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:53408",
+        "raddr": "61.91.165.64:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.18.16.1:60219",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50636",
+        "raddr": "127.0.0.1:50620",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:61041",
+        "raddr": "127.0.0.1:5001",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": ":::7680",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": ":::135",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.1.37:27036",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60885",
+        "raddr": "2606:4700:3034::ac43:a57f:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:55758",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60555",
+        "raddr": "2404:6800:4001:806::2004:443",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60046",
+        "raddr": "2602:f79a::1:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61059",
+        "raddr": "2404:6800:4003:c0f::5e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:59656",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::59004",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:27060",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:55520",
+        "raddr": "2603:1046:c14:820::2:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:500",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:60928",
+        "raddr": "184.73.223.196:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61132",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:60596",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:64834",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "192.168.1.37:53410",
+        "raddr": "61.91.165.64:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:58922",
+        "raddr": "2404:6800:4001:80c::200e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.18.16.1:1900",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61133",
+        "raddr": "2602:ffe4:c09:106::1154:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:19294",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": ":::49666",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.1.37:55929",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:60862",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:60768",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50617",
+        "raddr": "127.0.0.1:50637",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60990",
+        "raddr": "2001:fb0:1061:d2::cb90:9172:443",
+        "status": "CLOSE_WAIT"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:62685",
+        "raddr": "127.0.0.1:49670",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "0.0.0.0:7680",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60783",
+        "raddr": "2404:6800:4001:809::200e:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "172.18.16.1:55935",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "192.168.1.37:60217",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "127.0.0.1:57672",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60847",
+        "raddr": "2606:4700::6812:116:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:49670",
+        "raddr": "127.0.0.1:62685",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60726",
+        "raddr": "2404:6800:4001:808::2002:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:61043",
+        "raddr": "2001:fb0:100::207:29:53",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 2,
+        "laddr": ":::5353",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "127.0.0.1:50620",
+        "raddr": "127.0.0.1:50636",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60472",
+        "raddr": "2404:6800:4001:80d::200e:443",
+        "status": "TIME_WAIT"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60736",
+        "raddr": "2404:6800:4001:811::2003:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": "2001:fb1:88:29f4:24af:b883:5680:9bc5:60554",
+        "raddr": "2404:6800:4001:806::2004:443",
+        "status": "ESTABLISHED"
+      },
+      {
+        "family": 2,
+        "type": 2,
+        "laddr": "0.0.0.0:57465",
+        "raddr": null,
+        "status": "NONE"
+      },
+      {
+        "family": 23,
+        "type": 1,
+        "laddr": ":::49665",
+        "raddr": null,
+        "status": "LISTEN"
+      },
+      {
+        "family": 2,
+        "type": 1,
+        "laddr": "172.30.208.1:139",
+        "raddr": null,
+        "status": "LISTEN"
+      }
+    ],
+    "bytes_sent": 1090449859,
+    "bytes_recv": 15281292201,
+    "packets_sent": 3258839,
+    "packets_recv": 11990057
+  },
+  "disk": {
+    "usage": {
+      "C:\\": {
+        "total": 476.95605087280273,
+        "used": 347.21106719970703,
+        "free": 129.7449836730957,
+        "percent": 72.8
+      },
+      "D:\\": {
+        "total": 476.79784774780273,
+        "used": 32.4774055480957,
+        "free": 444.32044219970703,
+        "percent": 6.8
+      }
+    },
+    "io": {
+      "read_count": 1299738,
+      "write_count": 6878238,
+      "read_bytes": 69356357632,
+      "write_bytes": 157980535296
+    }
+  },
+  "services": [
+    {
+      "name": "WawagotService",
+      "display_name": "WAWAGOT.AI Enhanced Service",
+      "status": "stopped",
+      "start_type": "automatic"
+    }
+  ]
+}

@@ -1,13 +1,47 @@
 {
-    "backup_settings": {
-        "auto_backup": true,
-        "backup_interval": 3600,
-        "max_backups": 10,
-        "compression": true
-    },
-    "paths": {
-        "backup_dir": "./backups",
-        "temp_dir": "./temp",
-        "logs_dir": "./logs"
-    }
+  "backup_enabled": true,
+  "backup_schedule": "0 2 * * *",
+  "retention_days": 30,
+  "compression": true,
+  "max_backup_size": "1GB",
+  "backup_types": {
+    "full": true,
+    "incremental": true,
+    "database": true,
+    "config": true,
+    "logs": true
+  },
+  "backup_items": {
+    "include": [
+      "core/",
+      "config/",
+      "conversation_logs/",
+      "dashboard/",
+      "data/",
+      "pleamthinking/",
+      "*.py",
+      "*.md",
+      "*.txt",
+      "*.json",
+      "*.env"
+    ],
+    "exclude": [
+      "__pycache__/",
+      "*.pyc",
+      "*.log",
+      "backups/",
+      "node_modules/",
+      ".git/",
+      "venv/",
+      "env/",
+      "monitoring/",
+      "logs/"
+    ]
+  },
+  "notification": {
+    "enable_notifications": true,
+    "notify_on_success": true,
+    "notify_on_failure": true,
+    "notification_channels": ["log", "file"]
+  }
 }

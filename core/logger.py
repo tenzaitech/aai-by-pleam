@@ -10,6 +10,20 @@ from pathlib import Path
 from typing import Optional
 import json
 
+def get_logger(name: str = "wawagot"):
+    """
+    Get a configured logger instance.
+    If the logger has no handlers, add a default StreamHandler.
+    """
+    logger = logging.getLogger(name)
+    if not logger.handlers:
+        handler = logging.StreamHandler()
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+    logger.setLevel(logging.INFO)
+    return logger
+
 class WAWALogger:
     def __init__(self, name: str = "wawagot", log_dir: str = "logs"):
         self.name = name

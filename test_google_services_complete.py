@@ -129,7 +129,7 @@ class GoogleServicesTestSuite:
         self.total_tests += 1
         try:
             if not self.credentials:
-                raise Exception("ไม่มี credentials")
+                raise Exception("No credentials available")
             
             headers = {"Authorization": f"Bearer {self.credentials.token}"}
             response = requests.get("https://www.googleapis.com/oauth2/v2/userinfo", headers=headers)
@@ -164,7 +164,7 @@ class GoogleServicesTestSuite:
         self.total_tests += 1
         try:
             if not self.credentials:
-                raise Exception("ไม่มี credentials")
+                raise Exception("No credentials available")
             
             service = build("drive", "v3", credentials=self.credentials)
             results = service.files().list(pageSize=10).execute()
@@ -190,7 +190,7 @@ class GoogleServicesTestSuite:
         self.total_tests += 1
         try:
             if not self.credentials:
-                raise Exception("ไม่มี credentials")
+                raise Exception("No credentials available")
             
             service = build("calendar", "v3", credentials=self.credentials)
             now = datetime.utcnow().isoformat() + "Z"
@@ -223,7 +223,7 @@ class GoogleServicesTestSuite:
         self.total_tests += 1
         try:
             if not self.credentials:
-                raise Exception("ไม่มี credentials")
+                raise Exception("No credentials available")
             
             service = build("gmail", "v1", credentials=self.credentials)
             results = service.users().messages().list(userId="me", maxResults=10).execute()

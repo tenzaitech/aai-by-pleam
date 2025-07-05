@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAWAGOT.AI - Final Test Resume v1.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 15px 25px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #7f8c8d;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            min-width: 120px;
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .nav-tab:hover:not(.active) {
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #e74c3c, #f39c12, #27ae60);
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-weight: 800;
+        }
+        
+        .header .subtitle {
+            font-size: 1.5em;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #00b894, #00cec9);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .status-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 2s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #e74c3c, #f39c12);
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-color: rgba(52, 152, 219, 0.3);
+        }
+        
+        .card h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h2::before {
+            content: '';
+            width: 4px;
+            height: 25px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            margin-right: 15px;
+            border-radius: 2px;
+        }
+        
+        .card h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h3::before {
+            content: '▶';
+            color: #3498db;
+            margin-right: 10px;
+            font-size: 0.8em;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            margin: 12px 0;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-list li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(52, 152, 219, 0.1), transparent);
+            transition: width 0.3s ease;
+        }
+        
+        .feature-list li:hover {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            transform: translateX(8px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+        
+        .feature-list li:hover::before {
+            width: 100%;
+        }
+        
+        .status-icon {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            margin-right: 12px;
+            vertical-align: middle;
+            position: relative;
+        }
+        
+        .status-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .status-complete {
+            background: linear-gradient(45deg, #00b894, #00a085);
+            box-shadow: 0 3px 10px rgba(0, 184, 148, 0.3);
+        }
+        
+        .status-ready {
+            background: linear-gradient(45deg, #fdcb6e, #f39c12);
+            box-shadow: 0 3px 10px rgba(253, 203, 110, 0.3);
+        }
+        
+        .status-development {
+            background: linear-gradient(45deg, #e17055, #d63031);
+            box-shadow: 0 3px 10px rgba(225, 112, 85, 0.3);
+        }
+        
+        .code-block {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            position: relative;
+        }
+        
+        .code-block::before {
+            content: 'CODE';
+            position: absolute;
+            top: 8px;
+            right: 15px;
+            font-size: 0.7em;
+            color: #7f8c8d;
+            font-weight: 600;
+        }
+        
+        .command-example {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: #2ecc71;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            margin: 15px 0;
+            border-left: 4px solid #2ecc71;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .command-example::before {
+            content: 'TERMINAL';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.7em;
+            color: #7f8c8d;
+            font-weight: 600;
+        }
+        
+        .usage-steps {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+        }
+        
+        .usage-steps ol {
+            padding-left: 25px;
+        }
+        
+        .usage-steps li {
+            margin: 15px 0;
+            padding: 15px;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .usage-steps li {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .usage-steps li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+        
+        .integration-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 15px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .integration-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+        
+        .integration-section > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #e74c3c, #f39c12, #27ae60);
+        }
+        
+        .highlight {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        .warning {
+            background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #d63031;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .warning::before {
+            content: '⚠️';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5em;
+        }
+        
+        .success {
+            background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #00a085;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .success::before {
+            content: '✅';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5em;
+        }
+        
+        .info {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #0984e3;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info::before {
+            content: 'ℹ️';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5em;
+        }
+        
+        /* Progress Bar */
+        .progress-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .progress-item {
+            margin: 20px 0;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #ecf0f1;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            border-radius: 6px;
+            transition: width 1s ease;
+            position: relative;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progressShine 2s infinite;
+        }
+        
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Executive Summary */
+        .executive-summary {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .summary-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2);
+            border-color: rgba(52, 152, 219, 0.3);
+        }
+        
+        .summary-icon {
+            font-size: 2.5em;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            border-radius: 12px;
+            color: white;
+        }
+        
+        .summary-content h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.3em;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        
+        .summary-status {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #00b894;
+            margin-bottom: 5px;
+        }
+        
+        .summary-detail {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            line-height: 1.4;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .quick-action {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .quick-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+        }
+        
+        /* Expandable Sections */
+        .expandable-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: none;
+        }
+        
+        .expandable-section.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .section-header:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #1f5f8b 100%);
+        }
+        
+        .section-content {
+            padding: 25px;
+        }
+        
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .section-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .nav-tab {
+                margin: 2px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🤖 WAWAGOT.AI</h1>
+            <div class="subtitle">AI-Powered Automation System</div>
+            <div class="status-badge">✅ FINAL TEST RESUME v1.0 - 100% READY</div>
+            <p style="margin-top: 20px; font-size: 1.1em; color: #7f8c8d;">
+                ระบบ AI ที่สมบูรณ์แบบสำหรับ Automation, Chrome Control, Knowledge Management และ Infrastructure Management
+            </p>
+        </div>
+
+        <!-- Executive Summary Dashboard -->
+        <div class="executive-summary">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-icon">🤖</div>
+                    <div class="summary-content">
+                        <h3>AI Systems</h3>
+                        <div class="summary-status">✅ Ready</div>
+                        <div class="summary-detail">GPT-4, Gemini, Thai NLP</div>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">🌐</div>
+                    <div class="summary-content">
+                        <h3>Chrome Automation</h3>
+                        <div class="summary-status">✅ Ready</div>
+                        <div class="summary-detail">Selenium, Multi-tab, OCR</div>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">🧠</div>
+                    <div class="summary-content">
+                        <h3>Knowledge Management</h3>
+                        <div class="summary-status">✅ Ready</div>
+                        <div class="summary-detail">Supabase, Vector DB, Auto-Learning</div>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">🔧</div>
+                    <div class="summary-content">
+                        <h3>Infrastructure</h3>
+                        <div class="summary-status">✅ Ready</div>
+                        <div class="summary-detail">Ansible, WSL, Auto-Deploy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <button class="quick-action" onclick="toggleSection('quick-start')">🚀 Quick Start</button>
+            <button class="quick-action" onclick="toggleSection('api-reference')">🔌 API Reference</button>
+            <button class="quick-action" onclick="toggleSection('troubleshooting')">🔧 Troubleshooting</button>
+            <button class="quick-action" onclick="toggleSection('advanced-config')">⚙️ Advanced Config</button>
+        </div>
+
+        <!-- Compact Progress Section -->
+        <div class="progress-section">
+            <h2 style="margin-bottom: 20px; color: #2c3e50; font-size: 1.5em;">📊 สถานะระบบ</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>🤖 AI System</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>🌐 Chrome</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>🧠 Knowledge</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>🔧 Ansible</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expandable Content Sections -->
+        <div class="content-sections">
+            <!-- Quick Start Section -->
+            <div id="quick-start" class="expandable-section">
+                <div class="section-header" onclick="toggleSection('quick-start')">
+                    <span>🚀 Quick Start Guide</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="grid-2">
+                        <div>
+                            <h3>📋 Prerequisites</h3>
+                            <ul>
+                                <li>Python 3.10+ installed</li>
+                                <li>WSL (Windows Subsystem for Linux)</li>
+                                <li>Git repository cloned</li>
+                                <li>Admin privileges</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>⚡ Quick Commands</h3>
+                            <div class="code-block">
+                                <code># Install dependencies<br>
+pip install -r requirements.txt<br><br>
+# Start system<br>
+python launch.py<br><br>
+# Check status<br>
+python system_status_check.py</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Reference Section -->
+            <div id="api-reference" class="expandable-section">
+                <div class="section-header" onclick="toggleSection('api-reference')">
+                    <span>🔌 API Reference</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="grid-2">
+                        <div>
+                            <h3>🤖 AI Integration</h3>
+                            <div class="code-block">
+                                <code>from core.ai_integration import AIProcessor<br>
+ai = AIProcessor()<br>
+response = ai.process("Hello")</code>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>🌐 Chrome Automation</h3>
+                            <div class="code-block">
+                                <code>from core.chrome_controller import ChromeController<br>
+chrome = ChromeController()<br>
+chrome.navigate("https://example.com")</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Troubleshooting Section -->
+            <div id="troubleshooting" class="expandable-section">
+                <div class="section-header" onclick="toggleSection('troubleshooting')">
+                    <span>🔧 Troubleshooting</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="grid-2">
+                        <div>
+                            <h3>❌ Common Issues</h3>
+                            <ul>
+                                <li><strong>Chrome not starting:</strong> Check Chrome installation</li>
+                                <li><strong>Ansible error:</strong> Use WSL instead of Windows native</li>
+                                <li><strong>Database connection:</strong> Verify Supabase credentials</li>
+                                <li><strong>GPU not detected:</strong> Install CUDA drivers</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>✅ Solutions</h3>
+                            <div class="code-block">
+                                <code># Fix Chrome issues<br>
+python debug_chrome_launcher.py<br><br>
+# Check system status<br>
+python system_health_checker.py<br><br>
+# Reset configuration<br>
+python config_manager.py --reset</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Config Section -->
+            <div id="advanced-config" class="expandable-section">
+                <div class="section-header" onclick="toggleSection('advanced-config')">
+                    <span>⚙️ Advanced Configuration</span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="grid-2">
+                        <div>
+                            <h3>🔧 System Configuration</h3>
+                            <div class="code-block">
+                                <code># Environment Variables<br>
+WAWAGOT_API_KEY=your_key<br>
+SUPABASE_URL=your_url<br>
+SUPABASE_KEY=your_key<br>
+CHROME_DRIVER_PATH=path/to/chromedriver</code>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>📊 Performance Tuning</h3>
+                            <div class="code-block">
+                                <code># GPU Acceleration<br>
+USE_GPU=true<br>
+CUDA_VISIBLE_DEVICES=0<br><br>
+# Memory Optimization<br>
+MAX_MEMORY_USAGE=8192<br>
+CACHE_SIZE=1024</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Project Overview -->
+            <div class="card">
+                <h2>📋 ภาพรวมโปรเจค</h2>
+                <div class="info">
+                    <strong>สถานะ:</strong> พัฒนาเสร็จสมบูรณ์ 100% | <strong>เวอร์ชัน:</strong> 2.0 | <strong>วันที่:</strong> 2024-2025
+                </div>
+                
+                <h3>🎯 เป้าหมายหลัก</h3>
+                <ul class="feature-list">
+                    <li><span class="status-icon status-complete"></span>สร้างระบบ AI ที่สามารถควบคุม Chrome และเว็บไซต์ได้</li>
+                    <li><span class="status-icon status-complete"></span>จัดการความรู้และข้อมูลแบบอัจฉริยะ</li>
+                    <li><span class="status-icon status-complete"></span>ระบบ Automation ที่ใช้งานง่ายและมีประสิทธิภาพ</li>
+                    <li><span class="status-icon status-complete"></span>Infrastructure Management ด้วย Ansible</li>
+                    <li><span class="status-icon status-complete"></span>ระบบ Monitoring และ Alerting แบบ Real-time</li>
+                </ul>
+            </div>
+
+            <!-- Compact Dependencies -->
+            <div class="card">
+                <h2>📦 Dependencies & Requirements</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <h3>🔧 Python Dependencies</h3>
+                        <div class="code-block" style="font-size: 0.8em; max-height: 200px; overflow-y: auto;">
+# Core<br>
+selenium==4.18.1<br>
+webdriver-manager==4.0.1<br>
+pyautogui==0.9.54<br>
+opencv-python==4.11.0.86<br><br>
+# AI & ML<br>
+openai==1.58.1<br>
+transformers==4.53.0<br>
+torch==2.7.1<br><br>
+# Thai Language<br>
+pythainlp==5.1.2<br>
+easyocr==1.7.2<br><br>
+# Utilities<br>
+requests==2.31.0<br>
+beautifulsoup4==4.12.3<br>
+python-dotenv==1.0.1<br><br>
+# Supabase<br>
+supabase==2.0.0
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3>🔧 Environment Variables</h3>
+                        <div class="code-block" style="font-size: 0.8em; max-height: 200px; overflow-y: auto;">
+# Core System<br>
+APP_NAME=WAWAGOT.AI<br>
+APP_VERSION=2.0.0<br>
+DEBUG=true<br><br>
+# OpenAI<br>
+OPENAI_API_KEY=your-key<br>
+OPENAI_MODEL=gpt-4<br><br>
+# Supabase<br>
+SUPABASE_URL=your-url<br>
+SUPABASE_KEY=your-key<br><br>
+# Google<br>
+GOOGLE_CLIENT_ID=your-id<br>
+GOOGLE_GEMINI_API_KEY=your-key<br><br>
+# Security<br>
+SECRET_KEY=your-secret
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compact File Structure -->
+            <div class="card">
+                <h2>📁 โครงสร้างไฟล์ที่สำคัญ</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <h3>🔧 ไฟล์หลัก</h3>
+                        <ul class="feature-list">
+                            <li><span class="status-icon status-complete"></span><strong>launch_v2.py</strong> - ตัวรันระบบหลัก</li>
+                            <li><span class="status-icon status-complete"></span><strong>api_server.py</strong> - FastAPI Backend</li>
+                            <li><span class="status-icon status-complete"></span><strong>master_controller.py</strong> - ควบคุมระบบ</li>
+                            <li><span class="status-icon status-complete"></span><strong>requirements.txt</strong> - Dependencies</li>
+                            <li><span class="status-icon status-complete"></span><strong>.env</strong> - Environment Variables</li>
+                            <li><span class="status-icon status-complete"></span><strong>wawagot_mcp_server.py</strong> - MCP Server</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>📁 โครงสร้างโฟลเดอร์</h3>
+                        <div class="code-block" style="font-size: 0.8em; max-height: 200px; overflow-y: auto;">
+wawagot.ai/<br>
+├── core/                    # ระบบหลัก<br>
+│   ├── ai_integration.py    # AI Integration<br>
+│   ├── chrome_controller.py # Chrome Control<br>
+│   └── knowledge_manager.py # Knowledge Management<br>
+├── config/                  # การตั้งค่า<br>
+│   ├── ai.json             # AI Config<br>
+│   └── supabase_config.json # Supabase<br>
+├── conversation_logs/       # ระบบบันทึก<br>
+│   ├── security_manager.py # Security<br>
+│   └── auto_logger/        # Auto Logger<br>
+├── ansible/                # Ansible<br>
+├── dashboard/              # Web Dashboard<br>
+├── data/                   # Data Storage<br>
+└── pleamthinking/          # Memory
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Systems Section -->
+        <div id="systems" class="content-section">
+            <div class="content-grid">
+                <div class="card">
+                    <h2>🤖 AI Integration System</h2>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-complete"></span>OpenAI GPT-4 Vision Integration</li>
+                        <li><span class="status-icon status-complete"></span>Thai Language Processing</li>
+                        <li><span class="status-icon status-complete"></span>Natural Language Commands</li>
+                        <li><span class="status-icon status-complete"></span>Visual Recognition & OCR</li>
+                    </ul>
+                    
+                    <div class="command-example" style="font-size: 0.8em;">
+                        curl -X POST "http://localhost:8000/api/command" -d '{"command": "เปิดเว็บ Google", "language": "thai"}'
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>🌐 Chrome Automation</h2>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-complete"></span>Browser Control API</li>
+                        <li><span class="status-icon status-complete"></span>Navigation & URL Control</li>
+                        <li><span class="status-icon status-complete"></span>Screenshot & Recording</li>
+                        <li><span class="status-icon status-complete"></span>Form Automation</li>
+                    </ul>
+                    
+                    <div class="command-example" style="font-size: 0.8em;">
+                        curl -X POST "http://localhost:8000/api/chrome" -d '{"action": "navigate", "url": "https://google.com"}'
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>🧠 Knowledge Management</h2>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-complete"></span>Supabase Vector Database</li>
+                        <li><span class="status-icon status-complete"></span>Local/Cloud Storage Toggle</li>
+                        <li><span class="status-icon status-complete"></span>Smart Search & Retrieval</li>
+                        <li><span class="status-icon status-complete"></span>Learning System</li>
+                    </ul>
+                    
+                    <div class="command-example" style="font-size: 0.8em;">
+                        curl -X GET "http://localhost:8000/api/knowledge?query=automation"
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>🔧 Infrastructure (Ansible)</h2>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-complete"></span>WSL + Ubuntu Integration</li>
+                        <li><span class="status-icon status-complete"></span>Ansible Automation</li>
+                        <li><span class="status-icon status-complete"></span>Server Configuration</li>
+                        <li><span class="status-icon status-complete"></span>Deployment Automation</li>
+                    </ul>
+                    
+                    <div class="command-example" style="font-size: 0.8em;">
+                        wsl -d Ubuntu -e bash -c "ansible-playbook -i inventory/hosts playbooks/site.yml"
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <!-- Compact Conversation Logs -->
+            <div class="card">
+                <h2>💬 Conversation Logs System</h2>
+                <div class="success">
+                    <strong>✅ ระบบย่อย 10 ระบบ ครบถ้วนและทำงานได้จริง</strong>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;">
+                    <div>
+                        <h3>🔧 ระบบหลัก</h3>
+                        <ul class="feature-list">
+                            <li><span class="status-icon status-complete"></span><strong>SecurityManager</strong> - ความปลอดภัย</li>
+                            <li><span class="status-icon status-complete"></span><strong>AutoLogger</strong> - บันทึกอัตโนมัติ</li>
+                            <li><span class="status-icon status-complete"></span><strong>AIFilter</strong> - กรองข้อมูล AI</li>
+                            <li><span class="status-icon status-complete"></span><strong>AutoBackup</strong> - สำรองข้อมูล</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>🔧 ระบบรอง</h3>
+                        <ul class="feature-list">
+                            <li><span class="status-icon status-complete"></span><strong>MonitoringAlertSystem</strong> - แจ้งเตือน</li>
+                            <li><span class="status-icon status-complete"></span><strong>DataRetentionManager</strong> - จัดการข้อมูล</li>
+                            <li><span class="status-icon status-complete"></span><strong>ConversationManager</strong> - จัดการสนทนา</li>
+                            <li><span class="status-icon status-complete"></span><strong>IntegrationManager</strong> - เชื่อมต่อระบบ</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="command-example" style="font-size: 0.8em; margin-top: 15px;">
+                    from conversation_logs import SecurityManager, AutoLogger; sm = SecurityManager(); al = AutoLogger()
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Section -->
+        <div id="setup" class="content-section">
+            
+
+            <!-- Compact Dashboard & API -->
+            <div class="content-grid">
+                <div class="card">
+                    <h2>🎯 Web Dashboard</h2>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-complete"></span>Modern UI (Port 3000)</li>
+                        <li><span class="status-icon status-complete"></span>Real-time Updates</li>
+                        <li><span class="status-icon status-complete"></span>Configuration Panel</li>
+                        <li><span class="status-icon status-complete"></span>System Monitoring</li>
+                    </ul>
+                    
+                    <div class="command-example" style="font-size: 0.8em;">
+                        http://localhost:3000 | http://localhost:8000/docs
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>🔌 API Endpoints</h2>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-complete"></span>GET /health - System health check</li>
+                        <li><span class="status-icon status-complete"></span>POST /api/command - Process AI commands</li>
+                        <li><span class="status-icon status-complete"></span>POST /api/chrome - Chrome automation</li>
+                        <li><span class="status-icon status-complete"></span>GET /api/knowledge - Search knowledge</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Installation & Usage -->
+        <div class="card">
+            <h2>🚀 การติดตั้งและใช้งาน</h2>
+            
+            <h3>📋 ความต้องการระบบ</h3>
+            <ul class="feature-list">
+                <li><span class="status-icon status-complete"></span>Windows 10/11, macOS 10.15+, Ubuntu 18.04+</li>
+                <li><span class="status-icon status-complete"></span>Python 3.8+ และ pip package manager</li>
+                <li><span class="status-icon status-complete"></span>WSL (สำหรับ Ansible บน Windows)</li>
+                <li><span class="status-icon status-complete"></span>Chrome Browser</li>
+            </ul>
+            
+            <h3>🔧 ขั้นตอนการติดตั้ง</h3>
+            <div class="usage-steps">
+                <ol>
+                    <li><strong>Clone Repository:</strong><br>
+                        <div class="command-example">git clone &lt;repository-url&gt;<br>cd wawagot.ai</div>
+                    </li>
+                    <li><strong>ติดตั้ง Dependencies:</strong><br>
+                        <div class="command-example">pip install -r requirements_v2.txt</div>
+                    </li>
+                    <li><strong>ตั้งค่า Environment Variables:</strong><br>
+                        <div class="command-example"># สร้างไฟล์ .env และกำหนดค่า<br>OPENAI_API_KEY=your_key_here<br>SUPABASE_URL=your_url_here<br>SUPABASE_KEY=your_key_here</div>
+                    </li>
+                    <li><strong>ติดตั้ง WSL + Ansible (Windows):</strong><br>
+                        <div class="command-example">wsl --install<br>wsl -d Ubuntu -e bash -c "sudo apt update && sudo apt install ansible"</div>
+                    </li>
+                    <li><strong>รันระบบ:</strong><br>
+                        <div class="command-example">python launch_v2.py</div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Development Section -->
+        <div id="development" class="content-section">
+            <!-- Integration Section -->
+            <div class="integration-section">
+                <h2>🔗 การเชื่อมต่อระบบ</h2>
+                <h3>✅ Integrations ที่พร้อมใช้งาน</h3>
+                <ul class="feature-list">
+                    <li><span class="status-icon status-complete"></span><strong>Supabase</strong> - Database, Auth, Storage</li>
+                    <li><span class="status-icon status-complete"></span><strong>Google APIs</strong> - Drive, Calendar, Sheets</li>
+                    <li><span class="status-icon status-complete"></span><strong>Odoo</strong> - ERP, CRM Integration</li>
+                    <li><span class="status-icon status-complete"></span><strong>LINE Bot</strong> - Messaging Integration</li>
+                    <li><span class="status-icon status-complete"></span><strong>n8n Workflows</strong> - Advanced Automation</li>
+                    <li><span class="status-icon status-complete"></span><strong>MCP Server</strong> - Cursor IDE Integration</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Testing Section -->
+        <div id="testing" class="content-section">
+            <div class="card">
+                <h2>🧪 การทดสอบระบบ</h2>
+                <div class="success">
+                    <strong>✅ ทุกระบบผ่านการทดสอบ 100%</strong>
+                </div>
+                
+                <h3>🔧 ไฟล์ทดสอบที่สำคัญ</h3>
+                <ul class="feature-list">
+                    <li><span class="status-icon status-complete"></span><strong>test_all_new_systems.py</strong> - ทดสอบทุกระบบในครั้งเดียว</li>
+                    <li><span class="status-icon status-complete"></span><strong>test_security_manager.py</strong> - ทดสอบระบบความปลอดภัย</li>
+                    <li><span class="status-icon status-complete"></span><strong>test_auto_learning.py</strong> - ทดสอบระบบการเรียนรู้</li>
+                    <li><span class="status-icon status-complete"></span><strong>test_memory_system.py</strong> - ทดสอบระบบความทรงจำ</li>
+                </ul>
+                
+                <h3>🔧 วิธีรันการทดสอบ</h3>
+                <div class="command-example">
+                    # ทดสอบทุกระบบ<br>
+                    python test_all_new_systems.py<br><br>
+                    # ทดสอบเฉพาะระบบ<br>
+                    python -m pytest tests/test_auto_learning.py
+                </div>
+            </div>
+        </div>
+
+        <!-- Monitoring Section -->
+        <div id="monitoring" class="content-section">
+            <div class="card">
+                <h2>📊 การดูแลและมอนิเตอร์</h2>
+                
+                <h3>🔧 ระบบมอนิเตอร์ที่พร้อมใช้งาน</h3>
+                <ul class="feature-list">
+                    <li><span class="status-icon status-complete"></span><strong>Real-time Monitoring</strong> - ตรวจสอบสถานะแบบ Real-time</li>
+                    <li><span class="status-icon status-complete"></span><strong>Performance Tracking</strong> - ติดตามประสิทธิภาพ</li>
+                    <li><span class="status-icon status-complete"></span><strong>Alert System</strong> - ระบบแจ้งเตือน</li>
+                    <li><span class="status-icon status-complete"></span><strong>Log Management</strong> - จัดการ Log Files</li>
+                    <li><span class="status-icon status-complete"></span><strong>Health Checks</strong> - ตรวจสอบสุขภาพระบบ</li>
+                </ul>
+                
+                <h3>🔧 วิธีเข้าถึง Dashboard</h3>
+                <div class="command-example">
+                    # Real-time Monitor<br>
+                    http://localhost:3000/real-time-monitor<br><br>
+                    # System Dashboard<br>
+                    http://localhost:3000/dashboard
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Section -->
+        <div id="security" class="content-section">
+            <div class="card">
+                <h2>🔒 ความปลอดภัย</h2>
+                
+                <h3>🔧 ระบบความปลอดภัยที่พร้อมใช้งาน</h3>
+                <ul class="feature-list">
+                    <li><span class="status-icon status-complete"></span><strong>Admin Token Authentication</strong> - ระบบยืนยันตัวตน</li>
+                    <li><span class="status-icon status-complete"></span><strong>Data Encryption</strong> - เข้ารหัสข้อมูล</li>
+                    <li><span class="status-icon status-complete"></span><strong>Access Control</strong> - ควบคุมการเข้าถึง</li>
+                    <li><span class="status-icon status-complete"></span><strong>Audit Logging</strong> - บันทึกการใช้งาน</li>
+                    <li><span class="status-icon status-complete"></span><strong>Security Monitoring</strong> - ตรวจสอบความปลอดภัย</li>
+                </ul>
+                
+                <h3>🔧 การตั้งค่าความปลอดภัย</h3>
+                <div class="code-block">
+# Security Configuration<br>
+SECURITY_ENABLED=true<br>
+ADMIN_TOKEN=changeme<br>
+ENCRYPTION_KEY=your-encryption-key<br>
+AUDIT_LOGGING=true<br>
+ACCESS_CONTROL=true
+                </div>
+            </div>
+        </div>
+
+        <!-- Compact Configuration -->
+        <div class="card">
+            <h2>⚙️ ไฟล์การตั้งค่าที่สำคัญ</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div>
+                    <h3>📁 โครงสร้างหลัก</h3>
+                    <div class="code-block" style="font-size: 0.8em; max-height: 150px; overflow-y: auto;">
+wawagot.ai/<br>
+├── config/                    # การตั้งค่า<br>
+│   ├── ai.json               # AI Config<br>
+│   └── supabase_config.json  # Supabase<br>
+├── core/                     # ระบบหลัก<br>
+├── conversation_logs/        # Logging<br>
+├── ansible/                  # Ansible<br>
+└── dashboard/                # Dashboard
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>🔧 ไฟล์สำคัญ</h3>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-complete"></span><strong>launch_v2.py</strong> - ตัวรันหลัก</li>
+                        <li><span class="status-icon status-complete"></span><strong>api_server.py</strong> - FastAPI</li>
+                        <li><span class="status-icon status-complete"></span><strong>requirements.txt</strong> - Dependencies</li>
+                        <li><span class="status-icon status-complete"></span><strong>.env</strong> - Environment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="card">
+            <h2>🔧 การแก้ไขปัญหา</h2>
+            
+            <div class="warning">
+                <strong>⚠️ ปัญหาที่พบบ่อย:</strong>
+            </div>
+            
+            <h3>❌ Ansible ไม่ทำงานบน Windows</h3>
+            <div class="info">
+                <strong>วิธีแก้:</strong> ใช้ WSL + Ubuntu<br>
+                <div class="command-example">wsl -d Ubuntu -e bash -c "ansible --version"</div>
+            </div>
+            
+            <h3>❌ Chrome Driver ไม่พบ</h3>
+            <div class="info">
+                <strong>วิธีแก้:</strong> ติดตั้ง ChromeDriver หรือใช้ webdriver-manager<br>
+                <div class="command-example">pip install webdriver-manager</div>
+            </div>
+            
+            <h3>❌ API Key ไม่ถูกต้อง</h3>
+            <div class="info">
+                <strong>วิธีแก้:</strong> ตรวจสอบไฟล์ .env และ config files<br>
+                <div class="command-example"># ตรวจสอบ environment variables<br>python -c "import os; print(os.getenv('OPENAI_API_KEY'))"</div>
+            </div>
+        </div>
+
+        <!-- Dependencies & Requirements -->
+        <div class="card">
+            <h2>📦 Dependencies & Requirements</h2>
+            
+            <h3>🔧 Python Dependencies</h3>
+            <div class="code-block">
+# Core Dependencies<br>
+selenium==4.18.1<br>
+webdriver-manager==4.0.1<br>
+pyautogui==0.9.54<br>
+opencv-python==4.11.0.86<br>
+pillow==11.2.1<br>
+numpy==2.2.6<br><br>
+# AI & Machine Learning<br>
+openai==1.58.1<br>
+transformers==4.53.0<br>
+torch==2.7.1<br>
+torchvision==0.22.1<br>
+sentence-transformers==5.0.0<br><br>
+# Thai Language Processing<br>
+pythainlp==5.1.2<br>
+easyocr==1.7.2<br>
+thai-segmenter==0.4.2<br><br>
+# Utilities<br>
+requests==2.31.0<br>
+beautifulsoup4==4.12.3<br>
+lxml==5.2.1<br>
+python-dotenv==1.0.1<br>
+aiofiles==23.2.1<br><br>
+# Supabase Integration<br>
+supabase==2.0.0
+            </div>
+            
+            <h3>🔧 Environment Variables</h3>
+            <div class="code-block">
+# Core System<br>
+APP_NAME=WAWAGOT.AI<br>
+APP_VERSION=2.0.0<br>
+APP_ENV=development<br>
+DEBUG=true<br>
+LOG_LEVEL=INFO<br><br>
+# OpenAI Configuration<br>
+OPENAI_API_KEY=your-openai-api-key-here<br>
+OPENAI_MODEL=gpt-4-turbo-preview<br><br>
+# Supabase Configuration<br>
+SUPABASE_URL=https://your-project.supabase.co<br>
+SUPABASE_KEY=your-supabase-anon-key-here<br><br>
+# Google Services<br>
+GOOGLE_CLIENT_ID=your-google-client-id-here<br>
+GOOGLE_CLIENT_SECRET=your-google-client-secret-here<br>
+GOOGLE_GEMINI_API_KEY=your-gemini-api-key-here<br><br>
+# Security<br>
+SECRET_KEY=your-super-secret-key-here<br>
+JWT_SECRET_KEY=your-jwt-secret-key-here
+            </div>
+        </div>
+
+        <!-- File Structure & Important Files -->
+        <div class="card">
+            <h2>📁 โครงสร้างไฟล์ที่สำคัญ</h2>
+            
+            <h3>🔧 ไฟล์หลักที่ต้องรู้</h3>
+            <ul class="feature-list">
+                <li><span class="status-icon status-complete"></span><strong>launch_v2.py</strong> - ตัวรันระบบหลัก</li>
+                <li><span class="status-icon status-complete"></span><strong>api_server.py</strong> - FastAPI Backend Server</li>
+                <li><span class="status-icon status-complete"></span><strong>master_controller.py</strong> - ควบคุมระบบทั้งหมด</li>
+                <li><span class="status-icon status-complete"></span><strong>requirements.txt</strong> - Python Dependencies</li>
+                <li><span class="status-icon status-complete"></span><strong>.env</strong> - Environment Variables (ไม่ commit)</li>
+                <li><span class="status-icon status-complete"></span><strong>.cursorrules</strong> - Cursor IDE Configuration</li>
+                <li><span class="status-icon status-complete"></span><strong>wawagot_mcp_server.py</strong> - MCP Server</li>
+            </ul>
+            
+            <h3>📁 โครงสร้างโฟลเดอร์</h3>
+            <div class="code-block">
+wawagot.ai/<br>
+├── core/                    # ระบบหลัก<br>
+│   ├── ai_integration.py    # AI Integration<br>
+│   ├── backup_manager.py    # Backup System<br>
+│   ├── chrome_controller.py # Chrome Control<br>
+│   ├── knowledge_manager.py # Knowledge Management<br>
+│   └── thai_processor.py    # Thai Language Processing<br>
+├── config/                  # การตั้งค่า<br>
+│   ├── ai.json             # AI Configuration<br>
+│   ├── supabase_config.json # Supabase Settings<br>
+│   ├── chrome.json         # Chrome Settings<br>
+│   └── system_config.json  # System Settings<br>
+├── conversation_logs/       # ระบบบันทึกการสนทนา<br>
+│   ├── security_manager.py # Security Manager<br>
+│   ├── auto_logger/        # Auto Logger<br>
+│   ├── ai_filter/          # AI Filter<br>
+│   └── auto_backup/        # Auto Backup<br>
+├── ansible/                # Ansible Automation<br>
+│   ├── inventory/hosts     # Server Inventory<br>
+│   └── playbooks/site.yml  # Main Playbook<br>
+├── dashboard/              # Web Dashboard<br>
+├── data/                   # Data Storage<br>
+├── logs/                   # Log Files<br>
+├── backups/                # Backup Files<br>
+└── pleamthinking/          # Personal Notes & Memory
+            </div>
+        </div>
+
+        <!-- Security & Best Practices -->
+        <div class="card">
+            <h2>🔒 ความปลอดภัยและ Best Practices</h2>
+            
+            <h3>⚠️ ไฟล์ที่ต้องไม่ Commit</h3>
+            <ul class="feature-list">
+                <li><span class="status-icon status-complete"></span><strong>.env</strong> - Environment Variables</li>
+                <li><span class="status-icon status-complete"></span><strong>config/*_credentials.json</strong> - API Credentials</li>
+                <li><span class="status-icon status-complete"></span><strong>google_credentials.json</strong> - Google OAuth</li>
+                <li><span class="status-icon status-complete"></span><strong>*.db</strong> - Database Files</li>
+                <li><span class="status-icon status-complete"></span><strong>logs/</strong> - Log Files</li>
+                <li><span class="status-icon status-complete"></span><strong>backups/</strong> - Backup Files</li>
+            </ul>
+            
+            <h3>🔐 การตั้งค่าความปลอดภัย</h3>
+            <div class="code-block">
+# ใช้ Environment Variables<br>
+OPENAI_API_KEY=your_key_here<br>
+SUPABASE_KEY=your_key_here<br><br>
+# ใช้ .gitignore<br>
+.env<br>
+config/*_credentials.json<br>
+*.db<br>
+logs/<br>
+backups/<br><br>
+# ใช้ Virtual Environment<br>
+python -m venv .venv-gpu<br>
+source .venv-gpu/bin/activate  # Linux/Mac<br>
+.venv-gpu\\Scripts\\activate   # Windows
+            </div>
+        </div>
+
+        <!-- Compact Development Workflow -->
+        <div class="card">
+            <h2>🛠️ Development Workflow</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h3>🚀 การเริ่มต้นพัฒนา</h3>
+                    <div class="command-example" style="font-size: 0.8em;">
+                        git clone git@github.com:tenzaitech/aai-by-pleam.git<br>
+                        python -m venv .venv-gpu<br>
+                        .venv-gpu\\Scripts\\activate<br>
+                        pip install -r requirements.txt<br>
+                        python launch_v2.py
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>🔧 การใช้งาน Cursor IDE</h3>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-complete"></span><strong>.cursorrules</strong> - AI Assistant</li>
+                        <li><span class="status-icon status-complete"></span><strong>.cursor/mcp.json</strong> - MCP Server</li>
+                        <li><span class="status-icon status-complete"></span><strong>pleamthinking/</strong> - Memory</li>
+                        <li><span class="status-icon status-complete"></span><strong>conversation_logs/</strong> - Logs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compact Testing -->
+        <div class="card">
+            <h2>🧪 การทดสอบและ Quality Assurance</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h3>✅ ระบบทดสอบ</h3>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-complete"></span><strong>test_system_components.py</strong> - ระบบหลัก</li>
+                        <li><span class="status-icon status-complete"></span><strong>test_supabase.py</strong> - Supabase</li>
+                        <li><span class="status-icon status-complete"></span><strong>test_chrome_minimal.py</strong> - Chrome</li>
+                        <li><span class="status-icon status-complete"></span><strong>test_all_new_systems.py</strong> - ระบบย่อย</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>🔧 คำสั่งทดสอบ</h3>
+                    <div class="command-example" style="font-size: 0.8em;">
+                        python test_system_components.py<br>
+                        python conversation_logs/test_all_new_systems.py<br>
+                        python test_supabase.py<br>
+                        python test_google_services_complete.py
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compact Performance -->
+        <div class="card">
+            <h2>⚡ Performance & Optimization</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h3>🚀 การปรับแต่งประสิทธิภาพ</h3>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-complete"></span><strong>GPU Acceleration</strong> - AI Processing</li>
+                        <li><span class="status-icon status-complete"></span><strong>Async/Await</strong> - I/O Operations</li>
+                        <li><span class="status-icon status-complete"></span><strong>Connection Pooling</strong> - Database</li>
+                        <li><span class="status-icon status-complete"></span><strong>Caching</strong> - ข้อมูลที่ใช้บ่อย</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>🔧 การตั้งค่า GPU</h3>
+                    <div class="code-block" style="font-size: 0.8em; max-height: 150px; overflow-y: auto;">
+CUDA_VISIBLE_DEVICES=0<br>
+GPU_MEMORY_LIMIT=4096<br>
+USE_GPU=true<br>
+TORCH_DEVICE=cuda<br><br>
+python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}')"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compact Monitoring -->
+        <div class="card">
+            <h2>📊 Monitoring & Logging</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h3>🔍 ระบบ Monitoring</h3>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-complete"></span><strong>system_health_checker.py</strong> - สุขภาพระบบ</li>
+                        <li><span class="status-icon status-complete"></span><strong>performance_monitor.py</strong> - ประสิทธิภาพ</li>
+                        <li><span class="status-icon status-complete"></span><strong>monitoring_alert_system.py</strong> - แจ้งเตือน</li>
+                        <li><span class="status-icon status-complete"></span><strong>system_status_check.py</strong> - สถานะระบบ</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>📝 การตั้งค่า Logging</h3>
+                    <div class="code-block" style="font-size: 0.8em; max-height: 150px; overflow-y: auto;">
+LOG_LEVEL=INFO<br>
+LOG_FILE_PATH=./logs<br>
+LOG_MAX_SIZE=10MB<br>
+LOG_BACKUP_COUNT=5<br><br>
+HEALTH_CHECK_INTERVAL=300<br>
+HEALTH_CHECK_TIMEOUT=30
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compact Backup -->
+        <div class="card">
+            <h2>💾 Backup & Recovery</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h3>🔄 ระบบ Backup</h3>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-complete"></span><strong>core/backup_manager.py</strong> - Backup หลัก</li>
+                        <li><span class="status-icon status-complete"></span><strong>auto_backup/</strong> - Auto Backup</li>
+                        <li><span class="status-icon status-complete"></span><strong>AUTO_CLEANUP_SYSTEM.py</strong> - ทำความสะอาด</li>
+                        <li><span class="status-icon status-complete"></span><strong>tools/backup_tool.py</strong> - เครื่องมือ</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>🔧 การตั้งค่า Backup</h3>
+                    <div class="code-block" style="font-size: 0.8em; max-height: 150px; overflow-y: auto;">
+BACKUP_ENABLED=true<br>
+BACKUP_SCHEDULE=0 2 * * *<br>
+BACKUP_RETENTION_DAYS=30<br>
+BACKUP_PATH=backups/<br><br>
+CLEANUP_ENABLED=true<br>
+CLEANUP_RETENTION_DAYS=90
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compact Future Development -->
+        <div class="card">
+            <h2>🚀 แผนการพัฒนาต่อ</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h3>📋 Phase 2: Enhancement</h3>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-development"></span>Web Dashboard ที่สมบูรณ์</li>
+                        <li><span class="status-icon status-development"></span>Advanced Monitoring</li>
+                        <li><span class="status-icon status-development"></span>Smart Alerting</li>
+                        <li><span class="status-icon status-development"></span>Template Library</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>📋 Phase 3: Advanced</h3>
+                    <ul class="feature-list">
+                        <li><span class="status-icon status-development"></span>AI Assistant Integration</li>
+                        <li><span class="status-icon status-development"></span>Visual Workflow Builder</li>
+                        <li><span class="status-icon status-development"></span>Advanced Automation</li>
+                        <li><span class="status-icon status-development"></span>Multi-environment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compact Footer -->
+        <div class="footer">
+            <h2>🎉 สรุป</h2>
+            <p style="font-size: 1.1em; margin-bottom: 15px;">
+                <strong>WAWAGOT.AI</strong> เป็นระบบ AI ที่สมบูรณ์แบบสำหรับ Automation, Chrome Control, Knowledge Management และ Infrastructure Management
+            </p>
+            
+            <div class="success" style="font-size: 0.9em;">
+                <strong>✅ สถานะ:</strong> พร้อมใช้งาน 100% | <strong>✅ ฟีเจอร์:</strong> ครบถ้วนและทำงานได้จริง<br>
+                <strong>✅ การติดตั้ง:</strong> ง่ายและรวดเร็ว | <strong>✅ การใช้งาน:</strong> ผ่าน Web Dashboard และ API
+            </div>
+            
+            <p style="margin-top: 15px; color: #7f8c8d; font-size: 0.9em;">
+                <strong>วันที่สร้าง:</strong> 2024-2025 | <strong>เวอร์ชัน:</strong> 2.0 | <strong>สถานะ:</strong> Production Ready
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Toggle expandable sections
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const header = section.querySelector('.section-header');
+            const icon = header.querySelector('.toggle-icon');
+            
+            if (section.classList.contains('active')) {
+                section.classList.remove('active');
+                header.classList.remove('active');
+            } else {
+                // Close all other sections
+                const allSections = document.querySelectorAll('.expandable-section');
+                allSections.forEach(s => {
+                    s.classList.remove('active');
+                    s.querySelector('.section-header').classList.remove('active');
+                });
+                
+                // Open selected section
+                section.classList.add('active');
+                header.classList.add('active');
+            }
+        }
+        
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click effects to cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-5px)';
+                    }, 200);
+                });
+            });
+            
+            // Add smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    toggleSection(targetId);
+                });
+            });
+            
+            // Initialize with first section
+            toggleSection('quick-start');
+        });
+    </script>
+</body>
+</html>

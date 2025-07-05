@@ -1,0 +1,37 @@
+{
+  "dashboard_enabled": true,
+  "port": 5001,
+  "host": "0.0.0.0",
+  "debug": false,
+  "auto_refresh": true,
+  "refresh_interval": 30,
+  "security": {
+    "enable_authentication": false,
+    "session_timeout": 3600,
+    "allowed_ips": ["127.0.0.1", "localhost"]
+  },
+  "features": {
+    "real_time_monitoring": true,
+    "backup_management": true,
+    "service_control": true,
+    "health_checks": true,
+    "alert_management": true,
+    "performance_tracking": true
+  },
+  "display": {
+    "theme": "modern",
+    "language": "th",
+    "timezone": "Asia/Bangkok",
+    "date_format": "DD/MM/YYYY HH:mm:ss"
+  },
+  "notifications": {
+    "enable_notifications": true,
+    "notification_types": ["success", "warning", "error", "info"],
+    "notification_duration": 5000
+  },
+  "api": {
+    "enable_api": true,
+    "api_rate_limit": 100,
+    "api_timeout": 30
+  }
+} 

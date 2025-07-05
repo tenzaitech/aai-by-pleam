@@ -9,7 +9,19 @@ import sys
 import requests
 import subprocess
 import os
+import logging
 from datetime import datetime
+
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('logs/mcp_server.log', encoding='utf-8'),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
+logger = logging.getLogger(__name__)
 
 def get_dashboard_status():
     """Get dashboard status"""
@@ -20,10 +32,18 @@ def get_dashboard_status():
             "data": response.json(),
             "timestamp": datetime.now().isoformat()
         }
-    except Exception as e:
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Dashboard status request failed: {e}")
         return {
             "status": "error",
-            "error": str(e),
+            "error": f"Dashboard connection failed: {str(e)}",
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Unexpected error in get_dashboard_status: {e}")
+        return {
+            "status": "error",
+            "error": f"Unexpected error: {str(e)}",
             "timestamp": datetime.now().isoformat()
         }
 
@@ -34,15 +54,24 @@ def start_dashboard():
                         cwd=os.getcwd(), 
                         stdout=subprocess.PIPE, 
                         stderr=subprocess.PIPE)
+        logger.info("Dashboard started successfully")
         return {
             "status": "success",
             "message": "Dashboard started successfully",
             "timestamp": datetime.now().isoformat()
         }
-    except Exception as e:
+    except FileNotFoundError as e:
+        logger.error(f"Dashboard file not found: {e}")
         return {
             "status": "error",
-            "error": str(e),
+            "error": f"Dashboard file not found: {str(e)}",
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Unexpected error in start_dashboard: {e}")
+        return {
+            "status": "error",
+            "error": f"Unexpected error: {str(e)}",
             "timestamp": datetime.now().isoformat()
         }
 
@@ -56,10 +85,18 @@ def get_system_status():
             "data": result.stdout,
             "timestamp": datetime.now().isoformat()
         }
-    except Exception as e:
+    except FileNotFoundError as e:
+        logger.error(f"System status check file not found: {e}")
         return {
             "status": "error",
-            "error": str(e),
+            "error": f"System status check file not found: {str(e)}",
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Unexpected error in get_system_status: {e}")
+        return {
+            "status": "error",
+            "error": f"Unexpected error: {str(e)}",
             "timestamp": datetime.now().isoformat()
         }
 
@@ -81,15 +118,24 @@ def execute_command(command_type, params=None):
                 "timestamp": datetime.now().isoformat()
             }
         else:
+            logger.warning(f"Unknown command received: {command_type}")
             return {
                 "status": "error",
                 "error": f"Unknown command: {command_type}",
                 "timestamp": datetime.now().isoformat()
             }
-    except Exception as e:
+    except requests.exceptions.RequestException as e:
+        logger.error(f"API request failed in execute_command: {e}")
         return {
             "status": "error",
-            "error": str(e),
+            "error": f"API request failed: {str(e)}",
+                "timestamp": datetime.now().isoformat()
+            }
+    except Exception as e:
+        logger.error(f"Unexpected error in execute_command: {e}")
+        return {
+            "status": "error",
+            "error": f"Unexpected error: {str(e)}",
             "timestamp": datetime.now().isoformat()
         }
 
@@ -114,12 +160,25 @@ def handle_mcp_request():
         sys.stdout.flush()
         
     except EOFError:
+        logger.info("EOF received, ending MCP server")
         pass
-    except Exception as e:
+    except json.JSONDecodeError as e:
+        logger.error(f"Invalid JSON in MCP request: {e}")
         error_response = {
             "id": request.get("id") if 'request' in locals() else None,
             "error": {
-                "message": str(e),
+                "message": f"Invalid JSON format: {str(e)}",
+                "timestamp": datetime.now().isoformat()
+            }
+        }
+        print(json.dumps(error_response))
+        sys.stdout.flush()
+    except Exception as e:
+        logger.error(f"Unexpected error in handle_mcp_request: {e}")
+        error_response = {
+            "id": request.get("id") if 'request' in locals() else None,
+            "error": {
+                "message": f"Unexpected error: {str(e)}",
                 "timestamp": datetime.now().isoformat()
             }
         }
@@ -127,15 +186,22 @@ def handle_mcp_request():
         sys.stdout.flush()
 
 if __name__ == "__main__":
+    # Ensure logs directory exists
+    os.makedirs('logs', exist_ok=True)
+    
+    logger.info("WAWAGOT.AI MCP Server starting...")
+    
     # Simple MCP server loop
     while True:
         try:
             handle_mcp_request()
         except KeyboardInterrupt:
+            logger.info("MCP Server stopped by user")
             break
         except Exception as e:
+            logger.error(f"Critical error in MCP server main loop: {e}")
             print(json.dumps({
-                "error": str(e),
+                "error": f"Critical server error: {str(e)}",
                 "timestamp": datetime.now().isoformat()
             }))
             sys.stdout.flush()

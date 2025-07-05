@@ -1,0 +1,49 @@
+{
+  "monitoring_enabled": true,
+  "check_interval": 60,
+  "alert_thresholds": {
+    "cpu_usage": 80,
+    "memory_usage": 85,
+    "disk_usage": 90,
+    "chrome_processes": 20,
+    "python_processes": 10,
+    "network_connections": 1000,
+    "disk_io_high": 1000000
+  },
+  "monitoring_types": {
+    "system": true,
+    "processes": true,
+    "network": true,
+    "disk": true,
+    "services": true,
+    "performance": true
+  },
+  "alert_channels": {
+    "log": true,
+    "file": true,
+    "email": false,
+    "webhook": false
+  },
+  "performance_tracking": {
+    "history_retention_hours": 24,
+    "max_history_entries": 100,
+    "track_metrics": [
+      "cpu_usage",
+      "memory_usage",
+      "chrome_processes",
+      "python_processes",
+      "disk_usage"
+    ]
+  },
+  "services_to_monitor": [
+    "WawagotService",
+    "PythonService",
+    "ChromeService"
+  ],
+  "notification": {
+    "enable_notifications": true,
+    "notification_level": "warning",
+    "notification_channels": ["log", "file"],
+    "alert_cooldown_minutes": 5
+  }
+} 

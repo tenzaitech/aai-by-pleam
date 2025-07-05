@@ -1,0 +1,37 @@
+---
+# Main Playbook - WAWAGOT.AI
+# ไฟล์นี้เป็น playbook หลักสำหรับจัดการ server ทั้งหมด
+
+- name: Configure all servers
+  hosts: all
+  gather_facts: yes
+  become: yes
+  
+  tasks:
+    - name: Display system information
+      debug:
+        msg: "Configuring server: {{ inventory_hostname }}"
+    
+    - name: Check system uptime
+      command: uptime
+      register: uptime_result
+    
+    - name: Display uptime
+      debug:
+        msg: "Uptime: {{ uptime_result.stdout }}"
+    
+    - name: Check available disk space
+      command: df -h
+      register: disk_result
+    
+    - name: Display disk space
+      debug:
+        msg: "Disk space: {{ disk_result.stdout }}"
+    
+    - name: Check memory usage
+      command: free -h
+      register: memory_result
+    
+    - name: Display memory usage
+      debug:
+        msg: "Memory usage: {{ memory_result.stdout }}" 

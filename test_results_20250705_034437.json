@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-07-05T03:44:37.450490",
+  "results": {
+    "conversation_logs": "error_{'code': '42501', 'details': None, 'hint': None, '",
+    "user_profiles": "error_{'code': '42501', 'details': None, 'hint': None, '",
+    "system_logs": "error_{'code': '42501', 'details': None, 'hint': None, '",
+    "knowledge_base": "error_{'code': '42501', 'details': None, 'hint': None, '",
+    "system_config": "error_{'code': '42501', 'details': None, 'hint': None, '",
+    "health_checks": "error_{'code': '42501', 'details': None, 'hint': None, '",
+    "views": "success"
+  },
+  "summary": {
+    "total_tests": 7,
+    "success_count": 1,
+    "failure_count": 6,
+    "success_rate": "14.3%"
+  }
+}

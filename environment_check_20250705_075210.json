@@ -1,0 +1,87 @@
+{
+  "timestamp": "2025-07-05T07:52:10.233438",
+  "score": 50,
+  "total_checks": 8,
+  "issues_count": 2,
+  "recommendations_count": 4,
+  "issues": [
+    "ขาด Dependencies: google-generativeai, redis",
+    "เกิดข้อผิดพลาดในการตรวจสอบเครือข่าย: module 'psutil' has no attribute 'AF_INET'"
+  ],
+  "recommendations": [
+    "ใช้ Virtual Environment เพื่อแยก dependencies",
+    "ติดตั้ง packages ที่ขาด: pip install google-generativeai redis",
+    "มี Process จำนวนมาก ควรตรวจสอบ",
+    "ตั้งค่า Environment Variables: OPENAI_API_KEY, SUPABASE_URL, SUPABASE_KEY, RETELL_API_KEY"
+  ],
+  "details": {
+    "system": {
+      "os_name": "Windows",
+      "os_version": "10",
+      "architecture": "AMD64",
+      "hostname": "Nattanun",
+      "python_version": "3.10.4"
+    },
+    "hardware": {
+      "cpu_count": 16,
+      "total_memory_gb": 31.84,
+      "available_memory_gb": 15.52,
+      "total_disk_gb": 476.96,
+      "free_disk_gb": 131.55
+    },
+    "virtual_env": false,
+    "python_path": "C:\\Users\\pleam\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "dependencies": {
+      "installed": [
+        "flask",
+        "fastapi",
+        "requests",
+        "aiohttp",
+        "psutil",
+        "selenium",
+        "playwright",
+        "openai",
+        "supabase",
+        "pandas",
+        "numpy",
+        "tensorflow",
+        "torch"
+      ],
+      "missing": [
+        "google-generativeai",
+        "redis"
+      ],
+      "total_required": 15,
+      "total_installed": 13
+    },
+    "internet": true,
+    "services": {
+      "WAWAGOT.AI API": "stopped",
+      "Dashboard": "stopped",
+      "Database": "running",
+      "Redis": "stopped"
+    },
+    "storage": {
+      "total_gb": 476.96,
+      "used_gb": 345.41,
+      "free_gb": 131.55,
+      "usage_percent": 72.41925127356446
+    },
+    "performance": {
+      "cpu_percent": 14.7,
+      "memory_percent": 53.0,
+      "process_count": 368
+    },
+    "security": {
+      "missing_env_vars": [
+        "OPENAI_API_KEY",
+        "SUPABASE_URL",
+        "SUPABASE_KEY",
+        "RETELL_API_KEY"
+      ],
+      "has_env_file": true,
+      "has_gitignore": true
+    }
+  },
+  "status": "fair"
+}
